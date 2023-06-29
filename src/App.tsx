@@ -1,18 +1,19 @@
+import { BrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
 import { Container } from "@mui/material";
 
 function App() {
   const sections = [
-    { title: "Gallery", url: "#" },
-    { title: "Statistic", url: "#" },
-    { title: "Profile", url: "#" },
+    { title: "Gallery", url: "/" },
+    { title: "Statistic", url: "/statistic" },
+    { title: "Profile", url: "/profile" },
   ];
 
   return (
     <div>
-      <Container maxWidth="xl">
+      <BrowserRouter>
         <Header title="Blog" sections={sections}></Header>
-      </Container>
+      </BrowserRouter>
     </div>
   );
 }

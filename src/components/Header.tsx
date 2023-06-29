@@ -13,6 +13,11 @@ import PaletteIcon from "@mui/icons-material/Palette";
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import WalletIcon from "@mui/icons-material/Wallet";
+import { Link, Route, Routes } from "react-router-dom";
+
+import Statistic from "../RoutePages/Statistic";
+import Profile from "../RoutePages/Profile";
+import Gallery from "../RoutePages/Gallery";
 
 interface HeaderProps {
   sections: ReadonlyArray<{
@@ -126,23 +131,25 @@ export default function Header(props: HeaderProps) {
             }}
           >
             {props.sections.map((page, i) => (
-              <Typography
-                key={i}
-                variant="h6"
-                component="a"
-                href={page.url}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  m: 2,
-                  color: "white",
-                  display: "block",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  textDecoration: "none",
-                }}
-              >
-                {page.title}
-              </Typography>
+              <Link style={{ textDecoration: "none" }} to={page.url}>
+                <Typography
+                  key={i}
+                  variant="h6"
+                  component="a"
+                  // href={page.url}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    m: 2,
+                    color: "white",
+                    display: "block",
+                    fontWeight: 700,
+                    letterSpacing: ".3rem",
+                    textDecoration: "none",
+                  }}
+                >
+                  {page.title}
+                </Typography>
+              </Link>
             ))}
           </Box>
           <Button
@@ -162,6 +169,12 @@ export default function Header(props: HeaderProps) {
           </Button>
         </Toolbar>
       </AppBar>
+
+      <Routes>
+        <Route path="/" element={<Gallery />} />
+        <Route path="/statistic" element={<Statistic />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
     </React.Fragment>
   );
 }
