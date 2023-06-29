@@ -94,9 +94,15 @@ export default function Header(props: HeaderProps) {
             >
               {props.sections.map((page, i) => (
                 <MenuItem key={i} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" component="a" href={page.url}>
-                    {page.title}
-                  </Typography>
+                  <Link style={{ textDecoration: "none" }} to={page.url}>
+                    <Typography
+                      textAlign="center"
+                      component="a"
+                      href={page.url}
+                    >
+                      {page.title}
+                    </Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -131,12 +137,10 @@ export default function Header(props: HeaderProps) {
             }}
           >
             {props.sections.map((page, i) => (
-              <Link style={{ textDecoration: "none" }} to={page.url}>
+              <Link key={i} style={{ textDecoration: "none" }} to={page.url}>
                 <Typography
-                  key={i}
                   variant="h6"
                   component="a"
-                  // href={page.url}
                   onClick={handleCloseNavMenu}
                   sx={{
                     m: 2,
