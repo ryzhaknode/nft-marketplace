@@ -14,23 +14,18 @@ import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import WalletIcon from "@mui/icons-material/Wallet";
 import { NavLink } from "react-router-dom";
+import { ISections } from "../types/ISections";
 
-const sections = [
+const sections: ISections[] = [
   { title: "Gallery", url: "/" },
   { title: "Statistic", url: "/statistic" },
   { title: "Profile", url: "/profile" },
 ];
 
-interface HeaderProps {
-  sections: ReadonlyArray<{
-    title: string;
-    url: string;
-  }>;
-  title: string;
-}
-
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  console.log(Date());
 
   const handleCloseNavMenu = () => {
     setIsMenuOpen(false);
