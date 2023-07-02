@@ -13,11 +13,13 @@ import PaletteIcon from "@mui/icons-material/Palette";
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import WalletIcon from "@mui/icons-material/Wallet";
-import { Link, Route, Routes } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import Statistic from "../RoutePages/Statistic";
-import Profile from "../RoutePages/Profile";
-import Gallery from "../RoutePages/Gallery";
+const sections = [
+  { title: "Gallery", url: "/" },
+  { title: "Statistic", url: "/statistic" },
+  { title: "Profile", url: "/profile" },
+];
 
 interface HeaderProps {
   sections: ReadonlyArray<{
@@ -27,7 +29,7 @@ interface HeaderProps {
   title: string;
 }
 
-export default function Header(props: HeaderProps) {
+export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleCloseNavMenu = () => {
@@ -92,9 +94,9 @@ export default function Header(props: HeaderProps) {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {props.sections.map((page, i) => (
+              {sections.map((page, i) => (
                 <MenuItem key={i} onClick={handleCloseNavMenu}>
-                  <Link style={{ textDecoration: "none" }} to={page.url}>
+                  <NavLink style={{ textDecoration: "none" }} to={page.url}>
                     <Typography
                       textAlign="center"
                       component="a"
@@ -102,7 +104,7 @@ export default function Header(props: HeaderProps) {
                     >
                       {page.title}
                     </Typography>
-                  </Link>
+                  </NavLink>
                 </MenuItem>
               ))}
             </Menu>
@@ -136,8 +138,8 @@ export default function Header(props: HeaderProps) {
               alignItems: "center",
             }}
           >
-            {props.sections.map((page, i) => (
-              <Link key={i} style={{ textDecoration: "none" }} to={page.url}>
+            {sections.map((page, i) => (
+              <NavLink key={i} style={{ textDecoration: "none" }} to={page.url}>
                 <Typography
                   variant="h6"
                   component="a"
@@ -153,7 +155,7 @@ export default function Header(props: HeaderProps) {
                 >
                   {page.title}
                 </Typography>
-              </Link>
+              </NavLink>
             ))}
           </Box>
           <Button
@@ -173,12 +175,6 @@ export default function Header(props: HeaderProps) {
           </Button>
         </Toolbar>
       </AppBar>
-
-      <Routes>
-        <Route path="/" element={<Gallery />} />
-        <Route path="/statistic" element={<Statistic />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
     </React.Fragment>
   );
 }
