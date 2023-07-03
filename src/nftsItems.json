@@ -1,8 +1,8 @@
 [
   {
-    "name": "ARTCRUSH MEMBERSHIP NFT",
+    "name": "ARTCRUSH MEMBERSHIP",
     "description": "Join the Artcrush community today Artcrush Membership NFTs",
-    "nftCodeNumber8": 00000001,
+    "nftCodeNumber8": "00000001",
     "interests": [
       {
         "name": "Art"
@@ -27,7 +27,7 @@
   {
     "name": "Geometric Gems",
     "description": "Geometric Gems is a creative exploration of beauty and perfection through geometric shapes",
-    "nftCodeNumber8": 00000002,
+    "nftCodeNumber8": "00000002",
     "interests": [
       {
         "name": "Art"
@@ -45,14 +45,14 @@
     "images": [
       {
         "name": "Geometric",
-        "url": "https://example.com/image1.jpg"
+        "url": "https://i.seadn.io/gcs/files/6a22b700f3f0548d03259c035859db7a.jpg?auto=format&dpr=1&w=1000"
       }
     ]
   },
   {
     "name": "BEANZ",
     "description": "BEANZ are a small species that sprouts from the dirt in the garden.",
-    "nftCodeNumber8": 00000003,
+    "nftCodeNumber8": "00000003",
     "interests": [
       {
         "name": "Art"
