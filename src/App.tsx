@@ -5,8 +5,8 @@ import { Box } from "@mui/material";
 function App() {
   return (
     <Box>
-      <Header></Header>
-      <Outlet></Outlet>
+      <Header />
+      <Outlet />
     </Box>
   );
 }
