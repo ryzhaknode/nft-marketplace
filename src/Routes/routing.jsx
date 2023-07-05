@@ -4,6 +4,7 @@ import Statistic from "../RoutePages/Statistic";
 import App from "../App";
 import Gallery from "../RoutePages/Gallery";
 import ErrorPage from "../RoutePages/ErrorPage";
+import CardPage from "../RoutePages/CardPage";
 
 export const router = createBrowserRouter([
   {
@@ -24,5 +25,29 @@ export const router = createBrowserRouter([
         element: <Statistic />,
       },
     ],
+  },
+  {
+    path: "/card-artcrush",
+    element: <CardPage />,
+  },
+  {
+    path: "/card-geometric",
+    element: <CardPage />,
+  },
+  {
+    path: "/card-beanz",
+    element: <CardPage />,
+  },
+  {
+    path: "/card-morphaper",
+    element: <CardPage />,
+  },
+  {
+    path: "/card-otherdeed",
+    element: <CardPage />,
+  },
+  {
+    path: "/card-degods",
+    element: <CardPage />,
   },
 ]);

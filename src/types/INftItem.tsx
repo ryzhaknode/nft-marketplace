@@ -7,4 +7,5 @@ export interface INftItem {
   authorName: string;
   companyName: string;
   images: { name: string; url: string }[];
+  price: string;
 }
