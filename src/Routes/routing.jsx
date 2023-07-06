@@ -5,10 +5,12 @@ import App from "../App";
 import Gallery from "../RoutePages/Gallery";
 import ErrorPage from "../RoutePages/ErrorPage";
 import CardPage from "../RoutePages/CardPage";
+import { ROUTES } from "./routesName";
+import { loader as load } from "./loader";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: ROUTES.mainPage,
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
@@ -17,37 +19,18 @@ export const router = createBrowserRouter([
         index: true,
       },
       {
-        path: "/profile",
+        path: "gallery/:contactId",
+        element: <CardPage />,
+        loader: load,
+      },
+      {
+        path: ROUTES.profilePage,
         element: <Profile />,
       },
       {
-        path: "/statistic",
+        path: ROUTES.statisticPage,
         element: <Statistic />,
       },
     ],
-  },
-  {
-    path: "/card-artcrush",
-    element: <CardPage />,
-  },
-  {
-    path: "/card-geometric",
-    element: <CardPage />,
-  },
-  {
-    path: "/card-beanz",
-    element: <CardPage />,
-  },
-  {
-    path: "/card-morphaper",
-    element: <CardPage />,
-  },
-  {
-    path: "/card-otherdeed",
-    element: <CardPage />,
-  },
-  {
-    path: "/card-degods",
-    element: <CardPage />,
   },
 ]);

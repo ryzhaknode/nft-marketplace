@@ -1,18 +1,13 @@
-import { useLocation } from "react-router-dom";
-import datajson from "../nftsItems.json";
-import Header from "../components/Header";
+import { useLoaderData, useLocation } from "react-router-dom";
 import { Box, List, ListItem } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
 
 function CardPage() {
-  const location = useLocation();
-  const pathName = location.pathname.split("-")[1];
-  const currentCard = datajson.find((card) => card.companyName == pathName);
-  console.log(currentCard);
+  const data = useLoaderData();
+
   return (
     <>
-      <Header />
       <Grid sx={{ pt: 4 }} container spacing={2} columns={12}>
         <Grid xs={12} md={6}>
           <Box
@@ -30,8 +25,8 @@ function CardPage() {
                 maxHeight: "600px",
                 maxWidth: "100%",
               }}
-              src={currentCard.images[0].url}
-              alt={currentCard.images[0].name}
+              src={data.card.images[0].url}
+              alt={data.card.images[0].name}
               loading="lazy"
             />
           </Box>
@@ -64,7 +59,7 @@ function CardPage() {
                   alignItems: "center",
                 }}
               >
-                {currentCard.interests.map((int, i) => (
+                {data.card.interests.map((int, i) => (
                   <ListItem
                     sx={{
                       backgroundColor: "rgba(215, 112, 229, 0.2)",
@@ -89,14 +84,14 @@ function CardPage() {
                 }}
                 variant="h4"
                 component="div"
-              >{`${currentCard.price} ETH`}</Typography>
+              >{`${data.card.price} ETH`}</Typography>
             </Box>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography gutterBottom variant="h3" component="div">
-                {currentCard.name}
+                {data.card.name}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {currentCard.description}
+                {data.card.description}
               </Typography>
             </Box>
           </Box>
