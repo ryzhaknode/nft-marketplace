@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import NftCards from "../components/NftCards";
 import { INftItem } from "../types/INftItem";
 import Grid from "@mui/material/Unstable_Grid2";
+import { NavLink } from "react-router-dom";
+import { ROUTES } from "../Routes/routesName";
 
 declare module "@mui/system" {
   interface BreakpointOverrides {
@@ -49,6 +51,7 @@ function Gallery() {
         <Grid container spacing={4} columns={12}>
           {data.map((card, i) => (
             <Grid
+              key={i}
               laptop={4}
               tablet={6}
               mobile={12}
@@ -56,7 +59,9 @@ function Gallery() {
               justifyContent="center"
               alignItems="center"
             >
-              <NftCards key={i} card={card} />
+              <NavLink to={ROUTES.cardPage(card.nftCodeNumber8)}>
+                <NftCards card={card} />
+              </NavLink>
             </Grid>
           ))}
         </Grid>
