@@ -1,0 +1,159 @@
+[
+  {
+    "name": "ARTCRUSH MEMBERSHIP",
+    "description": "Join the Artcrush community today Artcrush Membership NFTs",
+    "nftCodeNumber8": "00000001",
+    "interests": [
+      {
+        "name": "Art"
+      },
+      {
+        "name": "Blockchain"
+      },
+      {
+        "name": "Collectibles"
+      }
+    ],
+    "createdAt": "2022-01-01T00:00:00Z",
+    "authorName": "Brian aka Arthemort",
+    "companyName": "artcrush",
+    "images": [
+      {
+        "name": "artcrush",
+        "url": "https://i.seadn.io/gcs/files/414e1860b18dbbece8e4c4fb9c1e8c14.webp?auto=format&dpr=1&w=1000"
+      }
+    ],
+    "price": "0.75"
+  },
+  {
+    "name": "Geometric Gems",
+    "description": "Geometric Gems is a creative exploration of beauty and perfection through geometric shapes",
+    "nftCodeNumber8": "00000002",
+    "interests": [
+      {
+        "name": "Art"
+      },
+      {
+        "name": "Blockchain"
+      },
+      {
+        "name": "Collectibles"
+      }
+    ],
+    "createdAt": "2022-05-11T00:00:00Z",
+    "authorName": "Arthur Heyse",
+    "companyName": "geometric",
+    "images": [
+      {
+        "name": "geometric",
+        "url": "https://i.seadn.io/gcs/files/6a22b700f3f0548d03259c035859db7a.jpg?auto=format&dpr=1&w=1000"
+      }
+    ],
+    "price": "1.1"
+  },
+  {
+    "name": "BEANZ",
+    "description": "BEANZ are a small species that sprouts from the dirt in the garden.",
+    "nftCodeNumber8": "00000003",
+    "interests": [
+      {
+        "name": "Art"
+      },
+      {
+        "name": "Blockchain"
+      },
+      {
+        "name": "Collectibles"
+      }
+    ],
+    "createdAt": "2022-11-04T00:00:00Z",
+    "authorName": "TeamAzuki",
+    "companyName": "beanz",
+    "images": [
+      {
+        "name": "beanz",
+        "url": "https://i.seadn.io/gcs/files/035b7239eaefc0acbf74bd7687bd2e84.png?auto=format&dpr=1&w=1000"
+      }
+    ],
+    "price": "1.55"
+  },
+
+  {
+    "name": "Morphaper",
+    "description": "Explore the world of 1080 morphapers at https://morphaper.xyz/ They morph!",
+    "nftCodeNumber8": "00000004",
+    "interests": [
+      {
+        "name": "Art"
+      },
+      {
+        "name": "Blockchain"
+      },
+      {
+        "name": "Collectibles"
+      }
+    ],
+    "createdAt": "2022-11-04T00:00:00Z",
+    "authorName": "Den Morph",
+    "companyName": "morphaper",
+    "images": [
+      {
+        "name": "morphaper",
+        "url": "https://i.seadn.io/gcs/files/aacf4f73db8bcdd64a382dbd3c2f239b.webp?auto=format&dpr=1&w=1000"
+      }
+    ],
+    "price": "0.2"
+  },
+  {
+    "name": "Otherdeed",
+    "description": "These evolved Otherdeeds enable holders to play future games in the Yuga Labs universe. ",
+    "nftCodeNumber8": "00000005",
+    "interests": [
+      {
+        "name": "Art"
+      },
+      {
+        "name": "Blockchain"
+      },
+      {
+        "name": "Collectibles"
+      }
+    ],
+    "createdAt": "2022-12-04T00:00:00Z",
+    "authorName": "YugaLabs",
+    "companyName": "otherdeed",
+    "images": [
+      {
+        "name": "otherdeed",
+        "url": "https://i.seadn.io/gcs/files/d6b8daaeb54f17962c714563e65ebd6c.jpg?auto=format&dpr=1&w=1000"
+      }
+    ],
+    "price": "1.2"
+  },
+  {
+    "name": "DeGods",
+    "description": "DeGods is a digital art collection and global community of creators, developers, entrepreneurs, athletes, artists",
+    "nftCodeNumber8": "00000006",
+    "interests": [
+      {
+        "name": "Art"
+      },
+      {
+        "name": "Blockchain"
+      },
+      {
+        "name": "Collectibles"
+      }
+    ],
+    "createdAt": "2022-12-04T00:00:00Z",
+    "authorName": "DeGods",
+    "companyName": "degods",
+    "images": [
+      {
+        "name": "DeGods",
+        "url": "https://i.seadn.io/gcs/files/7dd0d1ef7607fd0f90a468e88a244a2a.png?auto=format&dpr=1&w=1000"
+      }
+    ],
+    "price": "7.55"
+  }
+]

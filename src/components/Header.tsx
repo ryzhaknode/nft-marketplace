@@ -25,8 +25,6 @@ const sections: ISections[] = [
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  console.log(Date());
-
   const handleCloseNavMenu = () => {
     setIsMenuOpen(false);
   };
