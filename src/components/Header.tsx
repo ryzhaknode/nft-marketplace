@@ -35,7 +35,9 @@ export default function Header() {
     <React.Fragment>
       <AppBar position="static">
         <Toolbar>
-          <PaletteIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <PaletteIcon
+            sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -43,7 +45,7 @@ export default function Header() {
             href="/"
             sx={{
               m: 2,
-              display: { xs: "none", md: "flex" },
+              display: { mobile: "none", laptop: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
@@ -57,7 +59,7 @@ export default function Header() {
           <Box
             sx={{
               flexGrow: 1,
-              display: { xs: "flex", md: "none" },
+              display: { mobile: "flex", laptop: "none" },
             }}
           >
             <IconButton
@@ -84,7 +86,7 @@ export default function Header() {
               open={isMenuOpen}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { mobile: "block", laptop: "none" },
               }}
             >
               {sections.map((page, i) => (
@@ -103,7 +105,9 @@ export default function Header() {
             </Menu>
           </Box>
 
-          <PaletteIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <PaletteIcon
+            sx={{ display: { mobile: "flex", laptop: "none" }, mr: 1 }}
+          />
           <Typography
             variant="h5"
             noWrap
@@ -111,7 +115,7 @@ export default function Header() {
             href=""
             sx={{
               mr: 2,
-              display: { xs: "flex", md: "none" },
+              display: { mobile: "flex", laptop: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
@@ -126,7 +130,7 @@ export default function Header() {
           <Box
             sx={{
               flexGrow: 1,
-              display: { xs: "none", md: "flex" },
+              display: { mobile: "none", laptop: "flex" },
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -163,7 +167,9 @@ export default function Header() {
               p: 2,
             }}
           >
-            <WalletIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            <WalletIcon
+              sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
+            />
             Connect Wallet
           </Button>
         </Toolbar>

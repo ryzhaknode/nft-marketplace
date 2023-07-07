@@ -14,7 +14,7 @@ function NftCards({ card }) {
           alt={card.images[0].name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography variant="h5" component="div">
             {card.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">

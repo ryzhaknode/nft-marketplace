@@ -6,7 +6,6 @@ import Gallery from "../RoutePages/Gallery";
 import ErrorPage from "../RoutePages/ErrorPage";
 import CardPage from "../RoutePages/CardPage";
 import { ROUTES } from "./routesName";
-import { loader as load } from "./loader";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +20,6 @@ export const router = createBrowserRouter([
       {
         path: "gallery/:contactId",
         element: <CardPage />,
-        loader: load,
       },
       {
         path: ROUTES.profilePage,

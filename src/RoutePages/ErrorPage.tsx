@@ -5,7 +5,7 @@ function ErrorPage() {
   return (
     <>
       <h1>Ops...</h1>
-      <p>{error.statusText ?? error.message}</p>
+      {/* <p>{error.statusText ?? error.message}</p> */}
     </>
   );
 }
