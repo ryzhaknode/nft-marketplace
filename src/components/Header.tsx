@@ -34,7 +34,7 @@ export default function Header() {
   return (
     <React.Fragment>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar sx={{ padding: "0 50px" }}>
           <PaletteIcon
             sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
           />
@@ -91,11 +91,24 @@ export default function Header() {
             >
               {sections.map((page, i) => (
                 <MenuItem key={i} onClick={handleCloseNavMenu}>
-                  <NavLink style={{ textDecoration: "none" }} to={page.url}>
+                  <NavLink
+                    className={({ isActive }) => {
+                      return isActive ? "active-link" : "not-active";
+                    }}
+                    style={{ textDecoration: "none" }}
+                    to={page.url}
+                  >
                     <Typography
                       textAlign="center"
                       component="a"
                       href={page.url}
+                      sx={{
+                        m: 2,
+                        display: "block",
+                        fontWeight: 700,
+                        letterSpacing: ".3rem",
+                        textDecoration: "none",
+                      }}
                     >
                       {page.title}
                     </Typography>
@@ -136,14 +149,20 @@ export default function Header() {
             }}
           >
             {sections.map((page, i) => (
-              <NavLink key={i} style={{ textDecoration: "none" }} to={page.url}>
+              <NavLink
+                className={({ isActive }) => {
+                  return isActive ? "active-link" : "not-active";
+                }}
+                style={{ textDecoration: "none" }}
+                key={i}
+                to={page.url}
+              >
                 <Typography
                   variant="h6"
                   component="a"
                   onClick={handleCloseNavMenu}
                   sx={{
                     m: 2,
-                    color: "white",
                     display: "block",
                     fontWeight: 700,
                     letterSpacing: ".3rem",

@@ -7,7 +7,7 @@ import { theme } from "./theme/theme";
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Box>
+      <Box sx={{ overflow: "hidden" }}>
         <Header />
         <Outlet />
       </Box>

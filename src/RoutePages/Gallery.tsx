@@ -1,6 +1,6 @@
 import datajson from "../nftsItems.json";
 import { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import NftCards from "../components/NftCards";
 import { INftItem } from "../types/INftItem";
@@ -11,40 +11,42 @@ import { ROUTES } from "../Routes/routesName";
 function Gallery() {
   const [data, setData] = useState<INftItem[]>(datajson);
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Typography variant="h4" component="h1" padding={"30px"}>
-        Gallery
-      </Typography>
-      <Grid container spacing={4} columns={12}>
-        {data.map((card, i) => (
-          <Grid
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            key={i}
-            laptop={4}
-            tablet={6}
-            mobile={12}
-          >
-            <NavLink
-              style={{ textDecoration: "none" }}
-              to={ROUTES.cardPage(card.nftCodeNumber8)}
+    <Container style={{ maxWidth: "1400px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Typography variant="h4" component="h1" padding={"30px"}>
+          Gallery
+        </Typography>
+        <Grid container spacing={4} columns={12}>
+          {data.map((card, i) => (
+            <Grid
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              key={i}
+              laptop={4}
+              tablet={6}
+              mobile={12}
             >
-              <NftCards card={card} />
-            </NavLink>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+              <NavLink
+                style={{ textDecoration: "none" }}
+                to={ROUTES.cardPage(card.nftCodeNumber8)}
+              >
+                <NftCards card={card} />
+              </NavLink>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    </Container>
   );
 }
 
