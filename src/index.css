@@ -10,3 +10,23 @@
 .not-active {
   color: #ffffff;
 }
+
+/* swiper */
+
+.swiper {
+  max-width: 400px;
+  max-height: 400px;
+}
+
+/* .mySwiper {
+} */
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}

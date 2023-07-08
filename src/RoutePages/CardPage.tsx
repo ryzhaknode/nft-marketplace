@@ -4,6 +4,9 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
 import datajson from "../nftsItems.json";
 import { INftItem } from "../types/INftItem";
+import { SwiperSlide } from "swiper/react";
+import SwiperSlider from "../Swiper/SwiperSlider";
+
 function CardPage() {
   const { contactId } = useParams();
   const currentCard: INftItem | undefined = datajson.find(
@@ -14,27 +17,14 @@ function CardPage() {
     <>
       {currentCard ? (
         <Grid sx={{ pt: 4 }} container spacing={2} columns={12}>
-          <Grid laptop={6} mobile={12}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                maxHeight: "100%",
-              }}
-            >
-              <img
-                style={{
-                  textAlign: "center",
-                  maxHeight: "600px",
-                  maxWidth: "100%",
-                }}
-                src={currentCard.images[0].url}
-                alt={currentCard.images[0].name}
-                loading="lazy"
-              />
-            </Box>
+          <Grid style={{ padding: "0 40px" }} laptop={6} mobile={12}>
+            <SwiperSlider>
+              {currentCard.images.map((img, i) => (
+                <SwiperSlide key={i}>
+                  <img src={img.url} alt={img.name} loading="lazy" />
+                </SwiperSlide>
+              ))}
+            </SwiperSlider>
           </Grid>
           <Grid
             sx={{
