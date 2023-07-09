@@ -1,13 +1,17 @@
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import { Box } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { theme } from "./theme/theme";
 
 function App() {
   return (
-    <Box>
-      <Header />
-      <Outlet />
-    </Box>
+    <ThemeProvider theme={theme}>
+      <Box>
+        <Header />
+        <Outlet />
+      </Box>
+    </ThemeProvider>
   );
 }
 
