@@ -3,4 +3,5 @@ export const ROUTES = {
   cardPage: (id) => `gallery/${id}`,
   profilePage: "/profile",
   statisticPage: "/statistic",
+  addCard: "/add",
 };

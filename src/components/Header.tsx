@@ -15,11 +15,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import WalletIcon from "@mui/icons-material/Wallet";
 import { NavLink } from "react-router-dom";
 import { ISections } from "../types/ISections";
+import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 
 const sections: ISections[] = [
   { title: "Gallery", url: "/" },
-  { title: "Statistic", url: "/statistic" },
   { title: "Profile", url: "/profile" },
+  { title: "Statistic", url: "/statistic" },
 ];
 
 export default function Header() {
@@ -33,7 +34,7 @@ export default function Header() {
   };
   return (
     <React.Fragment>
-      <AppBar position="static">
+      <AppBar color="inherit" position="static">
         <Toolbar sx={{ padding: "0 50px" }}>
           <PaletteIcon
             sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
@@ -46,14 +47,13 @@ export default function Header() {
             sx={{
               m: 2,
               display: { mobile: "none", laptop: "flex" },
-              fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
               textDecoration: "none",
+              color: "#000000",
             }}
           >
-            NFTPlace
+            <Box sx={{ color: "#1976d2" }}>NFT</Box> Place
           </Typography>
 
           <Box
@@ -93,25 +93,12 @@ export default function Header() {
                 <MenuItem key={i} onClick={handleCloseNavMenu}>
                   <NavLink
                     className={({ isActive }) => {
-                      return isActive ? "active-link" : "not-active";
+                      return isActive ? "link active-link" : "link not-active";
                     }}
                     style={{ textDecoration: "none" }}
                     to={page.url}
                   >
-                    <Typography
-                      textAlign="center"
-                      component="a"
-                      href={page.url}
-                      sx={{
-                        m: 2,
-                        display: "block",
-                        fontWeight: 700,
-                        letterSpacing: ".3rem",
-                        textDecoration: "none",
-                      }}
-                    >
-                      {page.title}
-                    </Typography>
+                    {page.title}
                   </NavLink>
                 </MenuItem>
               ))}
@@ -124,20 +111,17 @@ export default function Header() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
+            component="div"
             sx={{
               mr: 2,
               display: { mobile: "flex", laptop: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
               textDecoration: "none",
             }}
           >
-            NFTPlace
+            <Box sx={{ color: "#1976d2" }}>NFT</Box> Place
           </Typography>
 
           <Box
@@ -151,46 +135,59 @@ export default function Header() {
             {sections.map((page, i) => (
               <NavLink
                 className={({ isActive }) => {
-                  return isActive ? "active-link" : "not-active";
+                  return isActive ? "link active-link" : "link not-active";
                 }}
                 style={{ textDecoration: "none" }}
                 key={i}
                 to={page.url}
               >
-                <Typography
-                  variant="h6"
-                  component="a"
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    m: 2,
-                    display: "block",
-                    fontWeight: 700,
-                    letterSpacing: ".3rem",
-                    textDecoration: "none",
-                  }}
-                >
-                  {page.title}
-                </Typography>
+                {page.title}
               </NavLink>
             ))}
           </Box>
-          <Button
+          <Box
             sx={{
-              my: 2,
-              color: "white",
               display: "flex",
               justifyContent: "center",
+              gap: "10px",
               alignItems: "center",
-              border: "1px solid",
-              borderRadius: 2,
-              p: 2,
             }}
           >
-            <WalletIcon
-              sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
-            />
-            Connect Wallet
-          </Button>
+            <NavLink
+              to={"/add"}
+              style={{
+                margin: "14px 0",
+                backgroundColor: "#1976D2",
+                color: "#ffffff",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: "8px",
+                padding: "14px",
+                textDecoration: "none",
+              }}
+            >
+              <AddCircleOutlineSharpIcon sx={{ paddingRight: "10px" }} />
+              <Typography>ADD ART</Typography>
+            </NavLink>
+            <Button
+              sx={{
+                my: 2,
+                color: "#000000",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                border: "1px solid",
+                borderRadius: 2,
+                p: "13px",
+              }}
+            >
+              <WalletIcon
+                sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
+              />
+              <Typography>Connect Wallet</Typography>
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
     </React.Fragment>
