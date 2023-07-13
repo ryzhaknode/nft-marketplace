@@ -23,9 +23,9 @@ function AddCard() {
   const [art, setArt] = useState<INftItem>({
     name: "",
     description: "",
-    nftCodeNumber8: "",
+    nftCodeNumber8: "00000007",
     interests: [{ name: "" }],
-    createdAt: "",
+    createdAt: "2022-11-12T01:05:01Z",
     authorName: "",
     companyName: "",
     images: [{ name: "", url: "" }],
@@ -43,6 +43,13 @@ function AddCard() {
     console.log(art);
     // console.log(artName);
   }, [art]);
+
+  const handleOnlyNumbers = (event: any) => {
+    let { value } = event.target;
+    value = value.replace(/[^\d.]/g, "");
+    value = value.replace(/\.(?=.*\.)/g, "");
+    event.target.value = value;
+  };
 
   return (
     <Box sx={{ paddingTop: "50px" }}>
@@ -99,6 +106,7 @@ function AddCard() {
           </Box>
           <Box sx={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
             <TextField
+              margin="normal"
               label="Art name"
               variant="outlined"
               value={artName}
@@ -108,6 +116,7 @@ function AddCard() {
               // Другие свойства Material-UI можно добавить здесь
             />
             <TextField
+              margin="normal"
               label="Author name"
               variant="outlined"
               value={authorName}
@@ -117,15 +126,21 @@ function AddCard() {
               // Другие свойства Material-UI можно добавить здесь
             />
             <TextField
-              label="Price"
+              margin="normal"
+              label="Price in ETH"
               variant="outlined"
+              inputProps={{
+                pattern: "[0-9]*", // Регулярное выражение для цифр
+              }}
               value={price}
               onChange={(e) => {
+                handleOnlyNumbers(e);
                 setPrice(e.target.value);
               }}
               // Другие свойства Material-UI можно добавить здесь
             />
             <TextField
+              margin="normal"
               label="Company name"
               variant="outlined"
               value={companyName}
@@ -137,28 +152,50 @@ function AddCard() {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ borderBottom: "1px solid #a0a0a0", paddingBottom: "20px" }}>
+      <Box sx={{ borderBottom: "1px solid #a0a0a0", paddingBottom: "10px" }}>
         <Box sx={{ padding: "20px 0" }}>
           <Typography variant="h6" component={"div"}>
             Additional information
           </Typography>
         </Box>
         <Box>
-          <TextField label="Art description" variant="outlined" />
+          <Box
+            sx={{ paddingBottom: "20px", borderBottom: "1px solid  #a0a0a0" }}
+          >
+            <TextField
+              label="Art description"
+              fullWidth
+              multiline
+              variant="outlined"
+              margin="normal"
+            />
+          </Box>
           <Box
             sx={{
-              margin: "10px 0",
-              padding: "10px 0",
-              border: "1px solid #000000",
+              padding: "20px 0",
               display: "flex",
+              flexDirection: "column",
               gap: "30px",
             }}
           >
-            <TextField label="Image name" variant="outlined" />
-            <TextField label="Image link" variant="outlined" />
+            <Typography variant="h6" component={"div"}>
+              Nft image
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <TextField
+                label="Image name"
+                margin="normal"
+                // sx={{ paddingBottom: "20px" }}
+                variant="outlined"
+              />
+              <TextField label="Image link" variant="outlined" />
+            </Box>
           </Box>
-          <TextField label="Creating date" variant="outlined" />
-          <TextField label="Nft Code" variant="outlined" />
         </Box>
       </Box>
     </Box>
