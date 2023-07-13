@@ -41,14 +41,31 @@ function AddCard() {
 
   useEffect(() => {
     console.log(art);
-    // console.log(artName);
   }, [art]);
-
+  //checking only numbers in input
   const handleOnlyNumbers = (event: any) => {
     let { value } = event.target;
     value = value.replace(/[^\d.]/g, "");
     value = value.replace(/\.(?=.*\.)/g, "");
     event.target.value = value;
+  };
+
+  //checking valid url and only url in input
+  const handleOnlyUrl = (event: any) => {
+    const { value } = event.target;
+    const isValidUrl = isValidURL(value);
+    event.target.value = isValidUrl ? value : "";
+  };
+  const isValidURL = (url: string) => {
+    const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
+    return urlPattern.test(url);
+  };
+
+  //checking only words in input
+  const handleOnlyWords = (event: any) => {
+    const { value } = event.target;
+    const textOnlyValue = value.replace(/[^a-zA-Z\s]/g, "");
+    event.target.value = textOnlyValue;
   };
 
   return (
@@ -110,7 +127,11 @@ function AddCard() {
               label="Art name"
               variant="outlined"
               value={artName}
+              inputProps={{
+                pattern: "[a-zA-Zs]*",
+              }}
               onChange={(e) => {
+                handleOnlyWords(e);
                 setArtName(e.target.value);
               }}
               // Другие свойства Material-UI можно добавить здесь
@@ -120,7 +141,11 @@ function AddCard() {
               label="Author name"
               variant="outlined"
               value={authorName}
+              inputProps={{
+                pattern: "[a-zA-Zs]*",
+              }}
               onChange={(e) => {
+                handleOnlyWords(e);
                 setAuthorName(e.target.value);
               }}
               // Другие свойства Material-UI можно добавить здесь
@@ -144,7 +169,11 @@ function AddCard() {
               label="Company name"
               variant="outlined"
               value={companyName}
+              inputProps={{
+                pattern: "[a-zA-Zs]*",
+              }}
               onChange={(e) => {
+                handleOnlyWords(e);
                 setCompanyName(e.target.value);
               }}
               // Другие свойства Material-UI можно добавить здесь
@@ -166,6 +195,12 @@ function AddCard() {
               label="Art description"
               fullWidth
               multiline
+              onChange={(e) => {
+                handleOnlyWords(e);
+              }}
+              inputProps={{
+                pattern: "[a-zA-Zs]*",
+              }}
               variant="outlined"
               margin="normal"
             />
@@ -190,10 +225,24 @@ function AddCard() {
               <TextField
                 label="Image name"
                 margin="normal"
-                // sx={{ paddingBottom: "20px" }}
+                onChange={(e) => {
+                  handleOnlyWords(e);
+                }}
+                inputProps={{
+                  pattern: "[a-zA-Zs]*",
+                }}
                 variant="outlined"
               />
-              <TextField label="Image link" variant="outlined" />
+              <TextField
+                onChange={(e) => {
+                  handleOnlyUrl(e);
+                }}
+                inputProps={{
+                  pattern: '^(ftp|http|https):\\/\\/[^ "]+$',
+                }}
+                label="Image url"
+                variant="outlined"
+              />
             </Box>
           </Box>
         </Box>
