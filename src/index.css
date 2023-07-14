@@ -43,3 +43,7 @@
   display: block;
   width: 100%;
 }
+
+.empty-input {
+  border: 1px solid red;
+}

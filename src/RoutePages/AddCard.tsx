@@ -1,6 +1,13 @@
 import { Typography, Box, Button, Input, TextField } from "@mui/material";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { INftItem } from "../types/INftItem";
+import {
+  handleOnlyNumbers,
+  handleOnlyUrl,
+  handleOnlyWords,
+} from "../functions/inputChecker";
+import { Images } from "../types/Images";
+import { addInJson } from "../functions/addInJson";
 
 const interests = [
   "Art",
@@ -14,23 +21,47 @@ const interests = [
 ];
 
 function AddCard() {
+  const [notFilled, setNotFilled] = useState(false);
   const [selectedButton, setSelectedButton] = useState("");
-  const [artName, setArtName] = useState("");
-  const [authorName, setAuthorName] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [price, setPrice] = useState("");
+  const [images, setImages] = useState<Images>({
+    name: "",
+    url: "",
+  });
 
   const [art, setArt] = useState<INftItem>({
     name: "",
     description: "",
-    nftCodeNumber8: "00000007",
+    nftCodeNumber8: "00000000",
     interests: [{ name: "" }],
-    createdAt: "2022-11-12T01:05:01Z",
+    createdAt: "2022-01-01T01:05:01Z",
     authorName: "",
     companyName: "",
     images: [{ name: "", url: "" }],
     price: "",
   });
+
+  const handleInputChangeInArt = (event: any) => {
+    const { name, value } = event.target;
+    setArt((prevArt) => ({
+      ...prevArt,
+      [name]: value,
+    }));
+  };
+
+  const handleInputChangeInImages = (event: any) => {
+    const { name, value } = event.target;
+    setImages((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    setArt((prevArt) => ({
+      ...prevArt,
+      images: [{ ...images }],
+    }));
+  }, [images]);
 
   const interestsChange = (value: string) => {
     setArt((prevArt) => ({
@@ -41,31 +72,37 @@ function AddCard() {
 
   useEffect(() => {
     console.log(art);
+    console.log(require("../nftsItems.json"));
   }, [art]);
-  //checking only numbers in input
-  const handleOnlyNumbers = (event: any) => {
-    let { value } = event.target;
-    value = value.replace(/[^\d.]/g, "");
-    value = value.replace(/\.(?=.*\.)/g, "");
-    event.target.value = value;
-  };
 
-  //checking valid url and only url in input
-  const handleOnlyUrl = (event: any) => {
-    const { value } = event.target;
-    const isValidUrl = isValidURL(value);
-    event.target.value = isValidUrl ? value : "";
-  };
-  const isValidURL = (url: string) => {
-    const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
-    return urlPattern.test(url);
-  };
-
-  //checking only words in input
-  const handleOnlyWords = (event: any) => {
-    const { value } = event.target;
-    const textOnlyValue = value.replace(/[^a-zA-Z\s]/g, "");
-    event.target.value = textOnlyValue;
+  const clickPublishArt = () => {
+    if (
+      art.name &&
+      art.authorName &&
+      art.price &&
+      art.images &&
+      art.companyName &&
+      art.interests &&
+      art.description
+    ) {
+      addInJson(art);
+      setNotFilled(false);
+      setArt({
+        name: "",
+        description: "",
+        nftCodeNumber8: "00000000",
+        interests: [{ name: "" }],
+        createdAt: "2022-01-01T01:05:01Z",
+        authorName: "",
+        companyName: "",
+        images: [{ name: "", url: "" }],
+        price: "",
+      });
+      setImages({
+        name: "",
+        url: "",
+      });
+    } else setNotFilled(true);
   };
 
   return (
@@ -82,9 +119,29 @@ function AddCard() {
         <Typography variant="h4" component={"h2"}>
           Add Card
         </Typography>
-        <Button sx={{ border: "1px solid", padding: "10px 20px" }}>
-          <Typography component={"h5"}>PUBLISH ART</Typography>{" "}
-        </Button>
+        <Box sx={{ position: "relative" }}>
+          <Button
+            onClick={clickPublishArt}
+            sx={{ border: "1px solid", padding: "10px 20px" }}
+          >
+            <Typography component={"h5"}>PUBLISH ART</Typography>
+          </Button>
+          {notFilled ? (
+            <Typography
+              sx={{
+                position: "absolute",
+                bottom: "10",
+                left: "0",
+              }}
+              component={"div"}
+              color="error"
+            >
+              fill all inputs
+            </Typography>
+          ) : (
+            <></>
+          )}
+        </Box>
       </Box>
 
       <Box sx={{ borderBottom: "1px solid #a0a0a0", paddingBottom: "20px" }}>
@@ -125,14 +182,16 @@ function AddCard() {
             <TextField
               margin="normal"
               label="Art name"
+              name="name"
+              color={art.name === "" ? "error" : "success"}
               variant="outlined"
-              value={artName}
+              value={art.name}
               inputProps={{
                 pattern: "[a-zA-Zs]*",
               }}
               onChange={(e) => {
                 handleOnlyWords(e);
-                setArtName(e.target.value);
+                handleInputChangeInArt(e);
               }}
               // Другие свойства Material-UI можно добавить здесь
             />
@@ -140,13 +199,15 @@ function AddCard() {
               margin="normal"
               label="Author name"
               variant="outlined"
-              value={authorName}
+              name="authorName"
+              color={art.authorName === "" ? "error" : "success"}
+              value={art.authorName}
               inputProps={{
                 pattern: "[a-zA-Zs]*",
               }}
               onChange={(e) => {
                 handleOnlyWords(e);
-                setAuthorName(e.target.value);
+                handleInputChangeInArt(e);
               }}
               // Другие свойства Material-UI можно добавить здесь
             />
@@ -154,27 +215,31 @@ function AddCard() {
               margin="normal"
               label="Price in ETH"
               variant="outlined"
+              color={art.price === "" ? "error" : "success"}
               inputProps={{
                 pattern: "[0-9]*", // Регулярное выражение для цифр
               }}
-              value={price}
+              name="price"
+              value={art.price}
               onChange={(e) => {
                 handleOnlyNumbers(e);
-                setPrice(e.target.value);
+                handleInputChangeInArt(e);
               }}
               // Другие свойства Material-UI можно добавить здесь
             />
             <TextField
               margin="normal"
               label="Company name"
+              name="companyName"
               variant="outlined"
-              value={companyName}
+              value={art.companyName}
+              color={art.companyName === "" ? "error" : "success"}
               inputProps={{
                 pattern: "[a-zA-Zs]*",
               }}
               onChange={(e) => {
                 handleOnlyWords(e);
-                setCompanyName(e.target.value);
+                handleInputChangeInArt(e);
               }}
               // Другие свойства Material-UI можно добавить здесь
             />
@@ -195,12 +260,16 @@ function AddCard() {
               label="Art description"
               fullWidth
               multiline
+              name="description"
+              value={art.description}
               onChange={(e) => {
                 handleOnlyWords(e);
+                handleInputChangeInArt(e);
               }}
               inputProps={{
                 pattern: "[a-zA-Zs]*",
               }}
+              color={art.description === "" ? "error" : "success"}
               variant="outlined"
               margin="normal"
             />
@@ -224,23 +293,31 @@ function AddCard() {
             >
               <TextField
                 label="Image name"
+                value={images.name}
+                name="name"
                 margin="normal"
                 onChange={(e) => {
                   handleOnlyWords(e);
+                  handleInputChangeInImages(e);
                 }}
                 inputProps={{
                   pattern: "[a-zA-Zs]*",
                 }}
                 variant="outlined"
+                color={images.name === "" ? "error" : "success"}
               />
               <TextField
                 onChange={(e) => {
                   handleOnlyUrl(e);
+                  handleInputChangeInImages(e);
                 }}
+                value={images.url}
+                name="url"
                 inputProps={{
                   pattern: '^(ftp|http|https):\\/\\/[^ "]+$',
                 }}
                 label="Image url"
+                color={images.url === "" ? "error" : "success"}
                 variant="outlined"
               />
             </Box>
