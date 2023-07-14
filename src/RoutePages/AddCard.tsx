@@ -102,6 +102,7 @@ function AddCard() {
         name: "",
         url: "",
       });
+      setSelectedButton("");
     } else setNotFilled(true);
   };
 
