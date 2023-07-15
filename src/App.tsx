@@ -1,15 +1,17 @@
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
-import { Box } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Box, Container } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./theme/theme";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Box>
+      <Box sx={{ overflow: "hidden" }}>
         <Header />
-        <Outlet />
+        <Container style={{ maxWidth: "1400px" }}>
+          <Outlet />
+        </Container>
       </Box>
     </ThemeProvider>
   );

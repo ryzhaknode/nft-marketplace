@@ -1,4 +1,49 @@
 * {
   font-family: "Roboto";
   margin: 0;
+  /* color: #000000; */
+}
+.span {
+  color: #1976d2;
+}
+
+.link {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0.46px;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+.active-link {
+  color: #1976d2;
+}
+
+.not-active {
+  color: #000000;
+}
+
+/* swiper */
+
+.swiper {
+  max-width: 400px;
+  max-height: 400px;
+}
+
+/* .mySwiper {
+} */
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
+.empty-input {
+  border: 1px solid red;
 }

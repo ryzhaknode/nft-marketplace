@@ -23,4 +23,9 @@ export const theme = createTheme({
       mobile: 0,
     },
   },
+  // palette: {
+  //   error: {
+  //     main: "#ffffff",
+  //   },
+  // },
 });

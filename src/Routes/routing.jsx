@@ -6,6 +6,7 @@ import Gallery from "../RoutePages/Gallery";
 import ErrorPage from "../RoutePages/ErrorPage";
 import CardPage from "../RoutePages/CardPage";
 import { ROUTES } from "./routesName";
+import AddCard from "../RoutePages/AddCard";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.statisticPage,
         element: <Statistic />,
+      },
+      {
+        path: ROUTES.addCard,
+        element: <AddCard />,
       },
     ],
   },

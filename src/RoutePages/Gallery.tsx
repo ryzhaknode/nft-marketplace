@@ -1,6 +1,6 @@
 import datajson from "../nftsItems.json";
 import { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import NftCards from "../components/NftCards";
 import { INftItem } from "../types/INftItem";
