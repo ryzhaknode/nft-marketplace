@@ -31,9 +31,6 @@
   max-height: 400px;
 }
 
-/* .mySwiper {
-} */
-
 .swiper-slide {
   background-position: center;
   background-size: cover;
@@ -42,8 +39,4 @@
 .swiper-slide img {
   display: block;
   width: 100%;
-}
-
-.empty-input {
-  border: 1px solid red;
 }

@@ -1,15 +1,12 @@
 import datajson from "../nftsItems.json";
-import { useState } from "react";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import NftCards from "../components/NftCards";
-import { INftItem } from "../types/INftItem";
 import Grid from "@mui/material/Unstable_Grid2";
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../Routes/routesName";
 
 function Gallery() {
-  const [data, setData] = useState<INftItem[]>(datajson);
   return (
     <Box
       sx={{
@@ -23,7 +20,7 @@ function Gallery() {
         Gallery
       </Typography>
       <Grid container spacing={4} columns={12}>
-        {data.map((card, i) => (
+        {datajson.map((card, i) => (
           <Grid
             style={{
               display: "flex",

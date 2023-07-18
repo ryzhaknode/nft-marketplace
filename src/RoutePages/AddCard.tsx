@@ -1,23 +1,43 @@
-import { Typography, Box, Button, Input, TextField } from "@mui/material";
+import { Typography, Box, Button, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
 import { INftItem } from "../types/INftItem";
-import datajson from "../nftsItems.json";
 import {
   handleOnlyNumbers,
   handleOnlyUrl,
   handleOnlyWords,
 } from "../functions/inputChecker";
-import { Images } from "../types/Images";
-import { emptyArt, emptyImages, interests } from "../functions/values";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+
+import {
+  emptyArt,
+  emptyImages,
+  interests,
+  randomEightNum,
+  randomEightNumToString,
+} from "../functions/values";
 import { useAddInJson } from "../hooks/useAddToJson";
 
 function AddCard() {
-  const [selectedButton, setSelectedButton] = useState("");
-  const [disabledButton, setDisabledButton] = useState(false);
-  const [images, setImages] = useState<Images>(emptyImages);
-  const [art, setArt] = useState<INftItem>(emptyArt);
+  const [selectedInterest, setSelectedInterest] = useState("");
+  const [images, setImages] = useState([
+    { id: randomEightNum(), ...emptyImages },
+  ]);
+  const [art, setArt] = useState<INftItem>({
+    nftCodeNumber8: randomEightNumToString(),
+    ...emptyArt,
+  });
+  //hook add in json
+  const [addObject] = useAddInJson();
 
-  //change art-values
+  //change values in interests
+  const interestsChange = (value: string) => {
+    setArt((prevArt) => ({
+      ...prevArt,
+      interests: [{ name: value }],
+    }));
+  };
+
+  //change values in art
   const handleInputChangeInArt = (event: any) => {
     const { name, value } = event.target;
     setArt((prevArt) => ({
@@ -26,43 +46,42 @@ function AddCard() {
     }));
   };
 
-  //compare art values + images object
-  useEffect(() => {
-    setArt((prevArt) => ({
-      ...prevArt,
-      images: [{ ...images }],
-    }));
-  }, [images]);
-
-  //change images object in art-values
-  const handleInputChangeInImages = (event: any) => {
+  //change values in images object
+  const handleInputChangeInImages = (event: any, id: number) => {
     const { name, value } = event.target;
-    setImages((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+    const updatedImages = [...images];
+    const objIndex = updatedImages.findIndex((image) => image.id === id);
+    if (objIndex !== -1) {
+      updatedImages[objIndex] = {
+        ...updatedImages[objIndex],
+        [name]: value,
+      };
+      setImages(updatedImages);
+    }
   };
-  //change interests object in art-values
-  const interestsChange = (value: string) => {
-    setArt((prevArt) => ({
-      ...prevArt,
-      interests: [{ name: value }],
-    }));
-  };
-
+  //clear all values
   const clearValues = () => {
-    setArt(emptyArt);
-    setImages(emptyImages);
-    setSelectedButton("");
+    setArt({
+      nftCodeNumber8: randomEightNumToString(),
+      ...emptyArt,
+    });
+    setImages([{ id: randomEightNum(), ...emptyImages }]);
+    setSelectedInterest("");
   };
-
-  const [addObject] = useAddInJson();
-
+  //push new art and clear all values
   const submitPublishArt = () => {
-    addObject(art);
+    addObject({ ...art, images: images });
     clearValues();
-    setDisabledButton(true);
   };
+  //add new image section but not more then 4 new section
+  function addNewImageClick() {
+    if (images.length < 4)
+      setImages([...images, { id: randomEightNum(), ...emptyImages }]);
+  }
+  //delete selected  image section
+  function deleteImage(id: number) {
+    if (images.length > 1) setImages(images.filter((img) => img.id !== id));
+  }
 
   return (
     <Box sx={{ paddingTop: "50px" }}>
@@ -86,7 +105,6 @@ function AddCard() {
           </Typography>
           <Box sx={{ position: "relative" }}>
             <Button
-              disabled={disabledButton}
               type="submit"
               sx={{ border: "1px solid", padding: "10px 20px" }}
             >
@@ -117,10 +135,10 @@ function AddCard() {
                 <Button
                   onClick={() => {
                     interestsChange(interest);
-                    setSelectedButton(interest);
+                    setSelectedInterest(interest);
                   }}
                   key={i}
-                  color={selectedButton === interest ? "success" : "primary"}
+                  color={selectedInterest === interest ? "success" : "primary"}
                   size="medium"
                   variant="outlined"
                   sx={{ borderRadius: "20px" }}
@@ -226,7 +244,17 @@ function AddCard() {
                 margin="normal"
               />
             </Box>
+          </Box>
+          <Box
+            paddingY={"30px"}
+            sx={{ display: "flex", justifyContent: "space-between" }}
+          >
+            <Typography variant="h6">Images</Typography>
+            <Button onClick={addNewImageClick}>+ ADD NEW IMAGE</Button>
+          </Box>
+          {images.map((img) => (
             <Box
+              key={img.id}
               sx={{
                 padding: "20px 0",
                 display: "flex",
@@ -246,37 +274,51 @@ function AddCard() {
                 <TextField
                   required
                   label="Image name"
-                  value={images.name}
+                  value={img.name}
                   name="name"
                   margin="normal"
                   onChange={(e) => {
                     handleOnlyWords(e);
-                    handleInputChangeInImages(e);
+                    handleInputChangeInImages(e, img.id);
                   }}
                   inputProps={{
                     pattern: "[a-zA-Zs]*",
                   }}
                   variant="outlined"
-                  color={images.name === "" ? "error" : "success"}
+                  color={img.name === "" ? "error" : "success"}
                 />
                 <TextField
                   required
                   onChange={(e) => {
                     handleOnlyUrl(e);
-                    handleInputChangeInImages(e);
+                    handleInputChangeInImages(e, img.id);
                   }}
-                  value={images.url}
+                  value={img.url}
                   name="url"
                   inputProps={{
                     pattern: '^(ftp|http|https):\\/\\/[^ "]+$',
                   }}
                   label="Image url"
-                  color={images.url === "" ? "error" : "success"}
+                  color={img.url === "" ? "error" : "success"}
                   variant="outlined"
                 />
               </Box>
+              <Button
+                style={{ justifyContent: "flex-end" }}
+                onClick={() => {
+                  deleteImage(img.id);
+                }}
+              >
+                <DeleteForeverIcon
+                  sx={{
+                    p: "6px",
+                    backgroundColor: "#e0f0ff",
+                    borderRadius: "50%",
+                  }}
+                />
+              </Button>
             </Box>
-          </Box>
+          ))}
         </Box>
       </form>
     </Box>
