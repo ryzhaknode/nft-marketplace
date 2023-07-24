@@ -25,12 +25,32 @@ const sections: ISections[] = [
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [userAccount, setUserAccount] = useState("");
 
   const handleCloseNavMenu = () => {
     setIsMenuOpen(false);
   };
   const handleOpenNavMenu = () => {
     setIsMenuOpen(true);
+  };
+
+  const connectWallet = () => {
+    if (window.ethereum) {
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((account: any) => {
+          setUserAccount(account[0]);
+          console.log(account);
+        });
+      window.ethereum.on("accountChanged", connectWallet);
+      window.ethereum.on("chainChanged", chainChangedHandler);
+    } else {
+      alert("install metamask");
+    }
+  };
+
+  const chainChangedHandler = () => {
+    window.location.reload();
   };
   return (
     <React.Fragment>
@@ -109,7 +129,10 @@ export default function Header() {
               ))}
               <Box sx={{ p: "13px" }}>
                 <Button
-                  onClick={handleCloseNavMenu}
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    connectWallet();
+                  }}
                   sx={{
                     display: { mobile: "block", laptop: "none" },
                     color: "#000000",
@@ -119,10 +142,22 @@ export default function Header() {
                     borderRadius: 2,
                   }}
                 >
-                  <WalletIcon
-                    sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
-                  />
-                  <Typography>Connect Wallet</Typography>
+                  {userAccount ? (
+                    <Typography>{`${userAccount.substring(
+                      0,
+                      12
+                    )}...`}</Typography>
+                  ) : (
+                    <Box sx={{ display: "flex" }}>
+                      <WalletIcon
+                        sx={{
+                          display: { mobile: "none", laptop: "flex" },
+                          mr: 1,
+                        }}
+                      />
+                      <Typography>Connect Wallet</Typography>
+                    </Box>
+                  )}
                 </Button>
               </Box>
               <Box
@@ -224,6 +259,7 @@ export default function Header() {
               </NavLink>
             </Box>
             <Button
+              onClick={connectWallet}
               sx={{
                 display: { mobile: "none", laptop: "flex" },
                 my: 2,
@@ -235,10 +271,16 @@ export default function Header() {
                 p: "13px",
               }}
             >
-              <WalletIcon
-                sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
-              />
-              <Typography>Connect Wallet</Typography>
+              {userAccount ? (
+                <Typography>{`${userAccount.substring(0, 12)}...`}</Typography>
+              ) : (
+                <Box sx={{ display: "flex" }}>
+                  <WalletIcon
+                    sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
+                  />
+                  <Typography>Connect Wallet</Typography>
+                </Box>
+              )}
             </Button>
           </Box>
         </Toolbar>
