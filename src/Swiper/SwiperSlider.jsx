@@ -1,31 +1,54 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useState, useRef } from "react";
+// Import Swiper React components
+import { Swiper } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/effect-cube";
-import "swiper/css/pagination";
+import "swiper/css/free-mode";
 import "swiper/css/navigation";
+import "swiper/css/thumbs";
+
+import "../index.css";
 
 // import required modules
-import { EffectCube, Navigation, Pagination } from "swiper/modules";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
-export default function SwiperSlider({ children }) {
+function SwiperSlider({ children }) {
+  // const thumbsSwiperRef = useRef(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
   return (
-    <Swiper
-      effect={"cube"}
-      grabCursor={true}
-      cubeEffect={{
-        shadow: true,
-        slideShadows: true,
-        shadowOffset: 10,
-        shadowScale: 0.94,
-      }}
-      navigation={true}
-      pagination={true}
-      modules={[EffectCube, Pagination, Navigation]}
-      className="mySwiper"
-    >
-      {children}
-    </Swiper>
+    <>
+      <Swiper
+        style={{
+          "--swiper-navigation-color": "#fff",
+          "--swiper-pagination-color": "#fff",
+        }}
+        loop={true}
+        spaceBetween={10}
+        navigation={true}
+        thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className="mySwiper2"
+      >
+        {children}
+      </Swiper>
+
+      <Swiper
+        onSwiper={setThumbsSwiper}
+        loop={true}
+        spaceBetween={10}
+        slidesPerView={4}
+        freeMode={true}
+        watchSlidesProgress={true}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className="mySwiper"
+        //
+      >
+        {children}
+      </Swiper>
+    </>
   );
 }
+
+export default SwiperSlider;

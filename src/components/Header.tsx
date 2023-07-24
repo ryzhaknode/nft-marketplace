@@ -25,6 +25,7 @@ const sections: ISections[] = [
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [userAccount, setUserAccount] = useState("");
 
   const handleCloseNavMenu = () => {
     setIsMenuOpen(false);
@@ -32,10 +33,33 @@ export default function Header() {
   const handleOpenNavMenu = () => {
     setIsMenuOpen(true);
   };
+
+  const connectWallet = () => {
+    if (window.ethereum) {
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((account: any) => {
+          setUserAccount(account[0]);
+          console.log(account);
+        });
+      window.ethereum.on("accountChanged", connectWallet);
+      window.ethereum.on("chainChanged", chainChangedHandler);
+    } else {
+      alert("install metamask");
+    }
+  };
+
+  const chainChangedHandler = () => {
+    window.location.reload();
+  };
   return (
     <React.Fragment>
       <AppBar color="inherit" position="static">
-        <Toolbar sx={{ padding: "0 50px" }}>
+        <Toolbar
+          sx={{
+            padding: { laptop: "0 50px", table: "0 30px", mobile: "0 15px" },
+          }}
+        >
           <PaletteIcon
             sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
           />
@@ -75,7 +99,7 @@ export default function Header() {
             <Menu
               id="menu-appbar"
               anchorOrigin={{
-                vertical: "bottom",
+                vertical: "top",
                 horizontal: "left",
               }}
               keepMounted
@@ -87,6 +111,7 @@ export default function Header() {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { mobile: "block", laptop: "none" },
+                marginTop: "80px",
               }}
             >
               {sections.map((page, i) => (
@@ -102,6 +127,60 @@ export default function Header() {
                   </NavLink>
                 </MenuItem>
               ))}
+              <Box sx={{ p: "13px" }}>
+                <Button
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    connectWallet();
+                  }}
+                  sx={{
+                    display: { mobile: "block", laptop: "none" },
+                    color: "#000000",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "1px solid",
+                    borderRadius: 2,
+                  }}
+                >
+                  {userAccount ? (
+                    <Typography>{`${userAccount.substring(
+                      0,
+                      12
+                    )}...`}</Typography>
+                  ) : (
+                    <Box sx={{ display: "flex" }}>
+                      <WalletIcon
+                        sx={{
+                          display: { mobile: "none", laptop: "flex" },
+                          mr: 1,
+                        }}
+                      />
+                      <Typography>Connect Wallet</Typography>
+                    </Box>
+                  )}
+                </Button>
+              </Box>
+              <Box
+                sx={{ display: { tablet: "none", mobile: "block" }, p: "13px" }}
+              >
+                <NavLink
+                  to={"/add"}
+                  style={{
+                    backgroundColor: "#1976D2",
+                    color: "#ffffff",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "8px",
+                    padding: "14px",
+                    textDecoration: "none",
+                  }}
+                  onClick={handleCloseNavMenu}
+                >
+                  <AddCircleOutlineSharpIcon sx={{ paddingRight: "10px" }} />
+                  <Typography>ADD ART</Typography>
+                </NavLink>
+              </Box>
             </Menu>
           </Box>
 
@@ -121,7 +200,14 @@ export default function Header() {
               textDecoration: "none",
             }}
           >
-            <Box sx={{ color: "#1976d2" }}>NFT</Box> Place
+            <Box
+              sx={{
+                color: "#1976d2",
+              }}
+            >
+              NFT
+            </Box>{" "}
+            Place
           </Typography>
 
           <Box
@@ -153,28 +239,31 @@ export default function Header() {
               alignItems: "center",
             }}
           >
-            <NavLink
-              to={"/add"}
-              style={{
-                margin: "14px 0",
-                backgroundColor: "#1976D2",
-                color: "#ffffff",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: "8px",
-                padding: "14px",
-                textDecoration: "none",
-              }}
-            >
-              <AddCircleOutlineSharpIcon sx={{ paddingRight: "10px" }} />
-              <Typography>ADD ART</Typography>
-            </NavLink>
+            <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
+              <NavLink
+                to={"/add"}
+                style={{
+                  margin: "14px 0",
+                  backgroundColor: "#1976D2",
+                  color: "#ffffff",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "8px",
+                  padding: "14px",
+                  textDecoration: "none",
+                }}
+              >
+                <AddCircleOutlineSharpIcon sx={{ paddingRight: "10px" }} />
+                <Typography>ADD ART</Typography>
+              </NavLink>
+            </Box>
             <Button
+              onClick={connectWallet}
               sx={{
+                display: { mobile: "none", laptop: "flex" },
                 my: 2,
                 color: "#000000",
-                display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 border: "1px solid",
@@ -182,10 +271,16 @@ export default function Header() {
                 p: "13px",
               }}
             >
-              <WalletIcon
-                sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
-              />
-              <Typography>Connect Wallet</Typography>
+              {userAccount ? (
+                <Typography>{`${userAccount.substring(0, 12)}...`}</Typography>
+              ) : (
+                <Box sx={{ display: "flex" }}>
+                  <WalletIcon
+                    sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
+                  />
+                  <Typography>Connect Wallet</Typography>
+                </Box>
+              )}
             </Button>
           </Box>
         </Toolbar>

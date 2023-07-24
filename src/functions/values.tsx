@@ -12,7 +12,6 @@ export const interests = [
 export const emptyArt = {
   name: "",
   description: "",
-  nftCodeNumber8: Math.floor(Math.random() * 90000000 + 10000000).toString(),
   interests: [{ name: "" }],
   createdAt: new Date().toISOString(),
   authorName: "",
@@ -21,7 +20,11 @@ export const emptyArt = {
   price: "",
 };
 
-export const emptyImages = {
-  name: "",
-  url: "",
+export const randomEightNumToString = () => {
+  return Date.now().toString().slice(-8);
 };
+export const randomEightNum = () => {
+  return Number(Date.now().toString().slice(-8));
+};
+
+export const emptyImages = { name: "", url: "" };
