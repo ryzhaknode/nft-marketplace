@@ -1,12 +1,27 @@
-import datajson from "../nftsItems.json";
-import { Box } from "@mui/material";
+import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import NftCards from "../components/NftCards";
 import Grid from "@mui/material/Unstable_Grid2";
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../Routes/routesName";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+
+import { useState } from "react";
+import { filtersList } from "../functions/values";
 
 function Gallery() {
+  const dispatch = useDispatch();
+  const datajson = useSelector((state: RootState) => state.sort);
+  console.log(datajson);
+  const [selectedFilter, setSelectedFilter] = useState("");
+
+  function selectChange(value: any) {
+    const callback = filtersList.find((l) => l.label === value)?.callback;
+    setSelectedFilter(value);
+    if (callback) dispatch(callback());
+  }
+
   return (
     <Box
       sx={{
@@ -16,6 +31,27 @@ function Gallery() {
         alignItems: "center",
       }}
     >
+      <Box sx={{ paddingTop: "50px" }}>
+        <FormControl sx={{ width: "300px" }}>
+          <InputLabel id="filter-label">Select</InputLabel>
+
+          <Select
+            labelId="filter-label"
+            id="filter-select"
+            value={selectedFilter}
+            onChange={(e) => {
+              selectChange(e.target.value);
+            }}
+          >
+            {filtersList.map((filter, i) => (
+              <MenuItem key={i} value={filter.label}>
+                {filter.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
+
       <Typography variant="h4" component="h1" padding={"30px"}>
         Gallery
       </Typography>
