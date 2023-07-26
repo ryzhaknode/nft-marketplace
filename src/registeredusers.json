@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Denis",
+    "username": "admin",
+    "interests": [
+      {
+        "name": "Blockchain"
+      },
+      {
+        "name": "Collectibles"
+      }
+    ],
+    "password": "1",
+    "repeatpassword": "1",
+    "createdAt": "2023-01-01T00:00:00Z"
+  }
+]

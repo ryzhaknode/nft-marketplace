@@ -17,6 +17,7 @@ import { NavLink } from "react-router-dom";
 import { ISections } from "../types/ISections";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import { useConnectWallet } from "../hooks/useConnectWallet";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 const sections: ISections[] = [
   { title: "Gallery", url: "/" },
@@ -240,6 +241,25 @@ export default function Header() {
               >
                 <AddCircleOutlineSharpIcon sx={{ paddingRight: "10px" }} />
                 <Typography>ADD ART</Typography>
+              </NavLink>
+            </Box>
+            <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
+              <NavLink
+                to={"/register"}
+                style={{
+                  margin: "14px 0",
+                  backgroundColor: "#1976D2",
+                  color: "#ffffff",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "8px",
+                  padding: "14px",
+                  textDecoration: "none",
+                }}
+              >
+                <HowToRegIcon sx={{ paddingRight: "10px" }} />
+                <Typography>Registration</Typography>
               </NavLink>
             </Box>
             <Button

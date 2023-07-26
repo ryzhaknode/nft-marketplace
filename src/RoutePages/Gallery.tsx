@@ -31,52 +31,66 @@ function Gallery() {
         alignItems: "center",
       }}
     >
-      <Box sx={{ paddingTop: "50px" }}>
-        <FormControl sx={{ width: "300px" }}>
-          <InputLabel id="filter-label">Select</InputLabel>
-
-          <Select
-            labelId="filter-label"
-            id="filter-select"
-            value={selectedFilter}
-            onChange={(e) => {
-              selectChange(e.target.value);
-            }}
-          >
-            {filtersList.map((filter, i) => (
-              <MenuItem key={i} value={filter.label}>
-                {filter.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
-
-      <Typography variant="h4" component="h1" padding={"30px"}>
+      <Typography variant="h4" component="h1" paddingY={"50px"}>
         Gallery
       </Typography>
-      <Grid container spacing={4} columns={12}>
-        {datajson.map((card, i) => (
-          <Grid
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            key={i}
-            laptop={4}
-            tablet={6}
-            mobile={12}
-          >
-            <NavLink
-              style={{ textDecoration: "none" }}
-              to={ROUTES.cardPage(card.nftCodeNumber8)}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            paddingBottom: "20px",
+            alignSelf: "center",
+          }}
+        >
+          <FormControl sx={{ width: "300px" }}>
+            <InputLabel id="filter-label">Sort NFT </InputLabel>
+
+            <Select
+              labelId="filter-label"
+              id="filter-select"
+              value={selectedFilter}
+              onChange={(e) => {
+                selectChange(e.target.value);
+              }}
             >
-              <NftCards card={card} />
-            </NavLink>
-          </Grid>
-        ))}
-      </Grid>
+              {filtersList.map((filter, i) => (
+                <MenuItem key={i} value={filter.label}>
+                  {filter.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+
+        <Grid container spacing={4} columns={12}>
+          {datajson.map((card, i) => (
+            <Grid
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              key={i}
+              laptop={4}
+              tablet={6}
+              mobile={12}
+            >
+              <NavLink
+                style={{ textDecoration: "none" }}
+                to={ROUTES.cardPage(card.nftCodeNumber8)}
+              >
+                <NftCards card={card} />
+              </NavLink>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Box>
   );
 }
