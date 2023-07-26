@@ -16,6 +16,8 @@ import WalletIcon from "@mui/icons-material/Wallet";
 import { NavLink } from "react-router-dom";
 import { ISections } from "../types/ISections";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
+import { useConnectWallet } from "../hooks/useConnectWallet";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 const sections: ISections[] = [
   { title: "Gallery", url: "/" },
@@ -34,24 +36,7 @@ export default function Header() {
     setIsMenuOpen(true);
   };
 
-  const connectWallet = () => {
-    if (window.ethereum) {
-      window.ethereum
-        .request({ method: "eth_requestAccounts" })
-        .then((account: any) => {
-          setUserAccount(account[0]);
-          console.log(account);
-        });
-      window.ethereum.on("accountChanged", connectWallet);
-      window.ethereum.on("chainChanged", chainChangedHandler);
-    } else {
-      alert("install metamask");
-    }
-  };
-
-  const chainChangedHandler = () => {
-    window.location.reload();
-  };
+  const [connectWallet] = useConnectWallet(setUserAccount);
   return (
     <React.Fragment>
       <AppBar color="inherit" position="static">
@@ -256,6 +241,25 @@ export default function Header() {
               >
                 <AddCircleOutlineSharpIcon sx={{ paddingRight: "10px" }} />
                 <Typography>ADD ART</Typography>
+              </NavLink>
+            </Box>
+            <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
+              <NavLink
+                to={"/register"}
+                style={{
+                  margin: "14px 0",
+                  backgroundColor: "#1976D2",
+                  color: "#ffffff",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "8px",
+                  padding: "14px",
+                  textDecoration: "none",
+                }}
+              >
+                <HowToRegIcon sx={{ paddingRight: "10px" }} />
+                <Typography>Registration</Typography>
               </NavLink>
             </Box>
             <Button

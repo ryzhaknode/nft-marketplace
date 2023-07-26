@@ -1,5 +1,5 @@
 import { Typography, Box, Button, TextField } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { INftItem } from "../types/INftItem";
 import {
   handleOnlyNumbers,

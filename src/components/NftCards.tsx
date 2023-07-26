@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-function NftCards({ card }) {
+function NftCards({ card }: any) {
   return (
     <Card sx={{ width: 345, minHeight: 475 }}>
       <CardActionArea sx={{ padding: "20px" }}>
