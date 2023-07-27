@@ -72,7 +72,7 @@ function RegisterPage() {
               margin="normal"
               label="Name"
               name="name"
-              color={newUser.name === "" ? "error" : "success"}
+              color={newUser.name ? "error" : "success"}
               variant="outlined"
               required
               value={newUser.name}
@@ -106,7 +106,7 @@ function RegisterPage() {
               fullWidth
               label="Username"
               name="username"
-              color={newUser.username === "" ? "error" : "success"}
+              color={newUser.username ? "error" : "success"}
               variant="outlined"
               required
               value={newUser.username}
@@ -119,7 +119,7 @@ function RegisterPage() {
               margin="normal"
               label="Password"
               name="password"
-              color={newUser.password === "" ? "error" : "success"}
+              color={newUser.password ? "error" : "success"}
               variant="outlined"
               required
               value={newUser.password}

@@ -4,7 +4,6 @@ import {
   Toolbar,
   Typography,
   Box,
-  Icon,
   IconButton,
   MenuItem,
   Button,
@@ -20,6 +19,7 @@ import { useConnectWallet } from "../hooks/useConnectWallet";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
+import { selectAuthenticated } from "../store/slice/authenticatedSlice";
 
 const sections: ISections[] = [
   { title: "Gallery", url: "/" },
@@ -28,9 +28,7 @@ const sections: ISections[] = [
 ];
 
 export default function Header() {
-  const authentication = useSelector(
-    (state: RootState) => state.authentication
-  );
+  const authentication = useSelector(selectAuthenticated);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userAccount, setUserAccount] = useState("");
 
@@ -104,7 +102,7 @@ export default function Header() {
                 marginTop: "80px",
               }}
             >
-              {authentication.authenticated ? (
+              {authentication ? (
                 sections.map((page, i) => (
                   <MenuItem key={i} onClick={handleCloseNavMenu}>
                     <NavLink
@@ -266,7 +264,7 @@ export default function Header() {
               alignItems: "center",
             }}
           >
-            {authentication.authenticated ? (
+            {authentication ? (
               sections.map((page, i) => (
                 <MenuItem key={i} onClick={handleCloseNavMenu}>
                   <NavLink
@@ -302,7 +300,7 @@ export default function Header() {
               alignItems: "center",
             }}
           >
-            {authentication.authenticated ? (
+            {authentication && (
               <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
                 <NavLink
                   to={"/add"}
@@ -322,12 +320,8 @@ export default function Header() {
                   <Typography>ADD ART</Typography>
                 </NavLink>
               </Box>
-            ) : (
-              <></>
             )}
-            {authentication.authenticated ? (
-              <></>
-            ) : (
+            {!authentication && (
               <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
                 <NavLink
                   to={"/register"}
@@ -348,7 +342,7 @@ export default function Header() {
                 </NavLink>
               </Box>
             )}
-            {authentication.authenticated ? (
+            {authentication ? (
               <></>
             ) : (
               <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
@@ -372,7 +366,7 @@ export default function Header() {
               </Box>
             )}
 
-            {authentication.authenticated ? (
+            {authentication && (
               <Button
                 onClick={connectWallet}
                 sx={{
@@ -403,8 +397,6 @@ export default function Header() {
                   </Box>
                 )}
               </Button>
-            ) : (
-              <></>
             )}
           </Box>
         </Toolbar>

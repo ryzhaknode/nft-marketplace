@@ -7,6 +7,7 @@ import { ROUTES } from "../Routes/routesName";
 import { useState } from "react";
 import data from "../nftsItems.json";
 import { useSortState } from "../hooks/useSortState";
+import { INftItem } from "../types/INftItem";
 interface FilterItem {
   label: string;
   callback: () => void;
@@ -49,9 +50,8 @@ function Gallery() {
   ];
 
   function selectChange(value: any) {
-    const callback = filtersList.find((l) => l.label === value)?.callback;
+    filtersList.find((l) => l.label === value)?.callback();
     setSelectedFilter(value);
-    if (callback) callback();
   }
 
   return (
@@ -101,7 +101,7 @@ function Gallery() {
         </Box>
 
         <Grid container spacing={4} columns={12}>
-          {datajson.map((card, i) => (
+          {datajson.map((card: INftItem, i) => (
             <Grid
               style={{
                 display: "flex",
@@ -117,7 +117,7 @@ function Gallery() {
                 style={{ textDecoration: "none" }}
                 to={ROUTES.cardPage(card.nftCodeNumber8)}
               >
-                <NftCards card={card} />
+                <NftCards {...card} />
               </NavLink>
             </Grid>
           ))}

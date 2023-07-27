@@ -4,13 +4,13 @@ import { emptyLogin } from "../functions/values";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { authenticationTrue } from "../store/slice/authenticatedSlice";
+import {
+  authenticationTrue,
+  selectAuthenticated,
+} from "../store/slice/authenticatedSlice";
 function LogIn() {
   const dispatch = useDispatch();
-  const authentication = useSelector(
-    (state: RootState) => state.authentication
-  );
-  console.log(authentication);
+  const authentication = useSelector(selectAuthenticated);
   const [newLogin, setNewLogin] = useState<ILogin>(emptyLogin);
   const handleInputUserChange = (event: any) => {
     const { name, value } = event.target;
@@ -20,7 +20,6 @@ function LogIn() {
     }));
   };
   const submitNewLogin = () => {
-    console.log("submit");
     setNewLogin(emptyLogin);
     dispatch(authenticationTrue());
   };
@@ -49,7 +48,7 @@ function LogIn() {
             margin="normal"
             label="Username"
             name="username"
-            color={newLogin.username === "" ? "error" : "success"}
+            color={newLogin.username ? "error" : "success"}
             variant="outlined"
             required
             value={newLogin.username}
@@ -66,7 +65,7 @@ function LogIn() {
             margin="normal"
             label="Password"
             name="password"
-            color={newLogin.password === "" ? "error" : "success"}
+            color={newLogin.password ? "error" : "success"}
             variant="outlined"
             required
             value={newLogin.password}

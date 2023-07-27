@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 const initialState = {
   authenticated: false,
@@ -16,6 +17,9 @@ export const authenticatedSlice = createSlice({
     },
   },
 });
+
+export const selectAuthenticated = (state: RootState) =>
+  state.authentication.authenticated;
 
 export const { authenticationTrue, authenticationFalse } =
   authenticatedSlice.actions;
