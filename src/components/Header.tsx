@@ -17,7 +17,6 @@ import { ISections } from "../types/ISections";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import { useConnectWallet } from "../hooks/useConnectWallet";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
-import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
 import { selectAuthenticated } from "../store/slice/authenticatedSlice";
 
