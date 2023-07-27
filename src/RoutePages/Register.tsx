@@ -32,7 +32,7 @@ function RegisterPage() {
 
   const [addObject] = useAddNewUserInJson();
 
-  const submitPublishArt = () => {
+  const submitNewRegister = () => {
     if (thesamePassword) {
       addObject({ ...newUser });
       setNewUser(emptyUser);
@@ -55,7 +55,7 @@ function RegisterPage() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            submitPublishArt();
+            submitNewRegister();
           }}
         >
           <Box

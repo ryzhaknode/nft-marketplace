@@ -12,9 +12,7 @@ function App() {
       <Box sx={{ overflow: "hidden" }}>
         <Header />
         <Container style={{ maxWidth: "1400px" }}>
-          <Provider store={store}>
-            <Outlet />
-          </Provider>
+          <Outlet />
         </Container>
       </Box>
     </ThemeProvider>

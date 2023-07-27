@@ -45,6 +45,8 @@ export const randomEightNum = () => {
 
 export const emptyImages = { name: "", url: "" };
 
+export const emptyLogin = { username: "", password: "" };
+
 export const filtersList = [
   {
     label: "by price (from more expensive to cheaper)",

@@ -5,4 +5,5 @@ export const ROUTES = {
   statisticPage: "/statistic",
   addCard: "/add",
   registerUser: "/register",
+  logIn: "/login",
 };

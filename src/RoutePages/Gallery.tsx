@@ -13,7 +13,6 @@ import { filtersList } from "../functions/values";
 function Gallery() {
   const dispatch = useDispatch();
   const datajson = useSelector((state: RootState) => state.sort);
-  console.log(datajson);
   const [selectedFilter, setSelectedFilter] = useState("");
 
   function selectChange(value: any) {

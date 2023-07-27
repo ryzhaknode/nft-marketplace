@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import sortReducer from "./sortSlice";
+import authenticatedReducer from "./authenticatedSlice";
+
 const store = configureStore({
   reducer: {
     sort: sortReducer,
+    authentication: authenticatedReducer,
   },
 });
 

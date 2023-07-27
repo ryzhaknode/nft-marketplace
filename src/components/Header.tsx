@@ -18,6 +18,8 @@ import { ISections } from "../types/ISections";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import { useConnectWallet } from "../hooks/useConnectWallet";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
+import { RootState } from "../store/store";
+import { useSelector } from "react-redux";
 
 const sections: ISections[] = [
   { title: "Gallery", url: "/" },
@@ -26,6 +28,9 @@ const sections: ISections[] = [
 ];
 
 export default function Header() {
+  const authentication = useSelector(
+    (state: RootState) => state.authentication
+  );
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userAccount, setUserAccount] = useState("");
 
@@ -99,19 +104,35 @@ export default function Header() {
                 marginTop: "80px",
               }}
             >
-              {sections.map((page, i) => (
-                <MenuItem key={i} onClick={handleCloseNavMenu}>
+              {authentication.authenticated ? (
+                sections.map((page, i) => (
+                  <MenuItem key={i} onClick={handleCloseNavMenu}>
+                    <NavLink
+                      className={({ isActive }) => {
+                        return isActive
+                          ? "link active-link"
+                          : "link not-active";
+                      }}
+                      style={{ textDecoration: "none" }}
+                      to={page.url}
+                    >
+                      {page.title}
+                    </NavLink>
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem onClick={handleCloseNavMenu}>
                   <NavLink
                     className={({ isActive }) => {
                       return isActive ? "link active-link" : "link not-active";
                     }}
                     style={{ textDecoration: "none" }}
-                    to={page.url}
+                    to={sections[0].url}
                   >
-                    {page.title}
+                    {sections[0].title}
                   </NavLink>
                 </MenuItem>
-              ))}
+              )}
               <Box sx={{ p: "13px" }}>
                 <Button
                   onClick={() => {
@@ -166,6 +187,48 @@ export default function Header() {
                   <Typography>ADD ART</Typography>
                 </NavLink>
               </Box>
+              <Box
+                sx={{ display: { tablet: "none", mobile: "block" }, p: "13px" }}
+              >
+                <NavLink
+                  onClick={handleCloseNavMenu}
+                  to={"/register"}
+                  style={{
+                    backgroundColor: "#1976D2",
+                    color: "#ffffff",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "8px",
+                    padding: "14px",
+                    textDecoration: "none",
+                  }}
+                >
+                  <HowToRegIcon sx={{ paddingRight: "10px" }} />
+                  <Typography>Registration</Typography>
+                </NavLink>
+              </Box>
+              <Box
+                sx={{ display: { tablet: "none", mobile: "block" }, p: "13px" }}
+              >
+                <NavLink
+                  onClick={handleCloseNavMenu}
+                  to={"/login"}
+                  style={{
+                    backgroundColor: "#1976D2",
+                    color: "#ffffff",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "8px",
+                    padding: "14px",
+                    textDecoration: "none",
+                  }}
+                >
+                  <HowToRegIcon sx={{ paddingRight: "10px" }} />
+                  <Typography>Log In</Typography>
+                </NavLink>
+              </Box>
             </Menu>
           </Box>
 
@@ -203,18 +266,33 @@ export default function Header() {
               alignItems: "center",
             }}
           >
-            {sections.map((page, i) => (
-              <NavLink
-                className={({ isActive }) => {
-                  return isActive ? "link active-link" : "link not-active";
-                }}
-                style={{ textDecoration: "none" }}
-                key={i}
-                to={page.url}
-              >
-                {page.title}
-              </NavLink>
-            ))}
+            {authentication.authenticated ? (
+              sections.map((page, i) => (
+                <MenuItem key={i} onClick={handleCloseNavMenu}>
+                  <NavLink
+                    className={({ isActive }) => {
+                      return isActive ? "link active-link" : "link not-active";
+                    }}
+                    style={{ textDecoration: "none" }}
+                    to={page.url}
+                  >
+                    {page.title}
+                  </NavLink>
+                </MenuItem>
+              ))
+            ) : (
+              <MenuItem onClick={handleCloseNavMenu}>
+                <NavLink
+                  className={({ isActive }) => {
+                    return isActive ? "link active-link" : "link not-active";
+                  }}
+                  style={{ textDecoration: "none" }}
+                  to={sections[0].url}
+                >
+                  {sections[0].title}
+                </NavLink>
+              </MenuItem>
+            )}
           </Box>
           <Box
             sx={{
@@ -224,68 +302,110 @@ export default function Header() {
               alignItems: "center",
             }}
           >
-            <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
-              <NavLink
-                to={"/add"}
-                style={{
-                  margin: "14px 0",
-                  backgroundColor: "#1976D2",
-                  color: "#ffffff",
-                  display: "flex",
+            {authentication.authenticated ? (
+              <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
+                <NavLink
+                  to={"/add"}
+                  style={{
+                    margin: "14px 0",
+                    backgroundColor: "#1976D2",
+                    color: "#ffffff",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "8px",
+                    padding: "14px",
+                    textDecoration: "none",
+                  }}
+                >
+                  <AddCircleOutlineSharpIcon sx={{ paddingRight: "10px" }} />
+                  <Typography>ADD ART</Typography>
+                </NavLink>
+              </Box>
+            ) : (
+              <></>
+            )}
+            {authentication.authenticated ? (
+              <></>
+            ) : (
+              <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
+                <NavLink
+                  to={"/register"}
+                  style={{
+                    margin: "14px 0",
+                    backgroundColor: "#1976D2",
+                    color: "#ffffff",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "8px",
+                    padding: "14px",
+                    textDecoration: "none",
+                  }}
+                >
+                  <HowToRegIcon sx={{ paddingRight: "10px" }} />
+                  <Typography>Registration</Typography>
+                </NavLink>
+              </Box>
+            )}
+            {authentication.authenticated ? (
+              <></>
+            ) : (
+              <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
+                <NavLink
+                  to={"/login"}
+                  style={{
+                    margin: "14px 0",
+                    backgroundColor: "#1976D2",
+                    color: "#ffffff",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "8px",
+                    padding: "14px",
+                    textDecoration: "none",
+                  }}
+                >
+                  <HowToRegIcon sx={{ paddingRight: "10px" }} />
+                  <Typography>Log In</Typography>
+                </NavLink>
+              </Box>
+            )}
+
+            {authentication.authenticated ? (
+              <Button
+                onClick={connectWallet}
+                sx={{
+                  display: { mobile: "none", laptop: "flex" },
+                  my: 2,
+                  color: "#000000",
                   justifyContent: "center",
                   alignItems: "center",
-                  borderRadius: "8px",
-                  padding: "14px",
-                  textDecoration: "none",
+                  border: "1px solid",
+                  borderRadius: 2,
+                  p: "13px",
                 }}
               >
-                <AddCircleOutlineSharpIcon sx={{ paddingRight: "10px" }} />
-                <Typography>ADD ART</Typography>
-              </NavLink>
-            </Box>
-            <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
-              <NavLink
-                to={"/register"}
-                style={{
-                  margin: "14px 0",
-                  backgroundColor: "#1976D2",
-                  color: "#ffffff",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: "8px",
-                  padding: "14px",
-                  textDecoration: "none",
-                }}
-              >
-                <HowToRegIcon sx={{ paddingRight: "10px" }} />
-                <Typography>Registration</Typography>
-              </NavLink>
-            </Box>
-            <Button
-              onClick={connectWallet}
-              sx={{
-                display: { mobile: "none", laptop: "flex" },
-                my: 2,
-                color: "#000000",
-                justifyContent: "center",
-                alignItems: "center",
-                border: "1px solid",
-                borderRadius: 2,
-                p: "13px",
-              }}
-            >
-              {userAccount ? (
-                <Typography>{`${userAccount.substring(0, 12)}...`}</Typography>
-              ) : (
-                <Box sx={{ display: "flex" }}>
-                  <WalletIcon
-                    sx={{ display: { mobile: "none", laptop: "flex" }, mr: 1 }}
-                  />
-                  <Typography>Connect Wallet</Typography>
-                </Box>
-              )}
-            </Button>
+                {userAccount ? (
+                  <Typography>{`${userAccount.substring(
+                    0,
+                    12
+                  )}...`}</Typography>
+                ) : (
+                  <Box sx={{ display: "flex" }}>
+                    <WalletIcon
+                      sx={{
+                        display: { mobile: "none", laptop: "flex" },
+                        mr: 1,
+                      }}
+                    />
+                    <Typography>Connect Wallet</Typography>
+                  </Box>
+                )}
+              </Button>
+            ) : (
+              <></>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
