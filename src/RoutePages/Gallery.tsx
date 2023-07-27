@@ -4,21 +4,54 @@ import NftCards from "../components/NftCards";
 import Grid from "@mui/material/Unstable_Grid2";
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../Routes/routesName";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/store";
-
 import { useState } from "react";
-import { filtersList } from "../functions/values";
-
+import data from "../nftsItems.json";
+import { useSortState } from "../hooks/useSortState";
+interface FilterItem {
+  label: string;
+  callback: () => void;
+}
 function Gallery() {
-  const dispatch = useDispatch();
-  const datajson = useSelector((state: RootState) => state.sort);
   const [selectedFilter, setSelectedFilter] = useState("");
+  const [datajson, setDatajson] = useState(data);
+  const [sortDatajson] = useSortState(datajson, setDatajson);
+  const filtersList: FilterItem[] = [
+    {
+      label: "by price (from more expensive to cheaper)",
+      callback: () => {
+        sortDatajson("price", true);
+      },
+    },
+    {
+      label: "by price (from more cheaper to expensive)",
+      callback: () => {
+        sortDatajson("price", false);
+      },
+    },
+    {
+      label: "by date of creation (oldest first)",
+      callback: () => {
+        sortDatajson("createdAt", true);
+      },
+    },
+    {
+      label: "by date of creation (newest first)",
+      callback: () => {
+        sortDatajson("createdAt", false);
+      },
+    },
+    {
+      label: "by name from A-Z",
+      callback: () => {
+        sortDatajson("name", false);
+      },
+    },
+  ];
 
   function selectChange(value: any) {
     const callback = filtersList.find((l) => l.label === value)?.callback;
     setSelectedFilter(value);
-    if (callback) dispatch(callback());
+    if (callback) callback();
   }
 
   return (

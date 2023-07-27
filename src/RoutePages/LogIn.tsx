@@ -4,7 +4,7 @@ import { emptyLogin } from "../functions/values";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { authenticationTrue } from "../store/authenticatedSlice";
+import { authenticationTrue } from "../store/slice/authenticatedSlice";
 function LogIn() {
   const dispatch = useDispatch();
   const authentication = useSelector(

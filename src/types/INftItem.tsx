@@ -8,4 +8,5 @@ export interface INftItem {
   companyName: string;
   images: { name: string; url: string }[];
   price: string;
+  [key: string]: any;
 }
