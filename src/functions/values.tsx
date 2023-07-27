@@ -20,6 +20,15 @@ export const emptyArt = {
   price: "",
 };
 
+export const emptyUser = {
+  name: "",
+  username: "",
+  interests: [{ name: "" }],
+  password: "",
+  repeatpassword: "",
+  createdAt: new Date().toISOString(),
+};
+
 export const randomEightNumToString = () => {
   return Date.now().toString().slice(-8);
 };
@@ -28,3 +37,5 @@ export const randomEightNum = () => {
 };
 
 export const emptyImages = { name: "", url: "" };
+
+export const emptyLogin = { username: "", password: "" };

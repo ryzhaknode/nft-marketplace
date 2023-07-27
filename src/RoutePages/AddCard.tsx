@@ -1,5 +1,5 @@
 import { Typography, Box, Button, TextField } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { INftItem } from "../types/INftItem";
 import {
   handleOnlyNumbers,
@@ -152,7 +152,7 @@ function AddCard() {
                 margin="normal"
                 label="Art name"
                 name="name"
-                color={art.name === "" ? "error" : "success"}
+                color={art.name ? "error" : "success"}
                 variant="outlined"
                 required
                 value={art.name}
@@ -170,7 +170,7 @@ function AddCard() {
                 variant="outlined"
                 required
                 name="authorName"
-                color={art.authorName === "" ? "error" : "success"}
+                color={art.authorName ? "error" : "success"}
                 value={art.authorName}
                 inputProps={{
                   pattern: "[a-zA-Zs]*",
@@ -185,7 +185,7 @@ function AddCard() {
                 label="Price in ETH"
                 variant="outlined"
                 required
-                color={art.price === "" ? "error" : "success"}
+                color={art.price ? "error" : "success"}
                 inputProps={{
                   pattern: "[0-9]*",
                 }}
@@ -203,7 +203,7 @@ function AddCard() {
                 name="companyName"
                 variant="outlined"
                 value={art.companyName}
-                color={art.companyName === "" ? "error" : "success"}
+                color={art.companyName ? "error" : "success"}
                 inputProps={{
                   pattern: "[a-zA-Zs]*",
                 }}
@@ -239,7 +239,7 @@ function AddCard() {
                 inputProps={{
                   pattern: "[a-zA-Zs]*",
                 }}
-                color={art.description === "" ? "error" : "success"}
+                color={art.description ? "error" : "success"}
                 variant="outlined"
                 margin="normal"
               />
@@ -285,7 +285,7 @@ function AddCard() {
                     pattern: "[a-zA-Zs]*",
                   }}
                   variant="outlined"
-                  color={img.name === "" ? "error" : "success"}
+                  color={img.name ? "error" : "success"}
                 />
                 <TextField
                   required
@@ -299,7 +299,7 @@ function AddCard() {
                     pattern: '^(ftp|http|https):\\/\\/[^ "]+$',
                   }}
                   label="Image url"
-                  color={img.url === "" ? "error" : "success"}
+                  color={img.url ? "error" : "success"}
                   variant="outlined"
                 />
               </Box>

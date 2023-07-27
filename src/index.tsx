@@ -4,12 +4,16 @@ import { RouterProvider } from "react-router-dom";
 import "./index.css";
 import { router } from "./Routes/routing";
 import Loading from "./RoutePages/Loading";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} fallbackElement={<Loading />} />
+    <Provider store={store}>
+      <RouterProvider router={router} fallbackElement={<Loading />} />
+    </Provider>
   </React.StrictMode>
 );

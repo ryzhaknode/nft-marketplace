@@ -2,26 +2,28 @@ import { Card, CardActionArea, Box } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { INftItem } from "../types/INftItem";
 
-function NftCards({ card }) {
+function NftCards({ name, description, interests, images, price }: INftItem) {
+  console.log(name);
   return (
     <Card sx={{ width: 345, minHeight: 475 }}>
       <CardActionArea sx={{ padding: "20px" }}>
         <CardMedia
           component="img"
           height="300"
-          image={card.images[0].url}
-          alt={card.images[0].name}
+          image={images[0].url}
+          alt={images[0].name}
           sx={{ borderRadius: "5%" }}
         />
         <CardContent sx={{ minHeight: 75 }}>
           <Typography variant="h6" component="div">
-            {card.name}
+            {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {card.description.split(" ").length > 8
-              ? `${card.description.split(" ").slice(0, 8).join(" ")}...`
-              : card.description}
+            {description.split(" ").length > 8
+              ? `${description.split(" ").slice(0, 8).join(" ")}...`
+              : description}
           </Typography>
           <Box
             sx={{
@@ -35,7 +37,7 @@ function NftCards({ card }) {
               variant="h6"
               component="div"
             >
-              {`${card.price} ETH`}
+              {`${price} ETH`}
             </Typography>
 
             <Typography
@@ -49,7 +51,7 @@ function NftCards({ card }) {
               variant="body2"
               component="div"
             >
-              {card.interests[0].name ? card.interests[0].name : "none"}
+              {interests[0].name ? interests[0].name : "none"}
             </Typography>
           </Box>
         </CardContent>

@@ -7,10 +7,13 @@ import ErrorPage from "../RoutePages/ErrorPage";
 import CardPage from "../RoutePages/CardPage";
 import { ROUTES } from "./routesName";
 import AddCard from "../RoutePages/AddCard";
+import RegisterPage from "../RoutePages/Register";
+import LogIn from "../RoutePages/LogIn";
 
 export const router = createBrowserRouter([
   {
     path: ROUTES.mainPage,
+
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
@@ -33,6 +36,14 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.addCard,
         element: <AddCard />,
+      },
+      {
+        path: ROUTES.registerUser,
+        element: <RegisterPage />,
+      },
+      {
+        path: ROUTES.logIn,
+        element: <LogIn />,
       },
     ],
   },

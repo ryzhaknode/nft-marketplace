@@ -4,4 +4,6 @@ export const ROUTES = {
   profilePage: "/profile",
   statisticPage: "/statistic",
   addCard: "/add",
+  registerUser: "/register",
+  logIn: "/login",
 };
