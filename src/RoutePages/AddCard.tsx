@@ -1,4 +1,4 @@
-import { Typography, Box, Button, TextField } from "@mui/material";
+import { Typography, Box, Button, TextField, FormControl } from "@mui/material";
 import { useState } from "react";
 import { INftItem } from "../types/INftItem";
 import {
@@ -85,7 +85,7 @@ function AddCard() {
 
   return (
     <Box sx={{ paddingTop: "50px" }}>
-      <form
+      <FormControl
         onSubmit={(e) => {
           e.preventDefault();
           submitPublishArt();
@@ -320,7 +320,7 @@ function AddCard() {
             </Box>
           ))}
         </Box>
-      </form>
+      </FormControl>
     </Box>
   );
 }

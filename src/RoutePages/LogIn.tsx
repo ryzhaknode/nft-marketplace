@@ -1,9 +1,8 @@
-import { Typography, Box, Button, TextField } from "@mui/material";
+import { Typography, Box, Button, TextField, FormControl } from "@mui/material";
 import { ILogin } from "../types/ILogin";
 import { emptyLogin } from "../functions/values";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/store";
 import {
   authenticationTrue,
   selectAuthenticated,
@@ -28,7 +27,7 @@ function LogIn() {
       <Typography variant="h5" component={"h2"}>
         Log In
       </Typography>
-      <form
+      <FormControl
         onSubmit={(e) => {
           e.preventDefault();
           submitNewLogin();
@@ -89,7 +88,7 @@ function LogIn() {
         >
           Log In
         </Button>
-      </form>
+      </FormControl>
     </Box>
   );
 }

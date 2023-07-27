@@ -1,4 +1,4 @@
-import { Typography, Box, Button, TextField } from "@mui/material";
+import { Typography, Box, Button, TextField, FormControl } from "@mui/material";
 import { IRegistration } from "../types/IRegistration";
 import { useState } from "react";
 import { emptyUser, interests } from "../functions/values";
@@ -52,7 +52,7 @@ function RegisterPage() {
         Registration Form
       </Typography>
       <Box>
-        <form
+        <FormControl
           onSubmit={(e) => {
             e.preventDefault();
             submitNewRegister();
@@ -168,7 +168,7 @@ function RegisterPage() {
           >
             Create Account
           </Button>
-        </form>
+        </FormControl>
       </Box>
     </Box>
   );
