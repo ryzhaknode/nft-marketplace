@@ -4,10 +4,13 @@ import { useState } from "react";
 import { emptyUser, interests } from "../functions/values";
 import { handleOnlyWords } from "../functions/inputChecker";
 import { useAddNewUserInJson } from "../hooks/useAddNewUserToJson";
+import ModalWindow from "../components/ModalWindow";
+import DoneIcon from "@mui/icons-material/Done";
 function RegisterPage() {
   const [newUser, setNewUser] = useState(emptyUser);
   const [selectedInterest, setSelectedInterest] = useState<Interest[]>([]);
   const [thesamePassword, setThesamePassword] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const interestsChange = (value: string) => {
     if (selectedInterest.find((int) => int.name === value)) {
@@ -16,6 +19,10 @@ function RegisterPage() {
       if (selectedInterest.length < 3)
         setSelectedInterest([...selectedInterest, { name: value }]);
     }
+  };
+
+  const closeModal = () => {
+    setModal(false);
   };
 
   const handleInputUserChange = (event: any) => {
@@ -38,6 +45,7 @@ function RegisterPage() {
     if (thesamePassword) {
       addObject({ ...newUser, interests: selectedInterest });
       setNewUser(emptyUser);
+      setModal(true);
     }
   };
 
@@ -176,6 +184,21 @@ function RegisterPage() {
           </Button>
         </FormControl>
       </Box>
+      <ModalWindow onClose={closeModal} show={modal}>
+        <Typography
+          variant="h5"
+          component={"div"}
+          sx={{
+            p: "10px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <DoneIcon fontSize="large" sx={{ paddingRight: "10px" }} />
+          Successfully registered
+        </Typography>
+      </ModalWindow>
     </Box>
   );
 }
