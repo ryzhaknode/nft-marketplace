@@ -47,6 +47,12 @@ function Gallery() {
         sortDatajson("name", false);
       },
     },
+    {
+      label: "by name from Z-A",
+      callback: () => {
+        sortDatajson("name", true);
+      },
+    },
   ];
 
   function selectChange(value: any) {
