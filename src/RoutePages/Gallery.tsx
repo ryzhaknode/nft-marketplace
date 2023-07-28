@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { Box, FormControl, FormLabel, Select, MenuItem } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import NftCards from "../components/NftCards";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -81,8 +81,7 @@ function Gallery() {
           }}
         >
           <FormControl sx={{ width: "300px" }}>
-            <InputLabel id="filter-label">Sort NFT </InputLabel>
-
+            <FormLabel component="legend">Sort NFT</FormLabel>
             <Select
               labelId="filter-label"
               id="filter-select"

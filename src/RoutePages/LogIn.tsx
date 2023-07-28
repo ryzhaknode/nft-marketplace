@@ -7,7 +7,9 @@ import {
   authenticationTrue,
   selectAuthenticated,
 } from "../store/slice/authenticatedSlice";
+import { useNavigate } from "react-router-dom";
 function LogIn() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const authentication = useSelector(selectAuthenticated);
   const [newLogin, setNewLogin] = useState<ILogin>(emptyLogin);
@@ -21,6 +23,7 @@ function LogIn() {
   const submitNewLogin = () => {
     setNewLogin(emptyLogin);
     dispatch(authenticationTrue());
+    navigate("/");
   };
   return (
     <Box sx={{ paddingTop: "50px" }}>

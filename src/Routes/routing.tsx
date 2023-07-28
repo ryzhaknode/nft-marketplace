@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
         index: true,
       },
       {
-        path: "gallery/:contactId",
+        path: ROUTES.contactId,
         element: <CardPage />,
       },
       {
