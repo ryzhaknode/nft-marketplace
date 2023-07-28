@@ -28,6 +28,7 @@ function LogIn() {
         Log In
       </Typography>
       <FormControl
+        component={"form"}
         onSubmit={(e) => {
           e.preventDefault();
           submitNewLogin();
