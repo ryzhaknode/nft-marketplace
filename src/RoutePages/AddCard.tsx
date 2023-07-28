@@ -86,6 +86,7 @@ function AddCard() {
   return (
     <Box sx={{ paddingTop: "50px" }}>
       <FormControl
+        component={"form"}
         onSubmit={(e) => {
           e.preventDefault();
           submitPublishArt();

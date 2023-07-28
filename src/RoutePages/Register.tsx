@@ -53,6 +53,7 @@ function RegisterPage() {
       </Typography>
       <Box>
         <FormControl
+          component={"form"}
           onSubmit={(e) => {
             e.preventDefault();
             submitNewRegister();
