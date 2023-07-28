@@ -1,19 +1,21 @@
 import { Typography, Box, Button, TextField, FormControl } from "@mui/material";
-import { IRegistration } from "../types/IRegistration";
+import { Interest } from "../types/IRegistration";
 import { useState } from "react";
 import { emptyUser, interests } from "../functions/values";
 import { handleOnlyWords } from "../functions/inputChecker";
 import { useAddNewUserInJson } from "../hooks/useAddNewUserToJson";
 function RegisterPage() {
-  const [newUser, setNewUser] = useState<IRegistration>(emptyUser);
-  const [selectedInterest, setSelectedInterest] = useState("");
+  const [newUser, setNewUser] = useState(emptyUser);
+  const [selectedInterest, setSelectedInterest] = useState<Interest[]>([]);
   const [thesamePassword, setThesamePassword] = useState(true);
 
   const interestsChange = (value: string) => {
-    setNewUser((prevUser) => ({
-      ...prevUser,
-      interests: [{ name: value }],
-    }));
+    if (selectedInterest.find((int) => int.name === value)) {
+      setSelectedInterest(selectedInterest.filter((int) => int.name !== value));
+    } else {
+      if (selectedInterest.length < 3)
+        setSelectedInterest([...selectedInterest, { name: value }]);
+    }
   };
 
   const handleInputUserChange = (event: any) => {
@@ -34,7 +36,7 @@ function RegisterPage() {
 
   const submitNewRegister = () => {
     if (thesamePassword) {
-      addObject({ ...newUser });
+      addObject({ ...newUser, interests: selectedInterest });
       setNewUser(emptyUser);
     }
   };
@@ -90,10 +92,13 @@ function RegisterPage() {
                 <Button
                   onClick={() => {
                     interestsChange(interest);
-                    setSelectedInterest(interest);
                   }}
                   key={i}
-                  color={selectedInterest === interest ? "success" : "primary"}
+                  color={
+                    selectedInterest.find((int) => int.name === interest)
+                      ? "success"
+                      : "primary"
+                  }
                   size="medium"
                   variant="outlined"
                   sx={{ borderRadius: "20px" }}
