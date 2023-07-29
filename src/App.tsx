@@ -1,10 +1,8 @@
-import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import { Box, Container } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./theme/theme";
-import { Provider } from "react-redux";
-import store from "./store/store";
+import Navigation from "./components/Navigation";
 
 function App() {
   return (
@@ -12,7 +10,7 @@ function App() {
       <Box sx={{ overflow: "hidden" }}>
         <Header />
         <Container style={{ maxWidth: "1400px" }}>
-          <Outlet />
+          <Navigation />
         </Container>
       </Box>
     </ThemeProvider>
