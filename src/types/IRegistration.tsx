@@ -6,3 +6,7 @@ export interface IRegistration {
   repeatpassword: string;
   createdAt: string;
 }
+
+export interface Interest {
+  name: string;
+}

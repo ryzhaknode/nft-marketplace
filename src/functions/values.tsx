@@ -23,7 +23,6 @@ export const emptyArt = {
 export const emptyUser = {
   name: "",
   username: "",
-  interests: [{ name: "" }],
   password: "",
   repeatpassword: "",
   createdAt: new Date().toISOString(),
