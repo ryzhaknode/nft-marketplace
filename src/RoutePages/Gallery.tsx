@@ -8,10 +8,8 @@ import { useState } from "react";
 import data from "../nftsItems.json";
 import { useSortState } from "../hooks/useSortState";
 import { INftItem } from "../types/INftItem";
-interface FilterItem {
-  label: string;
-  callback: () => void;
-}
+import { FilterItem } from "../types/IFilterItem";
+
 function Gallery() {
   const [selectedFilter, setSelectedFilter] = useState("");
   const [datajson, setDatajson] = useState(data);

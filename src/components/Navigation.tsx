@@ -1,32 +1,27 @@
 import { Routes, Route } from "react-router-dom";
 import { selectAuthenticated } from "../store/slice/authenticatedSlice";
 import { useSelector } from "react-redux";
-import Gallery from "../RoutePages/Gallery";
-import CardPage from "../RoutePages/CardPage";
-import Profile from "../RoutePages/Profile";
-import { ROUTES } from "../Routes/routesName";
-import Statistic from "../RoutePages/Statistic";
-import LogIn from "../RoutePages/LogIn";
-import RegisterPage from "../RoutePages/Register";
-import AddCard from "../RoutePages/AddCard";
+import { authRoutes, notAuthRoutes, publicRoutes } from "../Routes/routes";
 
 const Navigation = () => {
   const authentication = useSelector(selectAuthenticated);
 
   return (
     <Routes>
-      <Route index element={<Gallery />} />
-      <Route path={ROUTES.contactId} element={<CardPage />} />
+      {publicRoutes.map(({ path, Component }) => (
+        <Route key={path} path={path} element={<Component />} />
+      ))}
       {authentication ? (
         <>
-          <Route path={ROUTES.profilePage} element={<Profile />} />
-          <Route path={ROUTES.statisticPage} element={<Statistic />} />
-          <Route path={ROUTES.addCard} element={<AddCard />} />
+          {authRoutes.map(({ path, Component }) => (
+            <Route key={path} path={path} element={<Component />} />
+          ))}
         </>
       ) : (
         <>
-          <Route path={ROUTES.logIn} element={<LogIn />} />
-          <Route path={ROUTES.registerUser} element={<RegisterPage />} />
+          {notAuthRoutes.map(({ path, Component }) => (
+            <Route key={path} path={path} element={<Component />} />
+          ))}
         </>
       )}
     </Routes>

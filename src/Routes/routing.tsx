@@ -18,8 +18,8 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        element: <Gallery />,
         index: true,
+        element: <Gallery />,
       },
       {
         path: ROUTES.contactId,
