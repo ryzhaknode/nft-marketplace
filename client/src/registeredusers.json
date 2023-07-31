@@ -1,7 +1,7 @@
 [
   {
     "name": "Denis",
-    "username": "admin",
+    "email": "d@gmail.com",
     "interests": [
       {
         "name": "Blockchain"
@@ -11,7 +11,6 @@
       }
     ],
     "password": "1",
-    "repeatpassword": "1",
     "createdAt": "2023-01-01T00:00:00Z"
   }
 ]

@@ -22,10 +22,8 @@ export const emptyArt = {
 
 export const emptyUser = {
   name: "",
-  username: "",
+  email: "",
   password: "",
-  repeatpassword: "",
-  createdAt: new Date().toISOString(),
 };
 
 export const randomEightNumToString = () => {
@@ -37,4 +35,4 @@ export const randomEightNum = () => {
 
 export const emptyImages = { name: "", url: "" };
 
-export const emptyLogin = { username: "", password: "" };
+export const emptyLogin = { email: "", password: "" };

@@ -1,6 +1,6 @@
 import AddCard from "../RoutePages/AddCard";
 import Gallery from "../RoutePages/Gallery";
-import LogIn from "../RoutePages/LogIn";
+import LogIn from "../RoutePages/Login";
 import Profile from "../RoutePages/Profile";
 import RegisterPage from "../RoutePages/Register";
 import Statistic from "../RoutePages/Statistic";

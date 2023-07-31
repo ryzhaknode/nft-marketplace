@@ -8,7 +8,7 @@ import CardPage from "../RoutePages/CardPage";
 import { ROUTES } from "./routesName";
 import AddCard from "../RoutePages/AddCard";
 import RegisterPage from "../RoutePages/Register";
-import LogIn from "../RoutePages/LogIn";
+import LogIn from "../RoutePages/Login";
 
 export const router = createBrowserRouter([
   {

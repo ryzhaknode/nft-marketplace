@@ -1,10 +1,8 @@
 export interface IRegistration {
   name: string;
-  username: string;
+  email: string;
   interests: { name: string }[];
   password: string;
-  repeatpassword: string;
-  createdAt: string;
 }
 
 export interface Interest {

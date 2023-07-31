@@ -6,10 +6,12 @@ import { handleOnlyWords } from "../functions/inputChecker";
 import { useAddNewUserInJson } from "../hooks/useAddNewUserToJson";
 import ModalWindow from "../components/ModalWindow";
 import DoneIcon from "@mui/icons-material/Done";
+import axios from "axios";
+import { registration } from "../http/userAPI";
 function RegisterPage() {
   const [newUser, setNewUser] = useState(emptyUser);
   const [selectedInterest, setSelectedInterest] = useState<Interest[]>([]);
-  const [thesamePassword, setThesamePassword] = useState(true);
+  const [repeatPassword, setRepeatPassword] = useState('');
   const [modal, setModal] = useState(false);
 
   const interestsChange = (value: string) => {
@@ -33,17 +35,12 @@ function RegisterPage() {
     }));
   };
 
-  const checkPassword = (e: any) => {
-    if (e.target.value === newUser.password) {
-      setThesamePassword(true);
-    } else setThesamePassword(false);
-  };
+  // const [addObject] = useAddNewUserInJson();
 
-  const [addObject] = useAddNewUserInJson();
-
-  const submitNewRegister = () => {
-    if (thesamePassword) {
-      addObject({ ...newUser, interests: selectedInterest });
+  const submitNewRegister = async () => {
+    if (newUser.password === repeatPassword) {
+      const responce = await registration({ ...newUser, interests: selectedInterest })
+      setRepeatPassword('')
       setNewUser(emptyUser);
       setModal(true);
     }
@@ -83,7 +80,7 @@ function RegisterPage() {
               margin="normal"
               label="Name"
               name="name"
-              color={newUser.name ? "error" : "success"}
+              color={newUser.name ? "success":"error"}
               variant="outlined"
               required
               value={newUser.name}
@@ -118,12 +115,12 @@ function RegisterPage() {
             <TextField
               margin="normal"
               fullWidth
-              label="Username"
-              name="username"
-              color={newUser.username ? "error" : "success"}
+              label="Email"
+              name="email"
+              color={newUser.email ?  "success" :"error"}
               variant="outlined"
               required
-              value={newUser.username}
+              value={newUser.email}
               onChange={(e) => {
                 handleInputUserChange(e);
               }}
@@ -133,7 +130,7 @@ function RegisterPage() {
               margin="normal"
               label="Password"
               name="password"
-              color={newUser.password ? "error" : "success"}
+              color={newUser.password ? "success" :"error"}
               variant="outlined"
               required
               value={newUser.password}
@@ -148,19 +145,18 @@ function RegisterPage() {
                 label="Repeat-password"
                 name="repeatpassword"
                 color={
-                  newUser.password === newUser.repeatpassword
+                  newUser.password === repeatPassword
                     ? "success"
                     : "error"
                 }
                 variant="outlined"
                 required
-                value={newUser.repeatpassword}
+                value={repeatPassword}
                 onChange={(e) => {
-                  checkPassword(e);
-                  handleInputUserChange(e);
+                  setRepeatPassword(e.target.value)
                 }}
               />
-              {thesamePassword === false ? (
+              {newUser.password !== repeatPassword ? (
                 <Typography color={"error"}>not the same password!</Typography>
               ) : (
                 <></>

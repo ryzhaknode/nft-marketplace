@@ -1,10 +1,14 @@
-import datajson from "../registeredusers.json";
+
+import { registration } from "../http/userAPI";
+
 import { IRegistration } from "../types/IRegistration";
 
 export const useAddNewUserInJson = () => {
-  const addObject = (newObject: IRegistration) => {
-    datajson.push(newObject);
+  const addObject = async (newObject: IRegistration) => {
+    const responce = await registration(newObject)
+    console.log(newObject)
   };
+
 
   return [addObject];
 };

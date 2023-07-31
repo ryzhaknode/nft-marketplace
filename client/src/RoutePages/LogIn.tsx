@@ -1,18 +1,18 @@
 import { Typography, Box, Button, TextField, FormControl } from "@mui/material";
 import { ILogin } from "../types/ILogin";
 import { emptyLogin } from "../functions/values";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useState } from "react";
+import { useDispatch} from "react-redux";
 import {
   authenticationTrue,
-  selectAuthenticated,
 } from "../store/slice/authenticatedSlice";
 import { useNavigate } from "react-router-dom";
+import { login } from "../http/userAPI";
 function LogIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const authentication = useSelector(selectAuthenticated);
   const [newLogin, setNewLogin] = useState<ILogin>(emptyLogin);
+
   const handleInputUserChange = (event: any) => {
     const { name, value } = event.target;
     setNewLogin((prevUser) => ({
@@ -20,10 +20,16 @@ function LogIn() {
       [name]: value,
     }));
   };
-  const submitNewLogin = () => {
-    setNewLogin(emptyLogin);
-    dispatch(authenticationTrue());
-    navigate("/");
+
+
+  const submitNewLogin = async () => {
+    const responce = await login(newLogin)
+    if(responce){
+      setNewLogin(emptyLogin);
+      dispatch(authenticationTrue());
+      navigate("/");
+    }
+;
   };
   return (
     <Box sx={{ paddingTop: "50px" }}>
@@ -49,15 +55,12 @@ function LogIn() {
           <TextField
             fullWidth
             margin="normal"
-            label="Username"
-            name="username"
-            color={newLogin.username ? "error" : "success"}
+            label="Email"
+            name="email"
+            color={newLogin.email ? "success" : "error" }
             variant="outlined"
             required
-            value={newLogin.username}
-            inputProps={{
-              pattern: "[a-zA-Zs]*",
-            }}
+            value={newLogin.email}
             onChange={(e) => {
               handleInputUserChange(e);
             }}
@@ -68,7 +71,7 @@ function LogIn() {
             margin="normal"
             label="Password"
             name="password"
-            color={newLogin.password ? "error" : "success"}
+            color={newLogin.password ? "success" : "error"}
             variant="outlined"
             required
             value={newLogin.password}
