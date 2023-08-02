@@ -4,25 +4,25 @@ import NftCards from "../components/NftCards";
 import Grid from "@mui/material/Unstable_Grid2";
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../Routes/routesName";
-import { useState } from "react";
-import data from "../nftsItems.json";
+import { useEffect, useState } from "react";
 import { useSortState } from "../hooks/useSortState";
 import { INftItem } from "../types/INftItem";
 import { FilterItem } from "../types/IFilterItem";
+import { getAllNftCard } from "../http/nftCardAPI";
 
 function Gallery() {
   const [selectedFilter, setSelectedFilter] = useState("");
-  const [datajson, setDatajson] = useState(data);
-  const [sortDatajson] = useSortState(datajson, setDatajson);
+  const [data, setData] = useState([]);
+  const [sortDatajson] = useSortState(data, setData);
   const filtersList: FilterItem[] = [
     {
-      label: "by price (from more expensive to cheaper)",
+      label: "from more expensive to cheaper",
       callback: () => {
         sortDatajson("price", true);
       },
     },
     {
-      label: "by price (from more cheaper to expensive)",
+      label: "from more cheaper to expensive",
       callback: () => {
         sortDatajson("price", false);
       },
@@ -40,18 +40,24 @@ function Gallery() {
       },
     },
     {
-      label: "by name from A-Z",
+      label: "from A-Z",
       callback: () => {
         sortDatajson("name", false);
       },
     },
     {
-      label: "by name from Z-A",
+      label: "from Z-A",
       callback: () => {
         sortDatajson("name", true);
       },
     },
   ];
+
+  useEffect(() => {
+    getAllNftCard()
+      .then((data) => setData(data))
+      .catch((e) => console.log(e));
+  }, []);
 
   function selectChange(value: any) {
     filtersList.find((l) => l.label === value)?.callback();
@@ -104,7 +110,7 @@ function Gallery() {
         </Box>
 
         <Grid container spacing={4} columns={12}>
-          {datajson.map((card: INftItem, i) => (
+          {data.map((card: INftItem, i) => (
             <Grid
               style={{
                 display: "flex",

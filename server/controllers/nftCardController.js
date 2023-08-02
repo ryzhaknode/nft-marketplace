@@ -16,11 +16,6 @@ class NftCardController {
         companyName,
       } = req.body;
 
-      //code for uplouding img files
-      // const { images } = req.files;
-      // let fileName = uuid.v4() + ".jpg";
-      // img.mv(path.resolve(__dirname, "..", "static", fileName));
-
       const nftCard = await NftCard.create({
         name,
         description,
@@ -36,7 +31,10 @@ class NftCardController {
       next(ApiError.badRequest(e.message));
     }
   }
-  async getAll(req, res) {}
+  async getAll(req, res) {
+    let nftCatds = await NftCard.findAll();
+    return res.json(nftCatds);
+  }
   async getOne(req, res) {}
 }
 
