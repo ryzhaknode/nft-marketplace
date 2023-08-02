@@ -3,17 +3,15 @@ import { Interest } from "../types/IRegistration";
 import { useState } from "react";
 import { emptyUser, interests } from "../functions/values";
 import { handleOnlyWords } from "../functions/inputChecker";
-import { useAddNewUserInJson } from "../hooks/useAddNewUserToJson";
 import ModalWindow from "../components/ModalWindow";
 import DoneIcon from "@mui/icons-material/Done";
-import axios from "axios";
 import { registration } from "../http/userAPI";
 function RegisterPage() {
   const [newUser, setNewUser] = useState(emptyUser);
   const [selectedInterest, setSelectedInterest] = useState<Interest[]>([]);
-  const [repeatPassword, setRepeatPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState("");
   const [modal, setModal] = useState(false);
-
+  const [error, serError] = useState("");
   const interestsChange = (value: string) => {
     if (selectedInterest.find((int) => int.name === value)) {
       setSelectedInterest(selectedInterest.filter((int) => int.name !== value));
@@ -25,6 +23,7 @@ function RegisterPage() {
 
   const closeModal = () => {
     setModal(false);
+    serError("");
   };
 
   const handleInputUserChange = (event: any) => {
@@ -35,14 +34,28 @@ function RegisterPage() {
     }));
   };
 
-  // const [addObject] = useAddNewUserInJson();
+  const clearValues = () => {
+    setSelectedInterest([]);
+    setRepeatPassword("");
+    setNewUser(emptyUser);
+  };
 
   const submitNewRegister = async () => {
     if (newUser.password === repeatPassword) {
-      const responce = await registration({ ...newUser, interests: selectedInterest })
-      setRepeatPassword('')
-      setNewUser(emptyUser);
-      setModal(true);
+      try {
+        const responce = await registration({
+          ...newUser,
+          interests: selectedInterest,
+        });
+        clearValues();
+        setModal(true);
+      } catch (error: any) {
+        const message = error.response.data.message;
+        if (message) {
+          serError(message);
+          setModal(true);
+        }
+      }
     }
   };
 
@@ -80,7 +93,7 @@ function RegisterPage() {
               margin="normal"
               label="Name"
               name="name"
-              color={newUser.name ? "success":"error"}
+              color={newUser.name ? "success" : "error"}
               variant="outlined"
               required
               value={newUser.name}
@@ -117,7 +130,7 @@ function RegisterPage() {
               fullWidth
               label="Email"
               name="email"
-              color={newUser.email ?  "success" :"error"}
+              color={newUser.email ? "success" : "error"}
               variant="outlined"
               required
               value={newUser.email}
@@ -130,7 +143,7 @@ function RegisterPage() {
               margin="normal"
               label="Password"
               name="password"
-              color={newUser.password ? "success" :"error"}
+              color={newUser.password ? "success" : "error"}
               variant="outlined"
               required
               value={newUser.password}
@@ -145,15 +158,13 @@ function RegisterPage() {
                 label="Repeat-password"
                 name="repeatpassword"
                 color={
-                  newUser.password === repeatPassword
-                    ? "success"
-                    : "error"
+                  newUser.password === repeatPassword ? "success" : "error"
                 }
                 variant="outlined"
                 required
                 value={repeatPassword}
                 onChange={(e) => {
-                  setRepeatPassword(e.target.value)
+                  setRepeatPassword(e.target.value);
                 }}
               />
               {newUser.password !== repeatPassword ? (
@@ -191,8 +202,15 @@ function RegisterPage() {
             alignItems: "center",
           }}
         >
-          <DoneIcon fontSize="large" sx={{ paddingRight: "10px" }} />
-          Successfully registered
+          {error === "" ? (
+            <>
+              {" "}
+              <DoneIcon fontSize="large" sx={{ paddingRight: "10px" }} />
+              Successfully registered
+            </>
+          ) : (
+            <>{error}</>
+          )}
         </Typography>
       </ModalWindow>
     </Box>
