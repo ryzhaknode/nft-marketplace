@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import { INftItem } from "../types/INftItem";
 
 function NftCards({ name, description, interests, images, price }: INftItem) {
-  console.log(name);
   return (
     <Card sx={{ width: 345, minHeight: 475 }}>
       <CardActionArea sx={{ padding: "20px" }}>

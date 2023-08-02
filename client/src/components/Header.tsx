@@ -17,8 +17,11 @@ import { ISections } from "../types/ISections";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import { useConnectWallet } from "../hooks/useConnectWallet";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
-import { useSelector } from "react-redux";
-import { selectAuthenticated } from "../store/slice/authenticatedSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  authenticationFalse,
+  selectAuthenticated,
+} from "../store/slice/authenticatedSlice";
 
 const sections: ISections[] = [
   { title: "Gallery", url: "/" },
@@ -30,12 +33,17 @@ export default function Header() {
   const authentication = useSelector(selectAuthenticated);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userAccount, setUserAccount] = useState("");
-
+  const dispatch = useDispatch();
   const handleCloseNavMenu = () => {
     setIsMenuOpen(false);
   };
   const handleOpenNavMenu = () => {
     setIsMenuOpen(true);
+  };
+
+  const logOut = () => {
+    dispatch(authenticationFalse());
+    localStorage.token = "";
   };
 
   const [connectWallet] = useConnectWallet(setUserAccount);
@@ -206,25 +214,64 @@ export default function Header() {
                 </NavLink>
               </Box>
               <Box
-                sx={{ display: { tablet: "none", mobile: "block" }, p: "13px" }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
-                <NavLink
-                  onClick={handleCloseNavMenu}
-                  to={"/login"}
-                  style={{
-                    backgroundColor: "#1976D2",
-                    color: "#ffffff",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: "8px",
-                    padding: "14px",
-                    textDecoration: "none",
-                  }}
-                >
-                  <HowToRegIcon sx={{ paddingRight: "10px" }} />
-                  <Typography>Log In</Typography>
-                </NavLink>
+                {authentication ? (
+                  <Box
+                    sx={{
+                      display: { tablet: "none", mobile: "block" },
+                      p: "13px",
+                    }}
+                  >
+                    <Button
+                      onClick={() => {
+                        logOut();
+                      }}
+                      sx={{
+                        backgroundColor: "#1976D2",
+                        color: "#ffffff",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: "8px",
+                        padding: "14px",
+                        textDecoration: "none",
+                      }}
+                    >
+                      <HowToRegIcon sx={{ paddingRight: "10px" }} />
+                      <Typography>Log Out</Typography>
+                    </Button>
+                  </Box>
+                ) : (
+                  <Box
+                    sx={{
+                      display: { tablet: "none", mobile: "block" },
+                      p: "13px",
+                    }}
+                  >
+                    <NavLink
+                      onClick={handleCloseNavMenu}
+                      to={"/login"}
+                      style={{
+                        backgroundColor: "#1976D2",
+                        color: "#ffffff",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: "8px",
+                        padding: "14px",
+                        textDecoration: "none",
+                      }}
+                    >
+                      <HowToRegIcon sx={{ paddingRight: "10px" }} />
+                      <Typography>Log In</Typography>
+                    </NavLink>
+                  </Box>
+                )}
               </Box>
             </Menu>
           </Box>
@@ -342,7 +389,27 @@ export default function Header() {
               </Box>
             )}
             {authentication ? (
-              <></>
+              <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
+                <Button
+                  onClick={() => {
+                    logOut();
+                  }}
+                  sx={{
+                    margin: "14px 0",
+                    backgroundColor: "#1976D2",
+                    color: "#ffffff",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "8px",
+                    padding: "14px",
+                    textDecoration: "none",
+                  }}
+                >
+                  <HowToRegIcon sx={{ paddingRight: "10px" }} />
+                  <Typography>Log Out</Typography>
+                </Button>
+              </Box>
             ) : (
               <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
                 <NavLink
