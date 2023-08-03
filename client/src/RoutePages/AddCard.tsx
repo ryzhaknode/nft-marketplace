@@ -1,6 +1,5 @@
 import { Typography, Box, Button, TextField, FormControl } from "@mui/material";
 import { useState } from "react";
-import { INftItem } from "../types/INftItem";
 import {
   handleOnlyNumbers,
   handleOnlyUrl,
@@ -13,21 +12,15 @@ import {
   emptyImages,
   interests,
   randomEightNum,
-  randomEightNumToString,
 } from "../functions/values";
-import { useAddInJson } from "../hooks/useAddToJson";
+import { createNftCard } from "../http/nftCardAPI";
 
 function AddCard() {
   const [selectedInterest, setSelectedInterest] = useState("");
   const [images, setImages] = useState([
     { id: randomEightNum(), ...emptyImages },
   ]);
-  const [art, setArt] = useState<INftItem>({
-    nftCodeNumber8: randomEightNumToString(),
-    ...emptyArt,
-  });
-  //hook add in json
-  const [addObject] = useAddInJson();
+  const [art, setArt] = useState(emptyArt);
 
   //change values in interests
   const interestsChange = (value: string) => {
@@ -62,7 +55,6 @@ function AddCard() {
   //clear all values
   const clearValues = () => {
     setArt({
-      nftCodeNumber8: randomEightNumToString(),
       ...emptyArt,
     });
     setImages([{ id: randomEightNum(), ...emptyImages }]);
@@ -70,7 +62,7 @@ function AddCard() {
   };
   //push new art and clear all values
   const submitPublishArt = () => {
-    addObject({ ...art, images: images });
+    createNftCard({ ...art, images: images });
     clearValues();
   };
   //add new image section but not more then 4 new section
@@ -153,7 +145,7 @@ function AddCard() {
                 margin="normal"
                 label="Art name"
                 name="name"
-                color={art.name ? "error" : "success"}
+                color={art.name ? "success" : "error"}
                 variant="outlined"
                 required
                 value={art.name}
@@ -171,7 +163,7 @@ function AddCard() {
                 variant="outlined"
                 required
                 name="authorName"
-                color={art.authorName ? "error" : "success"}
+                color={art.authorName ? "success" : "error"}
                 value={art.authorName}
                 inputProps={{
                   pattern: "[a-zA-Zs]*",
@@ -186,7 +178,7 @@ function AddCard() {
                 label="Price in ETH"
                 variant="outlined"
                 required
-                color={art.price ? "error" : "success"}
+                color={art.price ? "success" : "error"}
                 inputProps={{
                   pattern: "[0-9]*",
                 }}
@@ -204,7 +196,7 @@ function AddCard() {
                 name="companyName"
                 variant="outlined"
                 value={art.companyName}
-                color={art.companyName ? "error" : "success"}
+                color={art.companyName ? "success" : "error"}
                 inputProps={{
                   pattern: "[a-zA-Zs]*",
                 }}
@@ -240,7 +232,7 @@ function AddCard() {
                 inputProps={{
                   pattern: "[a-zA-Zs]*",
                 }}
-                color={art.description ? "error" : "success"}
+                color={art.description ? "success" : "error"}
                 variant="outlined"
                 margin="normal"
               />
@@ -286,7 +278,7 @@ function AddCard() {
                     pattern: "[a-zA-Zs]*",
                   }}
                   variant="outlined"
-                  color={img.name ? "error" : "success"}
+                  color={img.name ? "success" : "error"}
                 />
                 <TextField
                   required
@@ -300,7 +292,7 @@ function AddCard() {
                     pattern: '^(ftp|http|https):\\/\\/[^ "]+$',
                   }}
                   label="Image url"
-                  color={img.url ? "error" : "success"}
+                  color={img.url ? "success" : "error"}
                   variant="outlined"
                 />
               </Box>

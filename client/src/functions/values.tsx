@@ -13,10 +13,8 @@ export const emptyArt = {
   name: "",
   description: "",
   interests: [{ name: "" }],
-  createdAt: new Date().toISOString(),
   authorName: "",
   companyName: "",
-  images: [{ name: "", url: "" }],
   price: "",
 };
 

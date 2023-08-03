@@ -1,11 +1,11 @@
 import { $authHost, $host } from "./index";
-import jwt_decode from "jwt-decode";
 
 //creating nft
 export const createNftCard = async ({
   name,
   description,
   price,
+  images,
   interests,
   authorName,
   companyName,
@@ -14,12 +14,13 @@ export const createNftCard = async ({
     name,
     description,
     price,
+    images,
     interests,
     authorName,
     companyName,
   });
-  localStorage.setItem("token", data.token);
-  return jwt_decode(data.token);
+
+  return data;
 };
 
 //get all nfts
