@@ -1,8 +1,8 @@
 import { Typography, Box, Button, TextField, FormControl } from "@mui/material";
 import { Interest } from "../types/IRegistration";
 import { useState } from "react";
-import { emptyUser, interests } from "../functions/values";
-import { handleOnlyWords } from "../functions/inputChecker";
+import { emptyUser, interests } from "../information/values";
+import { handleOnlyWords } from "../information/inputChecker";
 import ModalWindow from "../components/ModalWindow";
 import DoneIcon from "@mui/icons-material/Done";
 import { registration } from "../http/userAPI";
@@ -43,7 +43,7 @@ function RegisterPage() {
   const submitNewRegister = async () => {
     if (newUser.password === repeatPassword) {
       try {
-        const responce = await registration({
+        await registration({
           ...newUser,
           interests: selectedInterest,
         });

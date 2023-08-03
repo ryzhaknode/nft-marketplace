@@ -4,7 +4,7 @@ import {
   handleOnlyNumbers,
   handleOnlyUrl,
   handleOnlyWords,
-} from "../functions/inputChecker";
+} from "../information/inputChecker";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import {
@@ -12,7 +12,7 @@ import {
   emptyImages,
   interests,
   randomEightNum,
-} from "../functions/values";
+} from "../information/values";
 import { createNftCard } from "../http/nftCardAPI";
 
 function AddCard() {

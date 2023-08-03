@@ -1,10 +1,10 @@
-import AddCard from "../RoutePages/AddCard";
-import Gallery from "../RoutePages/Gallery";
-import LogIn from "../RoutePages/Login";
-import Profile from "../RoutePages/Profile";
-import RegisterPage from "../RoutePages/Register";
-import Statistic from "../RoutePages/Statistic";
-import CardPage from "../RoutePages/CardPage";
+import AddCard from "../Pages/AddCardPage";
+import Gallery from "../Pages/GalleryPage";
+import LogIn from "../Pages/LoginPage";
+import Profile from "../Pages/ProfilePage";
+import RegisterPage from "../Pages/RegisterPage";
+import Statistic from "../Pages/StatisticPage";
+import CardPage from "../Pages/CardPage";
 import { ROUTES } from "./routesName";
 
 export const publicRoutes = [

@@ -9,7 +9,7 @@ import { useSortState } from "../hooks/useSortState";
 import { INftItem } from "../types/INftItem";
 import { FilterItem } from "../types/IFilterItem";
 import { getAllNftCard } from "../http/nftCardAPI";
-import Loading from "./Loading";
+import Loading from "./LoadingPage";
 
 function Gallery() {
   const [selectedFilter, setSelectedFilter] = useState("");

@@ -1,6 +1,6 @@
 import { Typography, Box, Button, TextField, FormControl } from "@mui/material";
 import { ILogin } from "../types/ILogin";
-import { emptyLogin } from "../functions/values";
+import { emptyLogin } from "../information/values";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { authenticationTrue } from "../store/slice/authenticatedSlice";

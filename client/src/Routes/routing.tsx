@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import Profile from "../RoutePages/Profile";
-import Statistic from "../RoutePages/Statistic";
+import Profile from "../Pages/ProfilePage";
+import Statistic from "../Pages/StatisticPage";
 import App from "../App";
-import Gallery from "../RoutePages/Gallery";
-import ErrorPage from "../RoutePages/ErrorPage";
-import CardPage from "../RoutePages/CardPage";
+import Gallery from "../Pages/GalleryPage";
+import ErrorPage from "../Pages/ErrorPage";
+import CardPage from "../Pages/CardPage";
 import { ROUTES } from "./routesName";
-import AddCard from "../RoutePages/AddCard";
-import RegisterPage from "../RoutePages/Register";
-import LogIn from "../RoutePages/Login";
+import AddCard from "../Pages/AddCardPage";
+import RegisterPage from "../Pages/RegisterPage";
+import LogIn from "../Pages/LoginPage";
 
 export const router = createBrowserRouter([
   {

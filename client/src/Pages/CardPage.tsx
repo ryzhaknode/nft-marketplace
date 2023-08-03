@@ -8,7 +8,7 @@ import SwiperSlider from "../Swiper/SwiperSlider";
 import MyButton from "../UI/MyButton";
 import { getOneNftCard } from "../http/nftCardAPI";
 import { useEffect, useState } from "react";
-import Loading from "./Loading";
+import Loading from "./LoadingPage";
 
 function CardPage() {
   const { contactId } = useParams();
