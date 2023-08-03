@@ -228,9 +228,7 @@ export default function Header() {
                     }}
                   >
                     <Button
-                      onClick={() => {
-                        logOut();
-                      }}
+                      onClick={logOut}
                       sx={{
                         backgroundColor: "#1976D2",
                         color: "#ffffff",
@@ -240,6 +238,10 @@ export default function Header() {
                         borderRadius: "8px",
                         padding: "14px",
                         textDecoration: "none",
+                        "&:hover": {
+                          backgroundColor: "blue",
+                          opacity: "1",
+                        },
                       }}
                     >
                       <HowToRegIcon sx={{ paddingRight: "10px" }} />
@@ -391,9 +393,7 @@ export default function Header() {
             {authentication ? (
               <Box sx={{ display: { tablet: "flex", mobile: "none" } }}>
                 <Button
-                  onClick={() => {
-                    logOut();
-                  }}
+                  onClick={logOut}
                   sx={{
                     margin: "14px 0",
                     backgroundColor: "#1976D2",
@@ -404,6 +404,10 @@ export default function Header() {
                     borderRadius: "8px",
                     padding: "14px",
                     textDecoration: "none",
+                    "&:hover": {
+                      backgroundColor: "#fe2727",
+                      opacity: "1",
+                    },
                   }}
                 >
                   <HowToRegIcon sx={{ paddingRight: "10px" }} />

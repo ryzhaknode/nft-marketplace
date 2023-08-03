@@ -9,11 +9,13 @@ import { useSortState } from "../hooks/useSortState";
 import { INftItem } from "../types/INftItem";
 import { FilterItem } from "../types/IFilterItem";
 import { getAllNftCard } from "../http/nftCardAPI";
+import Loading from "./Loading";
 
 function Gallery() {
   const [selectedFilter, setSelectedFilter] = useState("");
   const [data, setData] = useState([]);
   const [sortDatajson] = useSortState(data, setData);
+  const [loading, setLoading] = useState(true);
   const filtersList: FilterItem[] = [
     {
       label: "from more expensive to cheaper",
@@ -56,14 +58,19 @@ function Gallery() {
   useEffect(() => {
     getAllNftCard()
       .then((data) => setData(data))
-      .catch((e) => console.log(e));
+      .catch((e) => console.log(e))
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   function selectChange(value: any) {
     filtersList.find((l) => l.label === value)?.callback();
     setSelectedFilter(value);
   }
-
+  if (loading) {
+    return <Loading></Loading>;
+  }
   return (
     <Box
       sx={{
@@ -124,7 +131,7 @@ function Gallery() {
             >
               <NavLink
                 style={{ textDecoration: "none" }}
-                to={ROUTES.cardPage(card.nftCodeNumber8)}
+                to={ROUTES.cardPage(card.id)}
               >
                 <NftCards {...card} />
               </NavLink>

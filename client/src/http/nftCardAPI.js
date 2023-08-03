@@ -1,4 +1,4 @@
-import { $authHost, $host } from "./index";
+import { $host } from "./index";
 
 //creating nft
 export const createNftCard = async ({
@@ -30,7 +30,7 @@ export const getAllNftCard = async () => {
 };
 
 //get one all nft by id
-export const getOneNftCard = async () => {
-  const { data } = await $host.get("api/nftcard/:id");
+export const getOneNftCard = async (id) => {
+  const { data } = await $host.get("api/nftcard/" + id);
   return data;
 };

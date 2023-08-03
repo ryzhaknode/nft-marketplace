@@ -1,5 +1,3 @@
-const uuid = require("uuid");
-const path = require("path");
 const ApiError = require("../error/ApiError");
 const { NftCard } = require("../models/models");
 
@@ -35,7 +33,13 @@ class NftCardController {
     let nftCatds = await NftCard.findAll();
     return res.json(nftCatds);
   }
-  async getOne(req, res) {}
+  async getOne(req, res) {
+    const { id } = req.params;
+    const nftCard = await NftCard.findOne({
+      where: { id },
+    });
+    return res.json(nftCard);
+  }
 }
 
 module.exports = new NftCardController();

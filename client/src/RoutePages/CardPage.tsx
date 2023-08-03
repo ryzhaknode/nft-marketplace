@@ -2,17 +2,31 @@ import { useParams } from "react-router-dom";
 import { Box, List, ListItem } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
-import datajson from "../nftsItems.json";
 import { INftItem } from "../types/INftItem";
 import { SwiperSlide } from "swiper/react";
 import SwiperSlider from "../Swiper/SwiperSlider";
 import MyButton from "../UI/MyButton";
+import { getOneNftCard } from "../http/nftCardAPI";
+import { useEffect, useState } from "react";
+import Loading from "./Loading";
 
 function CardPage() {
   const { contactId } = useParams();
-  const currentCard: INftItem | undefined = datajson.find(
-    (d) => d.nftCodeNumber8 === contactId
-  );
+  const [currentCard, setCurrentCard] = useState<INftItem | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getOneNftCard(contactId)
+      .then((responce) => setCurrentCard(responce))
+      .catch((e) => alert(e))
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <Box>

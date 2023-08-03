@@ -1,4 +1,5 @@
 export interface INftItem {
+  id: string;
   name: string;
   description: string;
   interests: { name: string }[];
