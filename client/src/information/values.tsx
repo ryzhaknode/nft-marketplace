@@ -1,0 +1,36 @@
+export const interests = [
+  "Art",
+  "Dao",
+  "Nft-Pass",
+  "Promo",
+  "Gaming",
+  "Vote-Power",
+  "Meme",
+  "3D-Art",
+];
+
+export const emptyArt = {
+  name: "",
+  description: "",
+  interests: [{ name: "" }],
+  authorName: "",
+  companyName: "",
+  price: "",
+};
+
+export const emptyUser = {
+  name: "",
+  email: "",
+  password: "",
+};
+
+export const randomEightNumToString = () => {
+  return Date.now().toString().slice(-8);
+};
+export const randomEightNum = () => {
+  return Number(Date.now().toString().slice(-8));
+};
+
+export const emptyImages = { name: "", url: "" };
+
+export const emptyLogin = { email: "", password: "" };
