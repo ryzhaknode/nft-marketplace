@@ -1,5 +1,7 @@
 # NFT Marketplace Project
 
+Status: In Development - The project is actively being developed, and new features are being added.
+
 ## Description
 This is a NFT marketplace built using React.js for the frontend and Node.js for the backend. The project allows users to buy, sell, and exchange unique digital assets represented as NFTs.
 
