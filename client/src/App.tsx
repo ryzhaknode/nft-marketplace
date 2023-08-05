@@ -15,7 +15,8 @@ function App() {
 
   useEffect(() => {
     check()
-      .then(() => {
+      .then((response) => {
+        console.log(response);
         dispatch(authenticationTrue());
       })
       .catch((error) => console.log(error.response.data.message))

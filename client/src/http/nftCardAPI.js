@@ -2,6 +2,7 @@ import { $host } from "./index";
 
 //creating nft
 export const createNftCard = async ({
+  token,
   name,
   description,
   price,
@@ -11,6 +12,7 @@ export const createNftCard = async ({
   companyName,
 }) => {
   const { data } = await $host.post("api/nftcard", {
+    token,
     name,
     description,
     price,

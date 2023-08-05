@@ -62,8 +62,11 @@ function AddCard() {
   };
   //push new art and clear all values
   const submitPublishArt = () => {
-    createNftCard({ ...art, images: images })
-      .then(() => clearValues())
+    createNftCard({ ...art, images: images, token: localStorage.token })
+      .then((res) => {
+        console.log(res);
+        clearValues();
+      })
       .catch((e) => alert(e.response.data.message));
   };
   //add new image section but not more then 4 new section

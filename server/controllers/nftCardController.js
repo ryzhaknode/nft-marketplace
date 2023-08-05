@@ -1,10 +1,12 @@
 const ApiError = require("../error/ApiError");
 const { NftCard } = require("../models/models");
+const jwt = require("jsonwebtoken");
 
 class NftCardController {
   async create(req, res, next) {
     try {
       const {
+        token,
         name,
         description,
         interests,
@@ -14,7 +16,10 @@ class NftCardController {
         companyName,
       } = req.body;
 
+      const decoded = jwt.verify(token, process.env.SECRET_KEY);
+      console.log(decoded);
       const nftCard = await NftCard.create({
+        userId: decoded.id,
         name,
         description,
         interests,
@@ -35,6 +40,7 @@ class NftCardController {
   }
   async getOne(req, res) {
     const { id } = req.params;
+    console.log(req.headers);
     const nftCard = await NftCard.findOne({
       where: { id },
     });
