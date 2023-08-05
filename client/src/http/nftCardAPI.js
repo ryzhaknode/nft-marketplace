@@ -2,7 +2,7 @@ import { $host } from "./index";
 
 //creating nft
 export const createNftCard = async ({
-  token,
+  userId,
   name,
   description,
   price,
@@ -12,7 +12,7 @@ export const createNftCard = async ({
   companyName,
 }) => {
   const { data } = await $host.post("api/nftcard", {
-    token,
+    userId,
     name,
     description,
     price,
@@ -34,5 +34,10 @@ export const getAllNftCard = async () => {
 //get one all nft by id
 export const getOneNftCard = async (id) => {
   const { data } = await $host.get("api/nftcard/" + id);
+  return data;
+};
+
+export const getUsersNft = async (userId) => {
+  const { data } = await $host.get("api/nftcard/user/" + userId);
   return data;
 };

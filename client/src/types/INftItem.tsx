@@ -1,4 +1,6 @@
 export interface INftItem {
+  userId?: Number;
+  role?: string;
   id: string;
   name: string;
   description: string;

@@ -13,9 +13,11 @@ import Loading from "./LoadingPage";
 
 function Gallery() {
   const [selectedFilter, setSelectedFilter] = useState("");
-  const [data, setData] = useState([]);
-  const [sortDatajson] = useSortState(data, setData);
+  const [data, setData] = useState<INftItem[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const [sortDatajson] = useSortState(data, setData);
+
   const filtersList: FilterItem[] = [
     {
       label: "from more expensive to cheaper",
@@ -68,78 +70,82 @@ function Gallery() {
     filtersList.find((l) => l.label === value)?.callback();
     setSelectedFilter(value);
   }
-  if (loading) {
-    return <Loading></Loading>;
-  }
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Typography variant="h4" component="h1" paddingY={"50px"}>
-        Gallery
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            paddingBottom: "20px",
-            alignSelf: "center",
+            alignContent: "center",
+            alignItems: "center",
           }}
         >
-          <FormControl sx={{ width: "300px" }}>
-            <FormLabel component="legend">Sort NFT</FormLabel>
-            <Select
-              labelId="filter-label"
-              id="filter-select"
-              value={selectedFilter}
-              onChange={(e) => {
-                selectChange(e.target.value);
-              }}
-            >
-              {filtersList.map((filter, i) => (
-                <MenuItem key={i} value={filter.label}>
-                  {filter.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-
-        <Grid container spacing={4} columns={12}>
-          {data.map((card: INftItem, i) => (
-            <Grid
-              style={{
+          <Typography variant="h4" component="h1" paddingY={"50px"}>
+            Gallery
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Box
+              sx={{
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                flexDirection: "column",
+                paddingBottom: "20px",
+                alignSelf: "center",
               }}
-              key={i}
-              laptop={4}
-              tablet={6}
-              mobile={12}
             >
-              <NavLink
-                style={{ textDecoration: "none" }}
-                to={ROUTES.cardPage(card.id)}
-              >
-                <NftCards {...card} />
-              </NavLink>
+              <FormControl sx={{ width: "300px" }}>
+                <FormLabel component="legend">Sort NFT</FormLabel>
+                <Select
+                  labelId="filter-label"
+                  id="filter-select"
+                  value={selectedFilter}
+                  onChange={(e) => {
+                    selectChange(e.target.value);
+                  }}
+                >
+                  {filtersList.map((filter, i) => (
+                    <MenuItem key={i} value={filter.label}>
+                      {filter.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+
+            <Grid container spacing={4} columns={12}>
+              {data.map((card: INftItem, i) => (
+                <Grid
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  key={i}
+                  laptop={4}
+                  tablet={6}
+                  mobile={12}
+                >
+                  <NavLink
+                    style={{ textDecoration: "none" }}
+                    to={ROUTES.cardPage(card.id)}
+                  >
+                    <NftCards {...card} />
+                  </NavLink>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-      </Box>
-    </Box>
+          </Box>
+        </Box>
+      )}
+    </>
   );
 }
 

@@ -8,7 +8,7 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
-import "../index.css";
+import "../style/index.scss";
 
 // import required modules
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";

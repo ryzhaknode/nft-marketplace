@@ -6,8 +6,10 @@ import Navigation from "./components/Navigation";
 import { useEffect, useState } from "react";
 import { check } from "./http/userAPI";
 import { useDispatch } from "react-redux";
-import { authenticationTrue } from "./store/slice/authenticatedSlice";
+
 import Loading from "./Pages/LoadingPage";
+import { setUserId } from "./store/slice/userIdSlice";
+import { authenticationTrue } from "./store/slice/authenticatedSlice";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -15,9 +17,9 @@ function App() {
 
   useEffect(() => {
     check()
-      .then((response) => {
-        console.log(response);
+      .then((response: any) => {
         dispatch(authenticationTrue());
+        dispatch(setUserId(response.id));
       })
       .catch((error) => console.log(error.response.data.message))
       .finally(() => {
@@ -25,17 +27,18 @@ function App() {
       });
   }, []);
 
-  if (loading) {
-    return <Loading></Loading>;
-  }
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ overflow: "hidden" }}>
-        <Header />
-        <Container style={{ maxWidth: "1400px" }}>
-          <Navigation />
-        </Container>
-      </Box>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Box sx={{ overflow: "hidden" }}>
+          <Header />
+          <Container style={{ maxWidth: "1400px" }}>
+            <Navigation />
+          </Container>
+        </Box>
+      )}
     </ThemeProvider>
   );
 }

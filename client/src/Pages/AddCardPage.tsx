@@ -14,9 +14,12 @@ import {
   randomEightNum,
 } from "../information/values";
 import { createNftCard } from "../http/nftCardAPI";
+import { useSelector } from "react-redux";
+import { selectUser } from "../store/slice/userIdSlice";
 
 function AddCard() {
   const [selectedInterest, setSelectedInterest] = useState("");
+  const user = useSelector(selectUser);
   const [images, setImages] = useState([
     { id: randomEightNum(), ...emptyImages },
   ]);
@@ -62,7 +65,7 @@ function AddCard() {
   };
   //push new art and clear all values
   const submitPublishArt = () => {
-    createNftCard({ ...art, images: images, token: localStorage.token })
+    createNftCard({ ...art, images: images, userId: user })
       .then((res) => {
         console.log(res);
         clearValues();
