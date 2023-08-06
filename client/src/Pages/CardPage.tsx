@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Box, List, ListItem, Button } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
@@ -6,7 +6,7 @@ import { INftItem } from "../types/INftItem";
 import { SwiperSlide } from "swiper/react";
 import SwiperSlider from "../Swiper/SwiperSlider";
 import MyButton from "../UI/MyButton";
-import { getOneNftCard } from "../http/nftCardAPI";
+import { deleteNft, getOneNftCard } from "../http/nftCardAPI";
 import { useEffect, useState } from "react";
 import Loading from "./LoadingPage";
 import styles from "../style/MyComponent.module.scss";
@@ -24,6 +24,7 @@ function CardPage() {
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(false);
   const userId = useSelector(selectUser);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getOneNftCard(contactId)
@@ -36,6 +37,15 @@ function CardPage() {
 
   const closeModal = () => {
     setModal(false);
+  };
+
+  const deleteThisNft = () => {
+    deleteNft(contactId)
+      .then((res) => {
+        console.log(res);
+        navigate(ROUTES.profilePage);
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -95,7 +105,13 @@ function CardPage() {
                         paddingTop: "10px",
                       }}
                     >
-                      <Button>Yes</Button>
+                      <Button
+                        onClick={() => {
+                          deleteThisNft();
+                        }}
+                      >
+                        Yes
+                      </Button>
                     </Box>
                   </Box>
                 </ModalWindow>

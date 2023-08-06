@@ -41,3 +41,8 @@ export const getUsersNft = async (userId) => {
   const { data } = await $host.get("api/nftcard/user/" + userId);
   return data;
 };
+
+export const deleteNft = async (id) => {
+  const { data } = await $host.get("api/nftcard/delete/" + id);
+  return data;
+};

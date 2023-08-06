@@ -18,7 +18,6 @@ function Profile() {
   useEffect(() => {
     getUsersNft(user)
       .then((res) => {
-        console.log(res);
         setData(res);
       })
       .catch((e) => console.log(e))

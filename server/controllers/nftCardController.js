@@ -50,6 +50,24 @@ class NftCardController {
     });
     return res.json(nftCards);
   }
+
+  async deleteNft(req, res, next) {
+    try {
+      const { id } = req.params;
+      const nftCard = await NftCard.findOne({
+        where: { id },
+      });
+      if (!nftCard) {
+        return res.status(404).json({ message: "Nft not found" });
+      }
+
+      await nftCard.destroy();
+
+      return res.json({ message: "nft deleted" });
+    } catch (e) {
+      next(ApiError.internalServerError(e.message));
+    }
+  }
 }
 
 module.exports = new NftCardController();

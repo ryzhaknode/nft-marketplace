@@ -12,7 +12,7 @@ import PaletteIcon from "@mui/icons-material/Palette";
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import WalletIcon from "@mui/icons-material/Wallet";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ISections } from "../types/ISections";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import { useConnectWallet } from "../hooks/useConnectWallet";
@@ -22,6 +22,7 @@ import {
   authenticationFalse,
   selectAuthenticated,
 } from "../store/slice/authenticatedSlice";
+import { ROUTES } from "../Routes/routesName";
 
 const sections: ISections[] = [
   { title: "Gallery", url: "/" },
@@ -31,6 +32,7 @@ const sections: ISections[] = [
 
 export default function Header() {
   const authentication = useSelector(selectAuthenticated);
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userAccount, setUserAccount] = useState("");
   const dispatch = useDispatch();
@@ -44,6 +46,7 @@ export default function Header() {
   const logOut = () => {
     dispatch(authenticationFalse());
     localStorage.token = "";
+    navigate(ROUTES.mainPage);
   };
 
   const [connectWallet] = useConnectWallet(setUserAccount);
