@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import { Box, Container } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./theme/theme";
-import Navigation from "./components/Navigation";
+import Navigation from "./Pages/Navigation";
 import { useEffect, useState } from "react";
 import { check } from "./http/userAPI";
 import { useDispatch } from "react-redux";

@@ -23,6 +23,7 @@ import {
   selectAuthenticated,
 } from "../store/slice/authenticatedSlice";
 import { ROUTES } from "../Routes/routesName";
+import { useNavigateNavMenu } from "../hooks/useNavigateMenu";
 
 const sections: ISections[] = [
   { title: "Gallery", url: "/" },
@@ -32,16 +33,15 @@ const sections: ISections[] = [
 
 export default function Header() {
   const authentication = useSelector(selectAuthenticated);
-  const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [userAccount, setUserAccount] = useState("");
   const dispatch = useDispatch();
-  const handleCloseNavMenu = () => {
-    setIsMenuOpen(false);
-  };
-  const handleOpenNavMenu = () => {
-    setIsMenuOpen(true);
-  };
+
+  const navigate = useNavigate();
+
+  const [userAccount, setUserAccount] = useState("");
+
+  const [menu, openMenu, closeMenu] = useNavigateNavMenu();
+
+  const [connectWallet] = useConnectWallet(setUserAccount);
 
   const logOut = () => {
     dispatch(authenticationFalse());
@@ -49,7 +49,6 @@ export default function Header() {
     navigate(ROUTES.mainPage);
   };
 
-  const [connectWallet] = useConnectWallet(setUserAccount);
   return (
     <React.Fragment>
       <AppBar color="inherit" position="static">
@@ -89,7 +88,7 @@ export default function Header() {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={openMenu}
               color="inherit"
             >
               <MenuIcon />
@@ -105,8 +104,8 @@ export default function Header() {
                 vertical: "top",
                 horizontal: "left",
               }}
-              open={isMenuOpen}
-              onClose={handleCloseNavMenu}
+              open={menu}
+              onClose={closeMenu}
               sx={{
                 display: { mobile: "block", laptop: "none" },
                 marginTop: "80px",
@@ -114,7 +113,7 @@ export default function Header() {
             >
               {authentication ? (
                 sections.map((page, i) => (
-                  <MenuItem key={i} onClick={handleCloseNavMenu}>
+                  <MenuItem key={i} onClick={openMenu}>
                     <NavLink
                       className={({ isActive }) => {
                         return isActive
@@ -129,7 +128,7 @@ export default function Header() {
                   </MenuItem>
                 ))
               ) : (
-                <MenuItem onClick={handleCloseNavMenu}>
+                <MenuItem onClick={openMenu}>
                   <NavLink
                     className={({ isActive }) => {
                       return isActive ? "link active-link" : "link not-active";
@@ -144,7 +143,7 @@ export default function Header() {
               <Box sx={{ p: "13px" }}>
                 <Button
                   onClick={() => {
-                    handleCloseNavMenu();
+                    closeMenu();
                     connectWallet();
                   }}
                   sx={{
@@ -189,7 +188,7 @@ export default function Header() {
                     padding: "14px",
                     textDecoration: "none",
                   }}
-                  onClick={handleCloseNavMenu}
+                  onClick={closeMenu}
                 >
                   <AddCircleOutlineSharpIcon sx={{ paddingRight: "10px" }} />
                   <Typography>ADD ART</Typography>
@@ -199,7 +198,7 @@ export default function Header() {
                 sx={{ display: { tablet: "none", mobile: "block" }, p: "13px" }}
               >
                 <NavLink
-                  onClick={handleCloseNavMenu}
+                  onClick={closeMenu}
                   to={"/register"}
                   style={{
                     backgroundColor: "#1976D2",
@@ -259,7 +258,7 @@ export default function Header() {
                     }}
                   >
                     <NavLink
-                      onClick={handleCloseNavMenu}
+                      onClick={closeMenu}
                       to={"/login"}
                       style={{
                         backgroundColor: "#1976D2",
@@ -317,7 +316,7 @@ export default function Header() {
           >
             {authentication ? (
               sections.map((page, i) => (
-                <MenuItem key={i} onClick={handleCloseNavMenu}>
+                <MenuItem key={i} onClick={closeMenu}>
                   <NavLink
                     className={({ isActive }) => {
                       return isActive ? "link active-link" : "link not-active";
@@ -330,7 +329,7 @@ export default function Header() {
                 </MenuItem>
               ))
             ) : (
-              <MenuItem onClick={handleCloseNavMenu}>
+              <MenuItem onClick={closeMenu}>
                 <NavLink
                   className={({ isActive }) => {
                     return isActive ? "link active-link" : "link not-active";

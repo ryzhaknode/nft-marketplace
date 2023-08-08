@@ -26,7 +26,7 @@ class NftCardController {
         companyName,
         images,
       });
-
+      console.log(nftCard);
       return res.json(nftCard);
     } catch (e) {
       next(ApiError.badRequest(e.message));

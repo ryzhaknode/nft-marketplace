@@ -12,7 +12,6 @@ export const interests = [
 export const emptyArt = {
   name: "",
   description: "",
-  interests: [{ name: "" }],
   authorName: "",
   companyName: "",
   price: "",
