@@ -2,12 +2,10 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Box, List, ListItem, Button } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
-import { INftItem } from "../types/INftItem";
 import { SwiperSlide } from "swiper/react";
 import SwiperSlider from "../Swiper/SwiperSlider";
 import MyButton from "../UI/MyButton";
-import { deleteNft, getOneNftCard } from "../http/nftCardAPI";
-import { useEffect, useState } from "react";
+import { deleteNft } from "../http/nftCardAPI";
 import Loading from "./LoadingPage";
 import styles from "../style/MyComponent.module.scss";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -17,27 +15,18 @@ import ModalWindow from "../components/ModalWindow";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/slice/userIdSlice";
+import { useNavigateNavMenu } from "../hooks/useNavigateMenu";
+import { useLoadCurrentNft } from "../hooks/useLoadCurrentNft";
 
 function CardPage() {
   const { contactId } = useParams();
-  const [currentCard, setCurrentCard] = useState<INftItem | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [modal, setModal] = useState(false);
+
   const userId = useSelector(selectUser);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getOneNftCard(contactId)
-      .then((responce) => setCurrentCard(responce))
-      .catch((e) => alert(e))
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  const { loading, currentCard } = useLoadCurrentNft(contactId);
 
-  const closeModal = () => {
-    setModal(false);
-  };
+  const [modal, modalClose, modalOpen] = useNavigateNavMenu();
 
   const deleteThisNft = () => {
     deleteNft(contactId)
@@ -76,14 +65,10 @@ function CardPage() {
             </NavLink>
             {userId === currentCard?.userId && (
               <Box>
-                <Button
-                  onClick={() => {
-                    setModal(true);
-                  }}
-                >
+                <Button onClick={modalOpen}>
                   <MoreVertIcon />
                 </Button>
-                <ModalWindow onClose={closeModal} show={modal}>
+                <ModalWindow onClose={modalClose} show={modal}>
                   <Box>
                     <Box
                       sx={{

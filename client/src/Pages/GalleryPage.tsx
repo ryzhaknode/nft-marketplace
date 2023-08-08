@@ -1,10 +1,7 @@
 import { Box, FormControl, FormLabel, Select, MenuItem } from "@mui/material";
 import Typography from "@mui/material/Typography";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSortState } from "../hooks/useSortState";
-import { INftItem } from "../types/INftItem";
-import { getAllNftCard } from "../http/nftCardAPI";
 import Loading from "./LoadingPage";
 import { filtersList } from "../information/filterList";
 import NftFilter from "../components/NftFilter";
@@ -13,8 +10,7 @@ import { useLoadNftData } from "../hooks/useLoadNftData";
 
 function Gallery() {
   const [selectedFilter, setSelectedFilter] = useState("");
-  const { loadedData, loading } = useLoadNftData();
-  const [data, setData] = useState(loadedData);
+  const { data, setData, loading } = useLoadNftData();
   const [sortDatajson] = useSortState(data, setData);
 
   function selectChange(value: any) {
