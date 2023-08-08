@@ -90,13 +90,7 @@ function CardPage() {
                         paddingTop: "10px",
                       }}
                     >
-                      <Button
-                        onClick={() => {
-                          deleteThisNft();
-                        }}
-                      >
-                        Yes
-                      </Button>
+                      <Button onClick={deleteThisNft}>Yes</Button>
                     </Box>
                   </Box>
                 </ModalWindow>

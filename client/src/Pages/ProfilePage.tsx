@@ -9,22 +9,10 @@ import NftCards from "../components/NftCards";
 import { ROUTES } from "../Routes/routesName";
 import Loading from "./LoadingPage";
 import styles from "../style/MyComponent.module.scss";
+import { useLoadUsersNft } from "../hooks/useLoadUsersNft";
 
 function Profile() {
-  const user: number | null = useSelector(selectUser);
-  const [data, setData] = useState<INftItem[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getUsersNft(user)
-      .then((res) => {
-        setData(res);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  const { data, loading } = useLoadUsersNft();
 
   return (
     <>
