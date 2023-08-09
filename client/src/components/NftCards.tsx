@@ -25,17 +25,11 @@ function NftCards({ name, description, interests, images, price }: INftItem) {
               : description}
           </Typography>
           <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
           >
-            <Typography
-              sx={{ paddingTop: "10px" }}
-              variant="h6"
-              component="div"
-            >
+            <Typography paddingTop={"10px"} variant="h6" component="div">
               {`${price} ETH`}
             </Typography>
 

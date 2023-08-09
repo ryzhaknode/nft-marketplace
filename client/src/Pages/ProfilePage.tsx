@@ -10,6 +10,7 @@ import { ROUTES } from "../Routes/routesName";
 import Loading from "./LoadingPage";
 import styles from "../style/MyComponent.module.scss";
 import { useLoadUsersNft } from "../hooks/useLoadUsersNft";
+import NftGrid from "../components/NftGrid";
 
 function Profile() {
   const { data, loading } = useLoadUsersNft();
@@ -20,47 +21,23 @@ function Profile() {
         <Loading />
       ) : (
         <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          paddingTop={"40px"}
         >
-          <Typography variant="h4" component="h1">
-            Your Nft-cards
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              paddingTop: "50px",
-            }}
+          <Typography
+            variant="h4"
+            component="h1"
+            display={"block"}
+            borderBottom={"1px solid"}
+            paddingBottom={"10px"}
+            marginBottom={"40px"}
           >
-            <Grid container spacing={4} columns={8}>
-              {data.length !== 0 &&
-                data.map((card: INftItem, i) => (
-                  <Grid
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                    key={i}
-                    laptop={4}
-                    tablet={6}
-                    mobile={12}
-                  >
-                    <NavLink
-                      className={styles.nav_link}
-                      to={`/${ROUTES.cardPage(card.id)}`}
-                    >
-                      <NftCards {...card} />
-                    </NavLink>
-                  </Grid>
-                ))}
-            </Grid>
-          </Box>
+            My Nft-cards
+          </Typography>
+          <NftGrid data={data} />
         </Box>
       )}
     </>

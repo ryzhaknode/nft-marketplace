@@ -44,7 +44,7 @@ function Gallery() {
           <Box
             display={"flex"}
             flexDirection={"column"}
-            paddingBottom={"20px"}
+            paddingBottom={"40px"}
             alignSelf={"start"}
           >
             <FormControl sx={{ width: "300px" }}>
