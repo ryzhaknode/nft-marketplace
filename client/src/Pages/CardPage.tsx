@@ -187,13 +187,7 @@ function CardPage() {
                         paddingTop: "20px",
                       }}
                     >
-                      <MyButton
-                        sx={{
-                          color: "#ffffff",
-                          padding: "10px 20px",
-                          backgroundColor: "#1976d2",
-                        }}
-                      >
+                      <MyButton size="large" variant="contained">
                         SEND PURCHASE
                       </MyButton>
                     </Box>

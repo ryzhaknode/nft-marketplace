@@ -6,7 +6,6 @@ import Navigation from "./Pages/Navigation";
 import { useEffect, useState } from "react";
 import { check } from "./http/userAPI";
 import { useDispatch } from "react-redux";
-
 import Loading from "./Pages/LoadingPage";
 import { setUserId } from "./store/slice/userIdSlice";
 import { authenticationTrue } from "./store/slice/authenticatedSlice";
