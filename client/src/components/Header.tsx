@@ -165,7 +165,6 @@ export default function Header() {
                         startIcon={<AppRegistrationIcon />}
                         onClick={() => {
                           handleClose();
-                          logOut();
                         }}
                       >
                         Registration
