@@ -23,9 +23,12 @@ export const theme = createTheme({
       mobile: 0,
     },
   },
-  // palette: {
-  //   error: {
-  //     main: "#ffffff",
-  //   },
-  // },
+  palette: {
+    error: {
+      main: "rgba(251,42,26,0.95)",
+    },
+    warning: {
+      main: "rgba(255,152,0,0.93)",
+    },
+  },
 });

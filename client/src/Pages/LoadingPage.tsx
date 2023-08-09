@@ -1,8 +1,8 @@
 function Loading() {
   return (
-    <>
-      <h1>Loading...</h1>
-    </>
+    <div className="loading-placeholder">
+      <div className="loading-animation">Loading</div>
+    </div>
   );
 }
 
