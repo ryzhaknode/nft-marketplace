@@ -12,7 +12,7 @@ function NftGrid({ data }: INftGrid) {
         <Grid key={i} laptop={data.length > 2 ? 4 : 6} tablet={6} mobile={12}>
           <NavLink
             style={{ textDecoration: "none" }}
-            to={ROUTES.cardPage(card.id)}
+            to={`/${ROUTES.cardPage(card.id)}`}
           >
             <NftCards {...card} />
           </NavLink>
