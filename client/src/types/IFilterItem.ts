@@ -1,4 +1,5 @@
 export interface FilterItem {
   label: string;
-  callback: () => void;
+  key: string;
+  sortBy: boolean;
 }

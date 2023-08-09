@@ -14,9 +14,13 @@ import {
   randomEightNum,
 } from "../information/values";
 import { createNftCard } from "../http/nftCardAPI";
+import { useSelector } from "react-redux";
+import { selectUser } from "../store/slice/userIdSlice";
+import { Interest } from "../types/IRegistration";
 
 function AddCard() {
-  const [selectedInterest, setSelectedInterest] = useState("");
+  const [selectedInterest, setSelectedInterest] = useState<Interest[]>([]);
+  const user = useSelector(selectUser);
   const [images, setImages] = useState([
     { id: randomEightNum(), ...emptyImages },
   ]);
@@ -24,10 +28,12 @@ function AddCard() {
 
   //change values in interests
   const interestsChange = (value: string) => {
-    setArt((prevArt) => ({
-      ...prevArt,
-      interests: [{ name: value }],
-    }));
+    if (selectedInterest.find((int) => int.name === value)) {
+      setSelectedInterest(selectedInterest.filter((int) => int.name !== value));
+    } else {
+      if (selectedInterest.length < 3)
+        setSelectedInterest([...selectedInterest, { name: value }]);
+    }
   };
 
   //change values in art
@@ -58,12 +64,20 @@ function AddCard() {
       ...emptyArt,
     });
     setImages([{ id: randomEightNum(), ...emptyImages }]);
-    setSelectedInterest("");
+    setSelectedInterest([]);
   };
   //push new art and clear all values
   const submitPublishArt = () => {
-    createNftCard({ ...art, images: images })
-      .then(() => clearValues())
+    createNftCard({
+      ...art,
+      interests: selectedInterest,
+      images: images,
+      userId: user,
+    })
+      .then((res) => {
+        console.log(res);
+        clearValues();
+      })
       .catch((e) => alert(e.response.data.message));
   };
   //add new image section but not more then 4 new section
@@ -129,10 +143,13 @@ function AddCard() {
                 <Button
                   onClick={() => {
                     interestsChange(interest);
-                    setSelectedInterest(interest);
                   }}
                   key={i}
-                  color={selectedInterest === interest ? "success" : "primary"}
+                  color={
+                    selectedInterest.find((int) => int.name === interest)
+                      ? "success"
+                      : "primary"
+                  }
                   size="medium"
                   variant="outlined"
                   sx={{ borderRadius: "20px" }}

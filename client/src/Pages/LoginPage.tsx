@@ -7,6 +7,8 @@ import { authenticationTrue } from "../store/slice/authenticatedSlice";
 import { useNavigate } from "react-router-dom";
 import { login } from "../http/userAPI";
 import ModalWindow from "../components/ModalWindow";
+import { setUserId } from "../store/slice/userIdSlice";
+import { ROUTES } from "../Routes/routesName";
 function LogIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,12 +31,13 @@ function LogIn() {
 
   const submitNewLogin = async () => {
     try {
-      const responce = await login(newLogin);
-      console.log(responce);
+      const responce: any = await login(newLogin);
+
       if (responce) {
         setNewLogin(emptyLogin);
         dispatch(authenticationTrue());
-        navigate("/");
+        dispatch(setUserId(responce.id));
+        navigate(ROUTES.mainPage);
       }
     } catch (error: any) {
       const message = error.response.data.message;

@@ -1,8 +1,13 @@
 import { Box, Button } from "@mui/material";
+import { IModalWindowProps } from "../types/IModalWindow";
 
-const ModalWindow = (props: any) => {
+const ModalWindow: React.FC<IModalWindowProps> = ({
+  onClose,
+  show,
+  children,
+}) => {
   return (
-    <Box className={`popup ${props.show ? "show" : ""}`}>
+    <Box className={`popup ${show ? "show" : ""}`}>
       <Box
         sx={{
           display: "flex",
@@ -15,7 +20,7 @@ const ModalWindow = (props: any) => {
           boxShadow: "0 2px 5px rgba(0, 0, 0, 0.3)",
         }}
       >
-        {props.children}
+        {children}
         <Button
           sx={{
             p: "10px",
@@ -23,7 +28,7 @@ const ModalWindow = (props: any) => {
             justifyContent: "center",
             alignSelf: "center",
           }}
-          onClick={props.onClose}
+          onClick={onClose}
         >
           Close
         </Button>
