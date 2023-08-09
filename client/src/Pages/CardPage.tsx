@@ -1,5 +1,5 @@
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import { Box, List, ListItem, Button } from "@mui/material";
+import { Box, List, ListItem, Button, IconButton } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
 import { SwiperSlide } from "swiper/react";
@@ -26,7 +26,7 @@ function CardPage() {
 
   const { loading, currentCard } = useLoadCurrentNft(contactId);
 
-  const [modal, modalClose, modalOpen] = useNavigateNavMenu();
+  const [modal, modalOpen, modalClose] = useNavigateNavMenu();
 
   const deleteThisNft = () => {
     deleteNft(contactId)
@@ -65,9 +65,10 @@ function CardPage() {
             </NavLink>
             {userId === currentCard?.userId && (
               <Box>
-                <Button onClick={modalOpen}>
+                <IconButton onClick={modalOpen}>
                   <MoreVertIcon />
-                </Button>
+                </IconButton>
+
                 <ModalWindow onClose={modalClose} show={modal}>
                   <Box>
                     <Box
