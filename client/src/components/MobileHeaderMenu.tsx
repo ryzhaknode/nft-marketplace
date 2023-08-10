@@ -100,7 +100,7 @@ function MobileHeaderMenu(props: any) {
                 size="large"
                 variant="contained"
                 startIcon={<AddCircleOutlineSharpIcon />}
-                onClick={logOut}
+                onClick={closeMenu}
               >
                 ADD ART
               </MyButton>
@@ -112,7 +112,7 @@ function MobileHeaderMenu(props: any) {
                 size="large"
                 variant="contained"
                 startIcon={<AppRegistrationIcon />}
-                onClick={logOut}
+                onClick={closeMenu}
               >
                 Registration
               </MyButton>
@@ -122,7 +122,10 @@ function MobileHeaderMenu(props: any) {
             {authentication ? (
               <Box display={{ tablet: "none", mobile: "block" }}>
                 <MyButton
-                  onClick={logOut}
+                  onClick={() => {
+                    logOut();
+                    closeMenu();
+                  }}
                   size="large"
                   variant="contained"
                   startIcon={<HowToRegIcon />}
@@ -137,7 +140,7 @@ function MobileHeaderMenu(props: any) {
                     size="large"
                     variant="contained"
                     startIcon={<HowToRegIcon />}
-                    onClick={logOut}
+                    onClick={closeMenu}
                   >
                     Log In
                   </MyButton>

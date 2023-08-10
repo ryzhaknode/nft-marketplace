@@ -128,7 +128,6 @@ export default function Header() {
                     size="large"
                     variant="contained"
                     startIcon={<AddCircleOutlineSharpIcon />}
-                    onClick={logOut}
                   >
                     ADD ART
                   </MyButton>
@@ -166,7 +165,6 @@ export default function Header() {
                         startIcon={<AppRegistrationIcon />}
                         onClick={() => {
                           handleClose();
-                          logOut();
                         }}
                       >
                         Registration

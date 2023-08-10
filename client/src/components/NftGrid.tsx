@@ -7,22 +7,12 @@ import { INftGrid } from "../types/INftGrid";
 
 function NftGrid({ data }: INftGrid) {
   return (
-    <Grid container spacing={4} columns={12}>
+    <Grid justifyContent={"space-between"} container spacing={4} columns={12}>
       {data.map((card: INftItem, i) => (
-        <Grid
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          key={i}
-          laptop={4}
-          tablet={6}
-          mobile={12}
-        >
+        <Grid key={i} laptop={data.length > 2 ? 4 : 6} tablet={6} mobile={12}>
           <NavLink
             style={{ textDecoration: "none" }}
-            to={ROUTES.cardPage(card.id)}
+            to={`/${ROUTES.cardPage(card.id)}`}
           >
             <NftCards {...card} />
           </NavLink>

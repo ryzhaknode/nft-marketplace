@@ -25,40 +25,37 @@ function Gallery() {
         <Loading />
       ) : (
         <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignContent: "center",
-            alignItems: "center",
-          }}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          alignContent={"center"}
         >
-          <Typography variant="h4" component="h1" paddingY={"50px"}>
+          <Typography
+            variant="h4"
+            component="h1"
+            paddingY={"50px"}
+            borderBottom={"1px solid"}
+            paddingBottom={"10px"}
+          >
             Gallery
           </Typography>
+
           <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-            }}
+            display={"flex"}
+            flexDirection={"column"}
+            paddingBottom={"40px"}
+            alignSelf={"start"}
           >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                paddingBottom: "20px",
-                alignSelf: "center",
-              }}
-            >
-              <FormControl sx={{ width: "300px" }}>
-                <FormLabel component="legend">Sort NFT</FormLabel>
-                <NftFilter
-                  selectedFilter={selectedFilter}
-                  selectChange={selectChange}
-                />
-              </FormControl>
-            </Box>
-            <NftGrid data={data} />
+            <FormControl sx={{ width: "300px" }}>
+              <FormLabel component="legend">Sort NFT</FormLabel>
+              <NftFilter
+                selectedFilter={selectedFilter}
+                selectChange={selectChange}
+              />
+            </FormControl>
           </Box>
+          <NftGrid data={data} />
         </Box>
       )}
     </>
