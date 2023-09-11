@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
-import "./style/index.scss";
-import { router } from "./Routes/routing";
-import Loading from "./Pages/LoadingPage";
+import "./app/style/index.scss";
+import { router } from "./app/Routes/routing";
+import Loading from "./pages/LoadingPage";
 import { Provider } from "react-redux";
-import store from "./store/store";
+import store from "./app/store/store";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

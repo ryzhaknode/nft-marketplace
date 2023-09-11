@@ -1,0 +1,50 @@
+.addCard {
+  padding-top: 50px;
+
+  &__titleBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  //&__mainBlock {
+  //}
+
+  &__interestsBlock {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+  }
+
+  &__inputBlock {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  //&__imageBlock {
+  //
+  //}
+  &__nftImageBlock {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__deleteBtn{
+    justify-content: flex-end;
+  }
+
+  &__deleteIcon{
+    padding: 6px;
+    background-color: #e0f0ff;
+    border-radius: 50%;
+  }
+}
+
+.bottomLine{
+  padding-bottom: 20px;
+  border-bottom: 1px solid #a0a0a0;
+}

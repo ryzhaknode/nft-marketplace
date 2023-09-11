@@ -1,0 +1,24 @@
+.gallery {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  &__title {
+    padding: 50px 0 50px;
+  }
+
+  &__filterBox {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 40px;
+    align-self: start;
+  }
+
+  &__formControl {
+    width: 300px
+  }
+}
+
