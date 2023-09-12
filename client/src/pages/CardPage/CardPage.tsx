@@ -4,7 +4,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
 import MyButton from "../../shared/UI/MyButton";
 import {deleteNft} from "../../shared/http/nftCardAPI";
-import Loading from "../LoadingPage";
+import Loading from "../LoadingPage/LoadingPage";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {ROUTES} from "../../app/Routes/routesName";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";

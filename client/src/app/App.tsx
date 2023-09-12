@@ -1,4 +1,4 @@
-import Header from "../pages/Header";
+import Header from "../pages/Header/Header";
 import { Box, Container } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./theme/theme";
@@ -6,7 +6,7 @@ import Navigation from "./Navigation";
 import { useEffect, useState } from "react";
 import { check } from "../shared/http/userAPI";
 import { useDispatch } from "react-redux";
-import Loading from "../pages/LoadingPage";
+import Loading from "../pages/LoadingPage/LoadingPage";
 import { setUserId } from "./store/slice/userIdSlice";
 import { authenticationTrue } from "./store/slice/authenticatedSlice";
 import {classNames} from "../shared/classNames/classNames";

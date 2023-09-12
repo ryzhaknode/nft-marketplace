@@ -11,13 +11,14 @@ import WalletIcon from "@mui/icons-material/Wallet";
 import { NavLink } from "react-router-dom";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
-import MyButton from "../shared/UI/MyButton";
+import MyButton from "../../shared/UI/MyButton";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
-import StyledSpan from "../shared/UI/StyledSpan";
+import StyledSpan from "../../shared/UI/StyledSpan";
 import PaletteIcon from "@mui/icons-material/Palette";
 import Drawer from "@mui/material/Drawer";
-import { sections, sectionsNotAuth } from "../shared/information/sections";
-import ItemMenu from "../widgets/ItemMenu";
+import { sections, sectionsNotAuth } from "../../shared/information/sections";
+import ItemMenu from "../../widgets/ItemMenu";
+import cls from './MobileHeaderMenu.module.scss'
 
 function MobileHeaderMenu(props: any) {
   const {

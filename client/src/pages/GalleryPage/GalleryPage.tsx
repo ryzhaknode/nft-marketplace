@@ -2,7 +2,7 @@ import {Box, FormControl, FormLabel, Select, MenuItem} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {useState} from "react";
 import {useSortState} from "../../shared/hooks/useSortState";
-import Loading from "../LoadingPage";
+import Loading from "../LoadingPage/LoadingPage";
 import {filtersList} from "../../shared/information/filterList";
 import NftFilter from "../../features/NftFilter";
 import NftGrid from "../../features/NftGrid";

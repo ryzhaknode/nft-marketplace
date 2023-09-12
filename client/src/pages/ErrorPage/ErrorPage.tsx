@@ -1,3 +1,4 @@
+import cls from './ErrorPage.module.scss'
 function ErrorPage() {
   return (
     <>
