@@ -4,15 +4,12 @@ import {
     handleOnlyNumbers,
     handleOnlyUrl,
     handleOnlyWords,
-} from "../../shared/information/inputChecker";
+} from "../../shared/functions/inputChecker";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-
+import {emptyImages, randomEightNum, emptyArt} from './constants/constats'
 import {
-    emptyArt,
-    emptyImages,
     interests,
-    randomEightNum,
-} from "../../shared/information/values";
+} from "../../shared/constants/constants";
 import {createNftCard} from "../../shared/http/nftCardAPI";
 import {useSelector} from "react-redux";
 import {selectUser} from "../../app/store/slice/userIdSlice";
@@ -222,25 +219,25 @@ function AddCard() {
                     <Typography paddingY={'20px'} variant="h6" component={"div"}>
                         Additional information
                     </Typography>
-                        <TextField
-                            label="Art description"
-                            fullWidth
-                            multiline
-                            required
-                            name="description"
-                            value={art.description}
-                            onChange={(e) => {
-                                handleOnlyWords(e);
-                                handleInputChangeInArt(e);
-                            }}
-                            inputProps={{
-                                pattern: "[a-zA-Zs]*",
-                            }}
-                            color={art.description ? "success" : "error"}
-                            variant="outlined"
-                            margin="normal"
-                            className={classNames(cls.bottomLine)}
-                        />
+                    <TextField
+                        label="Art description"
+                        fullWidth
+                        multiline
+                        required
+                        name="description"
+                        value={art.description}
+                        onChange={(e) => {
+                            handleOnlyWords(e);
+                            handleInputChangeInArt(e);
+                        }}
+                        inputProps={{
+                            pattern: "[a-zA-Zs]*",
+                        }}
+                        color={art.description ? "success" : "error"}
+                        variant="outlined"
+                        margin="normal"
+                        className={classNames(cls.bottomLine)}
+                    />
                     <Box
                         paddingY={"30px"}
                         display={"flex"}

@@ -1,12 +1,12 @@
 import {Box, FormControl, FormLabel, Select, MenuItem} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import {useState} from "react";
-import {useSortState} from "../../shared/hooks/useSortState";
+import React, {useState} from "react";
+import {useSortState} from "./hooks/useSortState";
 import Loading from "../LoadingPage/LoadingPage";
-import {filtersList} from "../../shared/information/filterList";
-import NftFilter from "../../features/NftFilter";
-import NftGrid from "../../features/NftGrid";
-import {useLoadNftData} from "../../shared/hooks/useLoadNftData";
+import {filtersList} from "./constants/filterList";
+import NftFilter from "../../features/NftFilter/NftFilter";
+import NftGrid from "../../features/NftGrid/NftGrid";
+import {useLoadNftData} from "./hooks/useLoadNftData";
 import cls from './GalleryPage.module.scss'
 import {classNames} from "../../shared/classNames/classNames";
 
@@ -15,13 +15,12 @@ function Gallery() {
     const {data, setData, loading} = useLoadNftData();
     const [sortDatajson] = useSortState(data, setData);
 
-    function selectChange(value: any) {
+    function selectChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const value = e.target.value;
         const filter = filtersList.find((lst) => lst.label === value);
         filter && sortDatajson(filter.key, filter.sortBy);
         setSelectedFilter(value);
     }
-
-
 
     return (
         <>

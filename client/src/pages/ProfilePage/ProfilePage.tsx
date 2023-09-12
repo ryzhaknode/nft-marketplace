@@ -5,12 +5,12 @@ import {getUsersNft} from "../../shared/http/nftCardAPI";
 import {Box, Typography, Grid} from "@mui/material";
 import {INftItem} from "../../shared/types/INftItem";
 import {NavLink} from "react-router-dom";
-import NftCards from "../../entities/NftCards";
-import {ROUTES} from "../../app/Routes/routesName";
+import NftCard from "../../entities/NftCard/NftCard";
+import {ROUTES} from "../../app/routes/routesName";
 import Loading from "../LoadingPage/LoadingPage";
 import styles from "../../app/style/MyComponent.module.scss";
-import {useLoadUsersNft} from "../../shared/hooks/useLoadUsersNft";
-import NftGrid from "../../features/NftGrid";
+import {useLoadUsersNft} from "./hooks/useLoadUsersNft";
+import NftGrid from "../../features/NftGrid/NftGrid";
 import cls from './ProfilePage.module.scss';
 import {classNames} from "../../shared/classNames/classNames";
 

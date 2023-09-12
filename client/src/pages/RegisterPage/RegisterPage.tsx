@@ -1,14 +1,14 @@
 import {Typography, Box, Button, TextField, FormControl} from "@mui/material";
 import {Interest} from "../../shared/types/IRegistration";
 import {useState} from "react";
-import {emptyUser, interests} from "../../shared/information/values";
-import {handleOnlyWords} from "../../shared/information/inputChecker";
-import ModalWindow from "../../shared/ModalWindow";
+import{ interests} from "../../shared/constants/constants";
+import {handleOnlyWords} from "../../shared/functions/inputChecker";
+import ModalWindow from "../../widgets/ModalWindow/ModalWindow";
 import DoneIcon from "@mui/icons-material/Done";
 import {registration} from "../../shared/http/userAPI";
 import cls from './RegisterPage.module.scss'
 import {classNames} from "../../shared/classNames/classNames";
-
+import {emptyUser} from './constants/constants'
 function RegisterPage() {
     const [newUser, setNewUser] = useState(emptyUser);
     const [selectedInterest, setSelectedInterest] = useState<Interest[]>([]);

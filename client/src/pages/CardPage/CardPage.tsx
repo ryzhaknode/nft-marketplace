@@ -2,21 +2,21 @@ import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {Box, List, ListItem, Button, IconButton} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
-import MyButton from "../../shared/UI/MyButton";
+import MyButton from "../../shared/ui/MyButton/MyButton";
 import {deleteNft} from "../../shared/http/nftCardAPI";
 import Loading from "../LoadingPage/LoadingPage";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import {ROUTES} from "../../app/Routes/routesName";
+import {ROUTES} from "../../app/routes/routesName";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ModalWindow from "../../shared/ModalWindow";
+import ModalWindow from "../../widgets/ModalWindow/ModalWindow";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import {useSelector} from "react-redux";
 import {selectUser} from "../../app/store/slice/userIdSlice";
 import {useNavigateNavMenu} from "../../shared/hooks/useNavigateMenu";
-import {useLoadCurrentNft} from "../../shared/hooks/useLoadCurrentNft";
+import {useLoadCurrentNft} from "./hooks/useLoadCurrentNft";
 import cls from './CardPage.module.scss'
 import {classNames} from "../../shared/classNames/classNames";
-import SwiperSlider from "../../shared/Swiper/SwiperSlider";
+import SwiperSlider from "../../shared/swiper/SwiperSlider";
 
 function CardPage() {
     const {contactId} = useParams();

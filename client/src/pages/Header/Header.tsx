@@ -12,26 +12,26 @@ import React, {useState} from "react";
 import WalletIcon from "@mui/icons-material/Wallet";
 import {NavLink, useNavigate} from "react-router-dom";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
-import {useConnectWallet} from "../../shared/hooks/useConnectWallet";
+import {useConnectWallet} from "./hooks/useConnectWallet";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import {useDispatch, useSelector} from "react-redux";
 import {
     authenticationFalse,
     selectAuthenticated,
 } from "../../app/store/slice/authenticatedSlice";
-import {ROUTES} from "../../app/Routes/routesName";
+import {ROUTES} from "../../app/routes/routesName";
 import {useNavigateNavMenu} from "../../shared/hooks/useNavigateMenu";
-import MyButton from "../../shared/UI/MyButton";
+import MyButton from "../../shared/ui/MyButton/MyButton";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import StyledSpan from "../../shared/UI/StyledSpan";
+import StyledSpan from "../../shared/ui/StyledSpan/StyledSpan";
 import MobileHeaderMenu from "./MobileHeaderMenu";
-import {sections, sectionsNotAuth} from "../../shared/information/sections";
+import {sections, sectionsNotAuth} from "./constants/sections";
 import cls from './Header.module.scss'
-import ItemMenu from "../../widgets/ItemMenu";
+import MyNavigationMenu from "../../widgets/MyNavigationMenu/MyNavigationMenu";
 import {classNames} from "../../shared/classNames/classNames";
-import MyItemMenu from "../../shared/MyItemMenu/MyItemMenu";
+import MyItemMenu from "../../shared/ui/MyItemMenu/MyItemMenu";
 
 export default function Header() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -110,10 +110,10 @@ export default function Header() {
                     >
                         {authentication
                             ? sections.map((page, i) => (
-                                <ItemMenu page={page} key={i} closeMenu={closeMenu}/>
+                                <MyNavigationMenu page={page} key={i} closeMenu={closeMenu}/>
                             ))
                             : sectionsNotAuth.map((page, i) => (
-                                <ItemMenu page={page} key={i} closeMenu={closeMenu}/>
+                                <MyNavigationMenu page={page} key={i} closeMenu={closeMenu}/>
                             ))}
                     </Box>
                     <Box
