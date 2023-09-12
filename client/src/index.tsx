@@ -6,6 +6,7 @@ import { router } from "./app/routes/routing";
 import Loading from "./pages/LoadingPage/LoadingPage";
 import { Provider } from "react-redux";
 import store from "./app/store/store";
+import "./shared/config/i18n/i18n";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

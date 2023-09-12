@@ -16,9 +16,11 @@ import {selectUser} from "../../app/store/slice/userIdSlice";
 import {Interest} from "../../shared/types/IRegistration";
 import cls from './AddCardPage.module.scss'
 import {classNames} from "../../shared/classNames/classNames";
+import {useTranslation} from "react-i18next";
 
 function AddCard() {
     const [selectedInterest, setSelectedInterest] = useState<Interest[]>([]);
+    const {t, i18n} = useTranslation()
     const user = useSelector(selectUser);
     const [images, setImages] = useState([
         {id: randomEightNum(), ...emptyImages},
@@ -104,7 +106,7 @@ function AddCard() {
                     className={classNames(`${cls.addCard__titleBlock} ${cls.bottomLine}`)}
                 >
                     <Typography variant="h4" component={"h2"}>
-                        Add Card
+                        {t("Add Card")}
                     </Typography>
                     <Box sx={{position: "relative"}}>
 
@@ -112,18 +114,20 @@ function AddCard() {
                             type="submit"
                             sx={{border: "1px solid", padding: "10px 20px"}} // material ui
                         >
-                            <Typography component={"h5"}>PUBLISH ART</Typography>
+                            <Typography component={"h5"}>
+                                {t("PUBLISH ART")}
+                            </Typography>
                         </Button>
                     </Box>
                 </Box>
 
                 <Box className={classNames(cls.bottomLine)}>
                     <Typography paddingY={'20px'} variant="h6" component={"div"}>
-                        Main information
+                        {t("PUBLISH ART")}
                     </Typography>
                     <Box>
                         <Typography paddingLeft={'10px'} component={"div"}>
-                            Medium *
+                            {t("Medium")}
                         </Typography>
                         <Box
                             className={classNames(`${cls.addCard__interestsBlock} ${cls.bottomLine}`)}
@@ -150,7 +154,7 @@ function AddCard() {
                         <Box className={cls.addCard__inputBlock}>
                             <TextField
                                 margin="normal"
-                                label="Art name"
+                                label={t("Art name")}
                                 name="name"
                                 color={art.name ? "success" : "error"}
                                 variant="outlined"
@@ -166,7 +170,7 @@ function AddCard() {
                             />
                             <TextField
                                 margin="normal"
-                                label="Author name"
+                                label={t("Author name")}
                                 variant="outlined"
                                 required
                                 name="authorName"
@@ -182,7 +186,7 @@ function AddCard() {
                             />
                             <TextField
                                 margin="normal"
-                                label="Price in ETH"
+                                label={t("Price in ETH")}
                                 variant="outlined"
                                 required
                                 color={art.price ? "success" : "error"}
@@ -198,7 +202,7 @@ function AddCard() {
                             />
                             <TextField
                                 margin="normal"
-                                label="Company name"
+                                label={t("Company name")}
                                 required
                                 name="companyName"
                                 variant="outlined"
@@ -217,10 +221,11 @@ function AddCard() {
                 </Box>
                 <Box className={classNames(cls.bottomLine)}>
                     <Typography paddingY={'20px'} variant="h6" component={"div"}>
-                        Additional information
+                        {t("Additional information")}
+
                     </Typography>
                     <TextField
-                        label="Art description"
+                        label={t("Art description")}
                         fullWidth
                         multiline
                         required
@@ -243,8 +248,8 @@ function AddCard() {
                         display={"flex"}
                         justifyContent={"space-between"}
                     >
-                        <Typography variant="h6">Images</Typography>
-                        <Button onClick={addNewImageClick}>+ ADD NEW IMAGE</Button>
+                        <Typography variant="h6">{t("Images")}</Typography>
+                        <Button onClick={addNewImageClick}>{`+ ${t("ADD NEW IMAGE")}`}</Button>
                     </Box>
                     {images.map((img) => (
                         <Box
@@ -252,7 +257,7 @@ function AddCard() {
                             className={classNames(cls.addCard__nftImageBlock)}
                         >
                             <Typography variant="h6" component={"div"}>
-                                Nft image
+                                {t("Nft image")}
                             </Typography>
                             <Box
                                 display={"flex"}
@@ -260,7 +265,7 @@ function AddCard() {
                             >
                                 <TextField
                                     required
-                                    label="Image name"
+                                    label={t("Image name")}
                                     value={img.name}
                                     name="name"
                                     margin="normal"
@@ -285,7 +290,7 @@ function AddCard() {
                                     inputProps={{
                                         pattern: '^(ftp|http|https):\\/\\/[^ "]+$',
                                     }}
-                                    label="Image url"
+                                    label={t("Image url")}
                                     color={img.url ? "success" : "error"}
                                     variant="outlined"
                                 />

@@ -1,44 +1,44 @@
 .card{
-  padding-top: 60px;
+    padding-top: 60px;
 
-  &__topBlock{
-    display: flex;
-    justif-content: space-between;
-    align-items: center;
-    padding: 0 40px;
-  }
+    &__topBlock{
+        display: flex;
+        justif-content: space-between;
+        align-items: center;
+        padding: 0 40px;
+    }
   
-  &__routeBack{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-  }
+    &__routeBack{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
 
-  &__content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+    &__content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-  &__interestsBlock{
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    align-items: center;
-    padding-top: 10px;
-  }
+    &__interestsBlock{
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        align-items: center;
+        padding-top: 10px;
+    }
 
-  &__interestsItem{
-    display: flex;
-    justify-content: center;
-    flex: 0 1 20%;
-    background-color: rgba(215, 112, 229, 0.2);
-    border-radius: 20px;
-    color: #D770E5;
-  }
+    &__interestsItem{
+        display: flex;
+        justify-content: center;
+        flex: 0 1 20%;
+        background-color: rgb(215 112 229 / 20%);
+        border-radius: 20px;
+        color: #D770E5;
+    }
 
-  &__cardPrice{
+    &__cardPrice{
 
-  }
+    }
 
 }

@@ -9,11 +9,13 @@ import NftGrid from "../../features/NftGrid/NftGrid";
 import {useLoadNftData} from "./hooks/useLoadNftData";
 import cls from './GalleryPage.module.scss'
 import {classNames} from "../../shared/classNames/classNames";
+import {useTranslation} from "react-i18next";
 
 function Gallery() {
     const [selectedFilter, setSelectedFilter] = useState("");
     const {data, setData, loading} = useLoadNftData();
     const [sortDatajson] = useSortState(data, setData);
+    const {t, i18n} = useTranslation()
 
     function selectChange(e: React.ChangeEvent<HTMLInputElement>) {
         const value = e.target.value;
@@ -36,14 +38,15 @@ function Gallery() {
                         variant="h4"
                         component="h1"
                     >
-                        Gallery
+                        {t("Gallery")}
+
                     </Typography>
 
                     <Box
                         className={classNames(cls.gallery__filterBox)}
                     >
                         <FormControl className={classNames(cls.gallery__formControl)}>
-                            <FormLabel component="legend">Sort NFT</FormLabel>
+                            <FormLabel component="legend">{t("Sort NFT")}</FormLabel>
                             <NftFilter
                                 selectedFilter={selectedFilter}
                                 selectChange={selectChange}

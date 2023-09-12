@@ -32,6 +32,7 @@ import cls from './Header.module.scss'
 import MyNavigationMenu from "../../widgets/MyNavigationMenu/MyNavigationMenu";
 import {classNames} from "../../shared/classNames/classNames";
 import MyItemMenu from "../../shared/ui/MyItemMenu/MyItemMenu";
+import { useTranslation } from 'react-i18next';
 
 export default function Header() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -42,6 +43,8 @@ export default function Header() {
     const [userAccount, setUserAccount] = useState("");
     const [menu, openMenu, closeMenu] = useNavigateNavMenu();
     const [connectWallet] = useConnectWallet(setUserAccount);
+
+    const {t, i18n} = useTranslation()
 
 
     const logOut = () => {
@@ -68,6 +71,9 @@ export default function Header() {
         connectWallet();
     }
 
+    const toggleLang = () => {
+        i18n.changeLanguage(i18n.language === 'en' ? 'uk' : 'en')
+    }
 
     return (
         <React.Fragment>
@@ -78,6 +84,12 @@ export default function Header() {
                         padding: {laptop: "0 50px", table: "0 30px", mobile: "0 15px"},
                     }}
                 >
+                    <Button
+                        onClick={toggleLang}
+                        sx={{
+                        height:'40px',
+                        width: '80px'}}
+                    >{t('Translate')}</Button>
                     <MobileHeaderMenu
                         openMenu={openMenu}
                         menu={menu}
@@ -128,7 +140,7 @@ export default function Header() {
                                         variant="contained"
                                         startIcon={<AddCircleOutlineSharpIcon/>}
                                     >
-                                        ADD ART
+                                        {t('ADD ART')}
                                     </MyButton>
                                 </NavLink>
                             </Box>
@@ -161,7 +173,7 @@ export default function Header() {
                                             icon={<AppRegistrationIcon/>}
                                             callbacks={handleClose}
                                         >
-                                            Registration
+                                            {t('Registration')}
                                         </MyItemMenu>
                                     </NavLink>
                                 )}
@@ -180,7 +192,7 @@ export default function Header() {
                                             setFullWidth={true}
                                             icon={<HowToRegIcon/>}
                                         >
-                                            Log In
+                                            {t('Log In')}
                                         </MyItemMenu>
                                     </NavLink>
                                 )}
@@ -196,7 +208,7 @@ export default function Header() {
                                                 12
                                             )}...`}</Typography>
                                         ) : (
-                                            <>Connect Wallet</>
+                                            <>{t('Connect Wallet')}</>
                                         )}
                                     </MyItemMenu>
                                 )}

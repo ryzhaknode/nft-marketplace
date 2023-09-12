@@ -13,9 +13,12 @@ import {useLoadUsersNft} from "./hooks/useLoadUsersNft";
 import NftGrid from "../../features/NftGrid/NftGrid";
 import cls from './ProfilePage.module.scss';
 import {classNames} from "../../shared/classNames/classNames";
+import {useTranslation} from "react-i18next";
 
 function Profile() {
     const {data, loading} = useLoadUsersNft();
+    const {t, i18n} = useTranslation()
+
 
     return (
         <>
@@ -30,7 +33,7 @@ function Profile() {
                         component="h1"
                         className={classNames(cls.profile__title)}
                     >
-                        My Nft-cards
+                        {t("My Nfts")}
                     </Typography>
                     <NftGrid data={data}/>
                 </Box>

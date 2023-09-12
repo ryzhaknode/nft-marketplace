@@ -1,13 +1,15 @@
 import { MenuItem } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import {ISections} from "../../shared/types/ISections";
+import {useTranslation} from "react-i18next";
 
 interface MyNavigationMenuProps{
     closeMenu: () => void,
     page: ISections,
 }
 function MyNavigationMenu({page, closeMenu}:MyNavigationMenuProps) {
-
+    const {t, i18n} = useTranslation()
+   console.log(page.title)
   return (
     <MenuItem onClick={closeMenu}>
       <NavLink
@@ -16,7 +18,7 @@ function MyNavigationMenu({page, closeMenu}:MyNavigationMenuProps) {
         }}
         to={page.url}
       >
-        {page.title}
+          {t(`${page.title}`)}
       </NavLink>
     </MenuItem>
   );

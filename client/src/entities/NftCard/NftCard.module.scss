@@ -1,25 +1,26 @@
 .nftcard{
-  width: 345px;
-  min-height: 475px;
-  &__area{
-    padding: 20px;
-  }
+    width: 345px;
+    min-height: 475px;
 
-  &__content{
-    min-height: 75px;
-  }
+    &__area{
+        padding: 20px;
+    }
 
-  &__priceBlock{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    &__content{
+        min-height: 75px;
+    }
 
-  &__interests{
-    padding: 5px 10px;
-    background-color: rgba(215, 112, 229, 0.2);
-    border-radius: 10px;
-    color: #D770E5;
-    text-transform: lowercase;
-  }
+    &__priceBlock{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__interests{
+        padding: 5px 10px;
+        background-color: rgb(215 112 229 / 20%);
+        border-radius: 10px;
+        color: #D770E5;
+        text-transform: lowercase;
+    }
 }
