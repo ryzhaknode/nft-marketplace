@@ -1,0 +1,9 @@
+@import "variables/colors";
+
+.nav_link {
+  text-decoration: none;
+  color: $blackColor;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
