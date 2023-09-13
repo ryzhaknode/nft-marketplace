@@ -8,8 +8,7 @@ interface MyNavigationMenuProps{
     page: ISections,
 }
 function MyNavigationMenu({page, closeMenu}:MyNavigationMenuProps) {
-    const {t, i18n} = useTranslation()
-   console.log(page.title)
+    const {t} = useTranslation()
   return (
     <MenuItem onClick={closeMenu}>
       <NavLink

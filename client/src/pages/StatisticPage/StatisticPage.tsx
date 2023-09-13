@@ -4,7 +4,7 @@ import cls from './StatisticPage.module.scss'
 import {classNames} from "../../shared/classNames/classNames";
 import {useTranslation} from "react-i18next";
 function Statistic() {
-    const {t, i18n} = useTranslation()
+    const {t} = useTranslation()
 
   return (
     <Box className={classNames(cls.statistic)}>

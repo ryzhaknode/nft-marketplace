@@ -1,4 +1,4 @@
-import {Box, FormControl, FormLabel, Select, MenuItem} from "@mui/material";
+import {Box, FormControl, FormLabel} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import React, {useState} from "react";
 import {useSortState} from "./hooks/useSortState";
@@ -15,7 +15,7 @@ function Gallery() {
     const [selectedFilter, setSelectedFilter] = useState("");
     const {data, setData, loading} = useLoadNftData();
     const [sortDatajson] = useSortState(data, setData);
-    const {t, i18n} = useTranslation()
+    const {t} = useTranslation()
 
     function selectChange(e: React.ChangeEvent<HTMLInputElement>) {
         const value = e.target.value;

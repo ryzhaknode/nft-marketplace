@@ -2,7 +2,7 @@ import Header from "../pages/Header/Header";
 import {Box, Container} from "@mui/material";
 import {ThemeProvider} from "@mui/material/styles";
 import {theme} from "./theme/theme";
-import Navigation from "../features/Navigation/Navigation";
+import AppRoutes from "./routes/ui/AppRoutes/AppRoutes";
 import {Suspense, useEffect, useState} from "react";
 import {check} from "../shared/http/userAPI";
 import {useDispatch} from "react-redux";
@@ -37,7 +37,7 @@ function App() {
                     <Box className={classNames('app')}>
                         <Header/>
                         <Container className={classNames('app__container')}>
-                            <Navigation/>
+                            <AppRoutes/>
                         </Container>
                     </Box>
                 </Suspense>

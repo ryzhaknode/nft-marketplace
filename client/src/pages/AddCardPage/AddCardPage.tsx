@@ -20,7 +20,7 @@ import {useTranslation} from "react-i18next";
 
 function AddCard() {
     const [selectedInterest, setSelectedInterest] = useState<Interest[]>([]);
-    const {t, i18n} = useTranslation()
+    const {t} = useTranslation('addCard')
     const user = useSelector(selectUser);
     const [images, setImages] = useState([
         {id: randomEightNum(), ...emptyImages},

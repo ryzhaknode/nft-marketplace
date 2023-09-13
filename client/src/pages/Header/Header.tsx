@@ -3,7 +3,6 @@ import {
     Toolbar,
     Typography,
     Box,
-    MenuItem,
     Menu,
     Button,
 } from "@mui/material";
@@ -183,7 +182,7 @@ export default function Header() {
                                         setFullWidth={true}
                                         icon={<HowToRegIcon/>}
                                     >
-                                        Log Out
+                                        {t('Log Out')}
                                     </MyItemMenu>
                                 ) : (
                                     <NavLink className={classNames('nav_link')} style={{width: "100%"}} to={"/login"}>

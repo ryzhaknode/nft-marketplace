@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import { selectAuthenticated } from "../../app/store/slice/authenticatedSlice";
+import { selectAuthenticated } from "../../../store/slice/authenticatedSlice";
 import { useSelector } from "react-redux";
-import { authRoutes, notAuthRoutes, publicRoutes } from "../../app/routes/routes";
+import { authRoutes, notAuthRoutes, publicRoutes } from "../../routes";
 
-const Navigation = () => {
+const AppRoutes = () => {
   const authentication = useSelector(selectAuthenticated);
 
   return (
@@ -28,4 +28,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default AppRoutes;
