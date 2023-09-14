@@ -1,26 +1,26 @@
-.nftcard{
+.nftcard {
     width: 345px;
     min-height: 475px;
 
-    &__area{
+    &__area {
         padding: 20px;
     }
 
-    &__content{
+    &__content {
         min-height: 75px;
     }
 
-    &__priceBlock{
+    &__priceBlock {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
-    &__interests{
+    &__interests {
         padding: 5px 10px;
         background-color: rgb(215 112 229 / 20%);
         border-radius: 10px;
-        color: #D770E5;
+        color: #d770e5;
         text-transform: lowercase;
     }
 }

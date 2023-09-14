@@ -1,12 +1,11 @@
-.login{
+.login {
     padding-top: 50px;
-  
-    &__input{
+
+    &__input {
         padding-top: 20px;
         display: flex;
         flex-direction: column;
         align-items: start;
         gap: 16px;
     }
-
 }

@@ -1,4 +1,4 @@
-.modalWindow{
+.modalWindow {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,8 +7,8 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgb(0 0 0 / 30%);
-  
-    &__button{
+
+    &__button {
         padding: 10px;
         display: flex;
         justify-content: center;
