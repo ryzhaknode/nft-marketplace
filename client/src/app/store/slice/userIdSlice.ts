@@ -1,5 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {RootState} from "../store";
+import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 interface userId {
     userId: number | null
@@ -10,7 +10,7 @@ const initialState: userId = {
 };
 
 export const userIdSlice = createSlice({
-    name: "user",
+    name: 'user',
     initialState,
     reducers: {
         setUserId: (state, action) => {
@@ -21,5 +21,5 @@ export const userIdSlice = createSlice({
 
 export const selectUser = (state: RootState) => state.user.userId;
 
-export const {setUserId} = userIdSlice.actions;
+export const { setUserId } = userIdSlice.actions;
 export default userIdSlice.reducer;

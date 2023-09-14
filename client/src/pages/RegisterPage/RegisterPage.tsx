@@ -1,36 +1,36 @@
-import {Typography, Box, Button, TextField, FormControl} from "@mui/material";
-import {Interest} from "../../shared/types/IRegistration";
-import {useState} from "react";
-import{ interests} from "../../shared/constants/constants";
-import {handleOnlyWords} from "../../shared/functions/inputChecker";
-import ModalWindow from "../../widgets/ModalWindow/ModalWindow";
-import DoneIcon from "@mui/icons-material/Done";
-import {registration} from "../../shared/http/userAPI";
-import cls from './RegisterPage.module.scss'
-import {classNames} from "../../shared/classNames/classNames";
-import {emptyUser} from './constants/constants'
+import {
+    Typography, Box, Button, TextField, FormControl,
+} from '@mui/material';
+import { useState } from 'react';
+import DoneIcon from '@mui/icons-material/Done';
+import { Interest } from '../../shared/types/IRegistration';
+import { interests } from '../../shared/constants/constants';
+import { handleOnlyWords } from '../../shared/functions/inputChecker';
+import ModalWindow from '../../widgets/ModalWindow/ModalWindow';
+import { registration } from '../../shared/http/userAPI';
+import cls from './RegisterPage.module.scss';
+import { classNames } from '../../shared/classNames/classNames';
+import { emptyUser } from './constants/constants';
+
 function RegisterPage() {
     const [newUser, setNewUser] = useState(emptyUser);
     const [selectedInterest, setSelectedInterest] = useState<Interest[]>([]);
-    const [repeatPassword, setRepeatPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState('');
     const [modal, setModal] = useState(false);
-    const [error, serError] = useState("");
+    const [error, serError] = useState('');
     const interestsChange = (value: string) => {
         if (selectedInterest.find((int) => int.name === value)) {
             setSelectedInterest(selectedInterest.filter((int) => int.name !== value));
-        } else {
-            if (selectedInterest.length < 3)
-                setSelectedInterest([...selectedInterest, {name: value}]);
-        }
+        } else if (selectedInterest.length < 3) setSelectedInterest([...selectedInterest, { name: value }]);
     };
 
     const closeModal = () => {
         setModal(false);
-        serError("");
+        serError('');
     };
 
     const handleInputUserChange = (event: any) => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
         setNewUser((prevUser) => ({
             ...prevUser,
             [name]: value,
@@ -39,7 +39,7 @@ function RegisterPage() {
 
     const clearValues = () => {
         setSelectedInterest([]);
-        setRepeatPassword("");
+        setRepeatPassword('');
         setNewUser(emptyUser);
     };
 
@@ -53,7 +53,7 @@ function RegisterPage() {
                 clearValues();
                 setModal(true);
             } catch (error: any) {
-                const message = error.response.data.message;
+                const { message } = error.response.data;
                 if (message) {
                     serError(message);
                     setModal(true);
@@ -66,12 +66,12 @@ function RegisterPage() {
         <Box
             className={classNames(cls.register)}
         >
-            <Typography variant="h4" component={"h1"}>
+            <Typography variant="h4" component="h1">
                 Registration Form
             </Typography>
             <Box>
                 <FormControl
-                    component={"form"}
+                    component="form"
                     onSubmit={(e) => {
                         e.preventDefault();
                         submitNewRegister();
@@ -85,19 +85,19 @@ function RegisterPage() {
                             margin="normal"
                             label="Name"
                             name="name"
-                            color={newUser.name ? "success" : "error"}
+                            color={newUser.name ? 'success' : 'error'}
                             variant="outlined"
                             required
                             value={newUser.name}
                             inputProps={{
-                                pattern: "[a-zA-Zs]*",
+                                pattern: '[a-zA-Zs]*',
                             }}
                             onChange={(e) => {
                                 handleOnlyWords(e);
                                 handleInputUserChange(e);
                             }}
                         />
-                        <Box sx={{display: "flex", gap: "10px", flexWrap: "wrap"}}>
+                        <Box sx={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                             {interests.map((interest, i) => (
                                 <Button
                                     onClick={() => {
@@ -106,14 +106,14 @@ function RegisterPage() {
                                     key={i}
                                     color={
                                         selectedInterest.find((int) => int.name === interest)
-                                            ? "success"
-                                            : "primary"
+                                            ? 'success'
+                                            : 'primary'
                                     }
                                     size="medium"
                                     variant="outlined"
-                                    sx={{borderRadius: "20px"}}
+                                    sx={{ borderRadius: '20px' }}
                                 >
-                                    <Typography component={"p"}>{interest}</Typography>
+                                    <Typography component="p">{interest}</Typography>
                                 </Button>
                             ))}
                         </Box>
@@ -122,7 +122,7 @@ function RegisterPage() {
                             fullWidth
                             label="Email"
                             name="email"
-                            color={newUser.email ? "success" : "error"}
+                            color={newUser.email ? 'success' : 'error'}
                             variant="outlined"
                             required
                             value={newUser.email}
@@ -135,7 +135,7 @@ function RegisterPage() {
                             margin="normal"
                             label="Password"
                             name="password"
-                            color={newUser.password ? "success" : "error"}
+                            color={newUser.password ? 'success' : 'error'}
                             variant="outlined"
                             required
                             value={newUser.password}
@@ -143,14 +143,14 @@ function RegisterPage() {
                                 handleInputUserChange(e);
                             }}
                         />
-                        <Box width={"100&"}>
+                        <Box width="100&">
                             <TextField
                                 fullWidth
                                 margin="normal"
                                 label="Repeat-password"
                                 name="repeatpassword"
                                 color={
-                                    newUser.password === repeatPassword ? "success" : "error"
+                                    newUser.password === repeatPassword ? 'success' : 'error'
                                 }
                                 variant="outlined"
                                 required
@@ -160,7 +160,7 @@ function RegisterPage() {
                                 }}
                             />
                             {newUser.password !== repeatPassword ? (
-                                <Typography color={"error"}>not the same password!</Typography>
+                                <Typography color="error">not the same password!</Typography>
                             ) : (
                                 <></>
                             )}
@@ -169,14 +169,14 @@ function RegisterPage() {
                     <Button
                         type="submit"
                         sx={{
-                            display: "flex",
+                            display: 'flex',
                             my: 2,
-                            color: "#1976d2",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            border: "1px solid",
+                            color: '#1976d2',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            border: '1px solid',
                             borderRadius: 2,
-                            p: "13px",
+                            p: '13px',
                         }}
                     >
                         Create Account
@@ -186,18 +186,18 @@ function RegisterPage() {
             <ModalWindow onClose={closeModal} show={modal}>
                 <Typography
                     variant="h5"
-                    component={"div"}
+                    component="div"
                     sx={{
-                        p: "10px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        p: '10px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                     }}
                 >
-                    {error === "" ? (
+                    {error === '' ? (
                         <>
-                            {" "}
-                            <DoneIcon fontSize="large" sx={{paddingRight: "10px"}}/>
+                            {' '}
+                            <DoneIcon fontSize="large" sx={{ paddingRight: '10px' }} />
                             Successfully registered
                         </>
                     ) : (

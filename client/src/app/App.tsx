@@ -1,16 +1,15 @@
-import Header from "../pages/Header/Header";
-import {Box, Container} from "@mui/material";
-import {ThemeProvider} from "@mui/material/styles";
-import {theme} from "./theme/theme";
-import AppRoutes from "./routes/ui/AppRoutes/AppRoutes";
-import {Suspense, useEffect, useState} from "react";
-import {check} from "../shared/http/userAPI";
-import {useDispatch} from "react-redux";
-import Loading from "../pages/LoadingPage/LoadingPage";
-import {setUserId} from "./store/slice/userIdSlice";
-import {authenticationTrue} from "./store/slice/authenticatedSlice";
-import {classNames} from "../shared/classNames/classNames";
-
+import { Box, Container } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { Suspense, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import Header from '../pages/Header/Header';
+import { theme } from './theme/theme';
+import AppRoutes from './routes/ui/AppRoutes/AppRoutes';
+import { check } from '../shared/http/userAPI';
+import Loading from '../pages/LoadingPage/LoadingPage';
+import { setUserId } from './store/slice/userIdSlice';
+import { authenticationTrue } from './store/slice/authenticatedSlice';
+import { classNames } from '../shared/classNames/classNames';
 
 function App() {
     const [loading, setLoading] = useState(true);
@@ -31,13 +30,13 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             {loading ? (
-                <Loading/>
+                <Loading />
             ) : (
-                <Suspense fallback=''>
+                <Suspense fallback="">
                     <Box className={classNames('app')}>
-                        <Header/>
+                        <Header />
                         <Container className={classNames('app__container')}>
-                            <AppRoutes/>
+                            <AppRoutes />
                         </Container>
                     </Box>
                 </Suspense>

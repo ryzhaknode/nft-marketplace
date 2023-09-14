@@ -1,26 +1,28 @@
-import {Typography, Box, Button, TextField, FormControl} from "@mui/material";
-import {ILogin} from "../../shared/types/ILogin";
-import {emptyLogin} from "./constants/constants";
-import {useState} from "react";
-import {useDispatch} from "react-redux";
-import {authenticationTrue} from "../../app/store/slice/authenticatedSlice";
-import {useNavigate} from "react-router-dom";
-import {login} from "../../shared/http/userAPI";
-import ModalWindow from "../../widgets/ModalWindow/ModalWindow";
-import {setUserId} from "../../app/store/slice/userIdSlice";
-import {ROUTES} from "../../app/routes/routesName";
-import cls from './  LoginPage.module.scss'
-import {classNames} from "../../shared/classNames/classNames";
+import {
+    Typography, Box, Button, TextField, FormControl,
+} from '@mui/material';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { ILogin } from '../../shared/types/ILogin';
+import { emptyLogin } from './constants/constants';
+import { authenticationTrue } from '../../app/store/slice/authenticatedSlice';
+import { login } from '../../shared/http/userAPI';
+import ModalWindow from '../../widgets/ModalWindow/ModalWindow';
+import { setUserId } from '../../app/store/slice/userIdSlice';
+import { ROUTES } from '../../app/routes/routesName';
+import cls from './  LoginPage.module.scss';
+import { classNames } from '../../shared/classNames/classNames';
 
 function LogIn() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [newLogin, setNewLogin] = useState<ILogin>(emptyLogin);
-    const [error, serError] = useState("");
+    const [error, serError] = useState('');
     const [modal, setModal] = useState(false);
 
     const handleInputUserChange = (event: any) => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
         setNewLogin((prevUser) => ({
             ...prevUser,
             [name]: value,
@@ -29,7 +31,7 @@ function LogIn() {
 
     const closeModal = () => {
         setModal(false);
-        serError("");
+        serError('');
     };
 
     const submitNewLogin = async () => {
@@ -43,7 +45,7 @@ function LogIn() {
                 navigate(ROUTES.mainPage);
             }
         } catch (error: any) {
-            const message = error.response.data.message;
+            const { message } = error.response.data;
             if (message) {
                 serError(message);
                 setModal(true);
@@ -52,11 +54,11 @@ function LogIn() {
     };
     return (
         <Box className={classNames((cls.login))}>
-            <Typography variant="h5" component={"h2"}>
+            <Typography variant="h5" component="h2">
                 Log In
             </Typography>
             <FormControl
-                component={"form"}
+                component="form"
                 onSubmit={(e) => {
                     e.preventDefault();
                     submitNewLogin();
@@ -70,7 +72,7 @@ function LogIn() {
                         margin="normal"
                         label="Email"
                         name="email"
-                        color={newLogin.email ? "success" : "error"}
+                        color={newLogin.email ? 'success' : 'error'}
                         variant="outlined"
                         required
                         value={newLogin.email}
@@ -82,7 +84,7 @@ function LogIn() {
                         margin="normal"
                         label="Password"
                         name="password"
-                        color={newLogin.password ? "success" : "error"}
+                        color={newLogin.password ? 'success' : 'error'}
                         variant="outlined"
                         required
                         value={newLogin.password}
@@ -92,14 +94,14 @@ function LogIn() {
                 <Button
                     type="submit"
                     sx={{
-                        display: "flex",
+                        display: 'flex',
                         my: 2,
-                        color: "#1976d2",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        border: "1px solid",
+                        color: '#1976d2',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        border: '1px solid',
                         borderRadius: 2,
-                        p: "13px",
+                        p: '13px',
                     }}
                 >
                     Log In
@@ -108,15 +110,15 @@ function LogIn() {
             <ModalWindow onClose={closeModal} show={modal}>
                 <Typography
                     variant="h5"
-                    component={"div"}
+                    component="div"
                     sx={{
-                        p: "10px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        p: '10px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                     }}
                 >
-                    {error !== "" ? error : "Unknown error"}
+                    {error !== '' ? error : 'Unknown error'}
                 </Typography>
             </ModalWindow>
         </Box>

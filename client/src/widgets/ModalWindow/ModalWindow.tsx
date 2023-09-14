@@ -1,7 +1,7 @@
-import {Box, Button} from "@mui/material";
-import {ReactNode} from "react";
-import cls from './ModalWindow.module.scss'
-import {classNames} from "../../shared/classNames/classNames";
+import { Box, Button } from '@mui/material';
+import { ReactNode } from 'react';
+import cls from './ModalWindow.module.scss';
+import { classNames } from '../../shared/classNames/classNames';
 
 export interface IModalWindowProps {
     onClose: () => void;
@@ -9,22 +9,20 @@ export interface IModalWindowProps {
     children: ReactNode;
 }
 
-const ModalWindow = ({ onClose, show, children,}: IModalWindowProps) => {
-    return (
-        <Box className={`popup ${show ? "show" : ""}`}>
-            <Box
-                className={classNames(cls.modalWindow)}
+const ModalWindow = ({ onClose, show, children }: IModalWindowProps) => (
+    <Box className={`popup ${show ? 'show' : ''}`}>
+        <Box
+            className={classNames(cls.modalWindow)}
+        >
+            {children}
+            <Button
+                className={classNames(cls.modalWindow__button)}
+                onClick={onClose}
             >
-                {children}
-                <Button
-                    className={classNames(cls.modalWindow__button)}
-                    onClick={onClose}
-                >
-                    Close
-                </Button>
-            </Box>
+                Close
+            </Button>
         </Box>
-    );
-};
+    </Box>
+);
 
 export default ModalWindow;

@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from '@mui/material';
 
-declare module "@mui/system" {
+declare module '@mui/system' {
   interface BreakpointOverrides {
     xs: false;
     sm: false;
@@ -15,20 +15,20 @@ declare module "@mui/system" {
 }
 
 export const theme = createTheme({
-  breakpoints: {
-    values: {
-      desktop: 1280,
-      laptop: 1024,
-      tablet: 640,
-      mobile: 0,
+    breakpoints: {
+        values: {
+            desktop: 1280,
+            laptop: 1024,
+            tablet: 640,
+            mobile: 0,
+        },
     },
-  },
-  palette: {
-    error: {
-      main: "rgba(251,42,26,0.95)",
+    palette: {
+        error: {
+            main: 'rgba(251,42,26,0.95)',
+        },
+        warning: {
+            main: 'rgba(255,152,0,0.93)',
+        },
     },
-    warning: {
-      main: "rgba(255,152,0,0.93)",
-    },
-  },
 });

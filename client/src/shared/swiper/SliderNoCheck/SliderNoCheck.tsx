@@ -1,25 +1,25 @@
-//@ts-nocheck
+// @ts-nocheck
 
-import React, {useState} from "react";
-import {Swiper, SwiperSlide} from "swiper/react";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-import {FreeMode, Navigation, Thumbs} from "swiper/modules";
-import cls from './SliderNoCheck.module.scss'
-import {classNames} from "../../classNames/classNames";
+import React, { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import cls from './SliderNoCheck.module.scss';
+import { classNames } from '../../classNames/classNames';
 
-function SliderNoCheck({images}: any) {
+function SliderNoCheck({ images }: any) {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
     return (
         <>
             <Swiper
-                loop={true}
+                loop
                 spaceBetween={10}
-                navigation={true}
-                thumbs={thumbsSwiper ? {swiper: thumbsSwiper} : undefined}
+                navigation
+                thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
                 modules={[FreeMode, Navigation, Thumbs]}
                 className={classNames(`${cls.navArrow} MySwiper2`)}
             >
@@ -32,11 +32,11 @@ function SliderNoCheck({images}: any) {
 
             <Swiper
                 onSwiper={setThumbsSwiper}
-                loop={true}
+                loop
                 spaceBetween={10}
                 slidesPerView={4}
-                freeMode={true}
-                watchSlidesProgress={true}
+                freeMode
+                watchSlidesProgress
                 modules={[FreeMode, Navigation, Thumbs]}
                 className={classNames('mySwiper')}
             >

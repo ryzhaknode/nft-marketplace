@@ -1,13 +1,13 @@
-import React from "react";
-import SliderNoCheck from "./SliderNoCheck/SliderNoCheck";
-import {INftCardImg} from "../types/INftCardImg";
+import React from 'react';
+import SliderNoCheck from './SliderNoCheck/SliderNoCheck';
+import { INftCardImg } from '../types/INftCardImg';
 
 interface SwiperSliderProps {
     images: INftCardImg[];
 }
-function SwiperSlider({images}:SwiperSliderProps){
+function SwiperSlider({ images }:SwiperSliderProps) {
     return (
-        <SliderNoCheck images={images}/>
+        <SliderNoCheck images={images} />
     );
 }
 

@@ -1,5 +1,5 @@
 export const emptyUser = {
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: '',
 };

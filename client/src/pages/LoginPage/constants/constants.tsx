@@ -1,1 +1,1 @@
-export const emptyLogin = { email: "", password: "" };
+export const emptyLogin = { email: '', password: '' };

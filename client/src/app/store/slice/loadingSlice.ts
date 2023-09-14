@@ -1,21 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 const initialState = {
-  loading: true,
+    loading: true,
 };
 
 export const userIdSlice = createSlice({
-  name: "user",
-  initialState,
-  reducers: {
-    setLoadingFalse: (state) => {
-      state.loading = false;
+    name: 'user',
+    initialState,
+    reducers: {
+        setLoadingFalse: (state) => {
+            state.loading = false;
+        },
+        setLoadingTrue: (state) => {
+            state.loading = true;
+        },
     },
-    setLoadingTrue: (state) => {
-      state.loading = true;
-    },
-  },
 });
 
 export const selectLoading = (state: RootState) => state.loading.loading;

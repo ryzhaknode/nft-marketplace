@@ -1,24 +1,24 @@
-import {Box, FormControl, FormLabel} from "@mui/material";
-import Typography from "@mui/material/Typography";
-import React, {useState} from "react";
-import {useSortState} from "./hooks/useSortState";
-import Loading from "../LoadingPage/LoadingPage";
-import {filtersList} from "./constants/filterList";
-import NftFilter from "../../features/NftFilter/NftFilter";
-import NftGrid from "../../features/NftGrid/NftGrid";
-import {useLoadNftData} from "./hooks/useLoadNftData";
-import cls from './GalleryPage.module.scss'
-import {classNames} from "../../shared/classNames/classNames";
-import {useTranslation} from "react-i18next";
+import { Box, FormControl, FormLabel } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSortState } from './hooks/useSortState';
+import Loading from '../LoadingPage/LoadingPage';
+import { filtersList } from './constants/filterList';
+import NftFilter from '../../features/NftFilter/NftFilter';
+import NftGrid from '../../features/NftGrid/NftGrid';
+import { useLoadNftData } from './hooks/useLoadNftData';
+import cls from './GalleryPage.module.scss';
+import { classNames } from '../../shared/classNames/classNames';
 
 function Gallery() {
-    const [selectedFilter, setSelectedFilter] = useState("");
-    const {data, setData, loading} = useLoadNftData();
+    const [selectedFilter, setSelectedFilter] = useState('');
+    const { data, setData, loading } = useLoadNftData();
     const [sortDatajson] = useSortState(data, setData);
-    const {t} = useTranslation()
+    const { t } = useTranslation();
 
     function selectChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const value = e.target.value;
+        const { value } = e.target;
         const filter = filtersList.find((lst) => lst.label === value);
         filter && sortDatajson(filter.key, filter.sortBy);
         setSelectedFilter(value);
@@ -27,7 +27,7 @@ function Gallery() {
     return (
         <>
             {loading ? (
-                <Loading/>
+                <Loading />
             ) : (
                 <Box
                     className={classNames(cls.gallery)}
@@ -38,7 +38,7 @@ function Gallery() {
                         variant="h4"
                         component="h1"
                     >
-                        {t("Gallery")}
+                        {t('Gallery')}
 
                     </Typography>
 
@@ -46,14 +46,14 @@ function Gallery() {
                         className={classNames(cls.gallery__filterBox)}
                     >
                         <FormControl className={classNames(cls.gallery__formControl)}>
-                            <FormLabel component="legend">{t("Sort NFT")}</FormLabel>
+                            <FormLabel component="legend">{t('Sort NFT')}</FormLabel>
                             <NftFilter
                                 selectedFilter={selectedFilter}
                                 selectChange={selectChange}
                             />
                         </FormControl>
                     </Box>
-                    <NftGrid data={data}/>
+                    <NftGrid data={data} />
                 </Box>
             )}
         </>

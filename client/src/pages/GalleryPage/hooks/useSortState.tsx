@@ -1,32 +1,30 @@
-import { INftItem } from "../../../shared/types/INftItem";
+import { INftItem } from '../../../shared/types/INftItem';
 
 export const useSortState = (state: INftItem[], setState: Function) => {
-  const sortByState = (key: string, boolen: boolean) => {
-    const sortedState = [...state];
-    if (boolen) {
-      sortedState.sort((a, b) => {
-        if (a[key] > b[key]) {
-          return -1;
-        } else if (a[key] < b[key]) {
-          return 1;
+    const sortByState = (key: string, boolen: boolean) => {
+        const sortedState = [...state];
+        if (boolen) {
+            sortedState.sort((a, b) => {
+                if (a[key] > b[key]) {
+                    return -1;
+                } if (a[key] < b[key]) {
+                    return 1;
+                }
+                return 0;
+            });
+            setState(sortedState);
         } else {
-          return 0;
+            sortedState.sort((a, b) => {
+                if (a[key] < b[key]) {
+                    return -1;
+                } if (a[key] > b[key]) {
+                    return 1;
+                }
+                return 0;
+            });
+            setState(sortedState);
         }
-      });
-      setState(sortedState);
-    } else {
-      sortedState.sort((a, b) => {
-        if (a[key] < b[key]) {
-          return -1;
-        } else if (a[key] > b[key]) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-      setState(sortedState);
-    }
-  };
+    };
 
-  return [sortByState];
+    return [sortByState];
 };

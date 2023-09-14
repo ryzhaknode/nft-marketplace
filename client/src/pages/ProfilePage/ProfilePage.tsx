@@ -1,21 +1,19 @@
-
-import {Box, Typography} from "@mui/material";
-import Loading from "../LoadingPage/LoadingPage";
-import {useLoadUsersNft} from "./hooks/useLoadUsersNft";
-import NftGrid from "../../features/NftGrid/NftGrid";
+import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import Loading from '../LoadingPage/LoadingPage';
+import { useLoadUsersNft } from './hooks/useLoadUsersNft';
+import NftGrid from '../../features/NftGrid/NftGrid';
 import cls from './ProfilePage.module.scss';
-import {classNames} from "../../shared/classNames/classNames";
-import {useTranslation} from "react-i18next";
+import { classNames } from '../../shared/classNames/classNames';
 
 function Profile() {
-    const {data, loading} = useLoadUsersNft();
-    const {t} = useTranslation()
-
+    const { data, loading } = useLoadUsersNft();
+    const { t } = useTranslation();
 
     return (
         <>
             {loading ? (
-                <Loading/>
+                <Loading />
             ) : (
                 <Box
                     className={classNames(cls.profile)}
@@ -25,9 +23,9 @@ function Profile() {
                         component="h1"
                         className={classNames(cls.profile__title)}
                     >
-                        {t("My Nfts")}
+                        {t('My Nfts')}
                     </Typography>
-                    <NftGrid data={data}/>
+                    <NftGrid data={data} />
                 </Box>
             )}
         </>

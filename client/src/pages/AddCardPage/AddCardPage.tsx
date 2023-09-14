@@ -1,54 +1,53 @@
-import {Typography, Box, Button, TextField, FormControl} from "@mui/material";
-import {useState} from "react";
+import {
+    Typography, Box, Button, TextField, FormControl,
+} from '@mui/material';
+import { useState } from 'react';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import {
     handleOnlyNumbers,
     handleOnlyUrl,
     handleOnlyWords,
-} from "../../shared/functions/inputChecker";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import {emptyImages, randomEightNum, emptyArt} from './constants/constats'
+} from '../../shared/functions/inputChecker';
+import { emptyImages, randomEightNum, emptyArt } from './constants/constats';
 import {
     interests,
-} from "../../shared/constants/constants";
-import {createNftCard} from "../../shared/http/nftCardAPI";
-import {useSelector} from "react-redux";
-import {selectUser} from "../../app/store/slice/userIdSlice";
-import {Interest} from "../../shared/types/IRegistration";
-import cls from './AddCardPage.module.scss'
-import {classNames} from "../../shared/classNames/classNames";
-import {useTranslation} from "react-i18next";
+} from '../../shared/constants/constants';
+import { createNftCard } from '../../shared/http/nftCardAPI';
+import { selectUser } from '../../app/store/slice/userIdSlice';
+import { Interest } from '../../shared/types/IRegistration';
+import cls from './AddCardPage.module.scss';
+import { classNames } from '../../shared/classNames/classNames';
 
 function AddCard() {
     const [selectedInterest, setSelectedInterest] = useState<Interest[]>([]);
-    const {t} = useTranslation('addCard')
+    const { t } = useTranslation('addCard');
     const user = useSelector(selectUser);
     const [images, setImages] = useState([
-        {id: randomEightNum(), ...emptyImages},
+        { id: randomEightNum(), ...emptyImages },
     ]);
     const [art, setArt] = useState(emptyArt);
 
-    //change values in interests
+    // change values in interests
     const interestsChange = (value: string) => {
         if (selectedInterest.find((int) => int.name === value)) {
             setSelectedInterest(selectedInterest.filter((int) => int.name !== value));
-        } else {
-            if (selectedInterest.length < 3)
-                setSelectedInterest([...selectedInterest, {name: value}]);
-        }
+        } else if (selectedInterest.length < 3) setSelectedInterest([...selectedInterest, { name: value }]);
     };
 
-    //change values in art
+    // change values in art
     const handleInputChangeInArt = (event: any) => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
         setArt((prevArt) => ({
             ...prevArt,
             [name]: value,
         }));
     };
 
-    //change values in images object
+    // change values in images object
     const handleInputChangeInImages = (event: any, id: number) => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
         const updatedImages = [...images];
         const objIndex = updatedImages.findIndex((image) => image.id === id);
         if (objIndex !== -1) {
@@ -59,20 +58,20 @@ function AddCard() {
             setImages(updatedImages);
         }
     };
-    //clear all values
+    // clear all values
     const clearValues = () => {
         setArt({
             ...emptyArt,
         });
-        setImages([{id: randomEightNum(), ...emptyImages}]);
+        setImages([{ id: randomEightNum(), ...emptyImages }]);
         setSelectedInterest([]);
     };
-    //push new art and clear all values
+    // push new art and clear all values
     const submitPublishArt = () => {
         createNftCard({
             ...art,
             interests: selectedInterest,
-            images: images,
+            images,
             userId: user,
         })
             .then((res) => {
@@ -82,13 +81,12 @@ function AddCard() {
             .catch((e) => alert(e.response.data.message));
     };
 
-    //add new image section but not more then 4 new section
+    // add new image section but not more then 4 new section
     function addNewImageClick() {
-        if (images.length < 4)
-            setImages([...images, {id: randomEightNum(), ...emptyImages}]);
+        if (images.length < 4) setImages([...images, { id: randomEightNum(), ...emptyImages }]);
     }
 
-    //delete selected  image section
+    // delete selected  image section
     function deleteImage(id: number) {
         if (images.length > 1) setImages(images.filter((img) => img.id !== id));
     }
@@ -96,7 +94,7 @@ function AddCard() {
     return (
         <Box className={classNames(cls.addCard)}>
             <FormControl
-                component={"form"}
+                component="form"
                 onSubmit={(e) => {
                     e.preventDefault();
                     submitPublishArt();
@@ -105,29 +103,29 @@ function AddCard() {
                 <Box
                     className={classNames(`${cls.addCard__titleBlock} ${cls.bottomLine}`)}
                 >
-                    <Typography variant="h4" component={"h2"}>
-                        {t("Add Card")}
+                    <Typography variant="h4" component="h2">
+                        {t('Add Card')}
                     </Typography>
-                    <Box sx={{position: "relative"}}>
+                    <Box sx={{ position: 'relative' }}>
 
                         <Button
                             type="submit"
-                            sx={{border: "1px solid", padding: "10px 20px"}} // material ui
+                            sx={{ border: '1px solid', padding: '10px 20px' }} // material ui
                         >
-                            <Typography component={"h5"}>
-                                {t("PUBLISH ART")}
+                            <Typography component="h5">
+                                {t('PUBLISH ART')}
                             </Typography>
                         </Button>
                     </Box>
                 </Box>
 
                 <Box className={classNames(cls.bottomLine)}>
-                    <Typography paddingY={'20px'} variant="h6" component={"div"}>
-                        {t("PUBLISH ART")}
+                    <Typography paddingY="20px" variant="h6" component="div">
+                        {t('PUBLISH ART')}
                     </Typography>
                     <Box>
-                        <Typography paddingLeft={'10px'} component={"div"}>
-                            {t("Medium")}
+                        <Typography paddingLeft="10px" component="div">
+                            {t('Medium')}
                         </Typography>
                         <Box
                             className={classNames(`${cls.addCard__interestsBlock} ${cls.bottomLine}`)}
@@ -140,28 +138,28 @@ function AddCard() {
                                     key={i}
                                     color={
                                         selectedInterest.find((int) => int.name === interest)
-                                            ? "success"
-                                            : "primary"
+                                            ? 'success'
+                                            : 'primary'
                                     }
                                     size="medium"
                                     variant="outlined"
-                                    sx={{borderRadius: "20px"}}
+                                    sx={{ borderRadius: '20px' }}
                                 >
-                                    <Typography component={"p"}>{interest}</Typography>
+                                    <Typography component="p">{interest}</Typography>
                                 </Button>
                             ))}
                         </Box>
                         <Box className={cls.addCard__inputBlock}>
                             <TextField
                                 margin="normal"
-                                label={t("Art name")}
+                                label={t('Art name')}
                                 name="name"
-                                color={art.name ? "success" : "error"}
+                                color={art.name ? 'success' : 'error'}
                                 variant="outlined"
                                 required
                                 value={art.name}
                                 inputProps={{
-                                    pattern: "[a-zA-Zs]*",
+                                    pattern: '[a-zA-Zs]*',
                                 }}
                                 onChange={(e) => {
                                     handleOnlyWords(e);
@@ -170,14 +168,14 @@ function AddCard() {
                             />
                             <TextField
                                 margin="normal"
-                                label={t("Author name")}
+                                label={t('Author name')}
                                 variant="outlined"
                                 required
                                 name="authorName"
-                                color={art.authorName ? "success" : "error"}
+                                color={art.authorName ? 'success' : 'error'}
                                 value={art.authorName}
                                 inputProps={{
-                                    pattern: "[a-zA-Zs]*",
+                                    pattern: '[a-zA-Zs]*',
                                 }}
                                 onChange={(e) => {
                                     handleOnlyWords(e);
@@ -186,12 +184,12 @@ function AddCard() {
                             />
                             <TextField
                                 margin="normal"
-                                label={t("Price in ETH")}
+                                label={t('Price in ETH')}
                                 variant="outlined"
                                 required
-                                color={art.price ? "success" : "error"}
+                                color={art.price ? 'success' : 'error'}
                                 inputProps={{
-                                    pattern: "[0-9]*",
+                                    pattern: '[0-9]*',
                                 }}
                                 name="price"
                                 value={art.price}
@@ -202,14 +200,14 @@ function AddCard() {
                             />
                             <TextField
                                 margin="normal"
-                                label={t("Company name")}
+                                label={t('Company name')}
                                 required
                                 name="companyName"
                                 variant="outlined"
                                 value={art.companyName}
-                                color={art.companyName ? "success" : "error"}
+                                color={art.companyName ? 'success' : 'error'}
                                 inputProps={{
-                                    pattern: "[a-zA-Zs]*",
+                                    pattern: '[a-zA-Zs]*',
                                 }}
                                 onChange={(e) => {
                                     handleOnlyWords(e);
@@ -220,12 +218,12 @@ function AddCard() {
                     </Box>
                 </Box>
                 <Box className={classNames(cls.bottomLine)}>
-                    <Typography paddingY={'20px'} variant="h6" component={"div"}>
-                        {t("Additional information")}
+                    <Typography paddingY="20px" variant="h6" component="div">
+                        {t('Additional information')}
 
                     </Typography>
                     <TextField
-                        label={t("Art description")}
+                        label={t('Art description')}
                         fullWidth
                         multiline
                         required
@@ -236,36 +234,36 @@ function AddCard() {
                             handleInputChangeInArt(e);
                         }}
                         inputProps={{
-                            pattern: "[a-zA-Zs]*",
+                            pattern: '[a-zA-Zs]*',
                         }}
-                        color={art.description ? "success" : "error"}
+                        color={art.description ? 'success' : 'error'}
                         variant="outlined"
                         margin="normal"
                         className={classNames(cls.bottomLine)}
                     />
                     <Box
-                        paddingY={"30px"}
-                        display={"flex"}
-                        justifyContent={"space-between"}
+                        paddingY="30px"
+                        display="flex"
+                        justifyContent="space-between"
                     >
-                        <Typography variant="h6">{t("Images")}</Typography>
-                        <Button onClick={addNewImageClick}>{`+ ${t("ADD NEW IMAGE")}`}</Button>
+                        <Typography variant="h6">{t('Images')}</Typography>
+                        <Button onClick={addNewImageClick}>{`+ ${t('ADD NEW IMAGE')}`}</Button>
                     </Box>
                     {images.map((img) => (
                         <Box
                             key={img.id}
                             className={classNames(cls.addCard__nftImageBlock)}
                         >
-                            <Typography variant="h6" component={"div"}>
-                                {t("Nft image")}
+                            <Typography variant="h6" component="div">
+                                {t('Nft image')}
                             </Typography>
                             <Box
-                                display={"flex"}
-                                flexDirection={"column"}
+                                display="flex"
+                                flexDirection="column"
                             >
                                 <TextField
                                     required
-                                    label={t("Image name")}
+                                    label={t('Image name')}
                                     value={img.name}
                                     name="name"
                                     margin="normal"
@@ -274,10 +272,10 @@ function AddCard() {
                                         handleInputChangeInImages(e, img.id);
                                     }}
                                     inputProps={{
-                                        pattern: "[a-zA-Zs]*",
+                                        pattern: '[a-zA-Zs]*',
                                     }}
                                     variant="outlined"
-                                    color={img.name ? "success" : "error"}
+                                    color={img.name ? 'success' : 'error'}
                                 />
                                 <TextField
                                     required
@@ -290,8 +288,8 @@ function AddCard() {
                                     inputProps={{
                                         pattern: '^(ftp|http|https):\\/\\/[^ "]+$',
                                     }}
-                                    label={t("Image url")}
-                                    color={img.url ? "success" : "error"}
+                                    label={t('Image url')}
+                                    color={img.url ? 'success' : 'error'}
                                     variant="outlined"
                                 />
                             </Box>
