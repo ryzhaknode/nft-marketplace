@@ -1,14 +1,13 @@
 import {
-    Menu,
     Typography,
     Box,
     IconButton,
-    MenuItem,
     Button,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import WalletIcon from '@mui/icons-material/Wallet';
 import { NavLink } from 'react-router-dom';
+// eslint-disable-next-line max-len
 import AddCircleOutlineSharpIcon from '@mui/icons-material/AddCircleOutlineSharp';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
@@ -18,7 +17,6 @@ import StyledSpan from '../../shared/ui/StyledSpan/StyledSpan';
 import MyButton from '../../shared/ui/MyButton/MyButton';
 import { sections, sectionsNotAuth } from './constants/sections';
 import MyNavigationMenu from '../../widgets/MyNavigationMenu/MyNavigationMenu';
-import cls from './MobileHeaderMenu.module.scss';
 
 function MobileHeaderMenu(props: any) {
     const {
@@ -63,12 +61,24 @@ function MobileHeaderMenu(props: any) {
                         Menu
                     </Typography>
                     {authentication
-                        ? sections.map((page, i) => (
-                            <MyNavigationMenu page={page} key={i} closeMenu={closeMenu} />
-                        ))
-                        : sectionsNotAuth.map((page, i) => (
-                            <MyNavigationMenu page={page} key={i} closeMenu={closeMenu} />
-                        ))}
+                        ? sections.map(
+                            (page) => (
+                                <MyNavigationMenu
+                                    page={page}
+                                    key={page.title}
+                                    closeMenu={closeMenu}
+                                />
+                            ),
+                        )
+                        : sectionsNotAuth.map(
+                            (page) => (
+                                <MyNavigationMenu
+                                    page={page}
+                                    key={page.title}
+                                    closeMenu={closeMenu}
+                                />
+                            ),
+                        )}
                     <Typography
                         paddingTop="10px"
                         borderBottom="1px solid"
@@ -89,7 +99,11 @@ function MobileHeaderMenu(props: any) {
                             }}
                         >
                             {userAccount ? (
-                                <Typography>{`${userAccount.substring(0, 12)}...`}</Typography>
+                                <Typography>
+                                    {
+                                        `${userAccount.substring(0, 12)}...`
+                                    }
+                                </Typography>
                             ) : (
                                 <>Connect Wallet</>
                             )}
@@ -119,7 +133,11 @@ function MobileHeaderMenu(props: any) {
                             </MyButton>
                         </NavLink>
                     </Box>
-                    <Box display="flex" justifyContent="center" alignItems="center">
+                    <Box
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                    >
                         {authentication ? (
                             <Box display={{ tablet: 'none', mobile: 'block' }}>
                                 <MyButton
@@ -152,14 +170,22 @@ function MobileHeaderMenu(props: any) {
                 </Box>
             </Drawer>
 
-            <Box display={{ mobile: 'flex', laptop: 'none' }} alignItems="center">
+            <Box
+                display={{ mobile: 'flex', laptop: 'none' }}
+                alignItems="center"
+            >
                 <PaletteIcon
                     sx={{
                         mr: 1,
                         fontSize: '32px',
                     }}
                 />
-                <Typography variant="h4" noWrap letterSpacing={3} display="flex">
+                <Typography
+                    variant="h4"
+                    noWrap
+                    letterSpacing={3}
+                    display="flex"
+                >
                     <StyledSpan variant="h4" letterSpacing={3}>
                         NFT
                     </StyledSpan>

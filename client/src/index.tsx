@@ -6,6 +6,7 @@ import { router } from './app/routes/routing';
 import Loading from './pages/LoadingPage/LoadingPage';
 import store from './app/store/store';
 import './shared/config/i18n/i18n';
+// eslint-disable-next-line react/no-deprecated,import/order
 import { render } from 'react-dom';
 
 // const root = ReactDOM.createRoot(

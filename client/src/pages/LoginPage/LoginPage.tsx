@@ -10,11 +10,11 @@ import { authenticationTrue } from '../../app/store/slice/authenticatedSlice';
 import { login } from '../../shared/http/userAPI';
 import ModalWindow from '../../widgets/ModalWindow/ModalWindow';
 import { setUserId } from '../../app/store/slice/userIdSlice';
-import { ROUTES } from '../../app/routes/routesName';
+import { ROUTES } from '../../app/routes/routesConfig';
 import cls from './  LoginPage.module.scss';
 import { classNames } from '../../shared/classNames/classNames';
 
-function LogIn() {
+function LogInPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [newLogin, setNewLogin] = useState<ILogin>(emptyLogin);
@@ -125,4 +125,4 @@ function LogIn() {
     );
 }
 
-export default LogIn;
+export default LogInPage;

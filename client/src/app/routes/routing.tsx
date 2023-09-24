@@ -1,12 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Profile from '../../pages/ProfilePage/ProfilePage';
+import Profile from '../../pages/ProfilePage/ui/ProfilePage';
 import Statistic from '../../pages/StatisticPage/StatisticPage';
 import App from '../App';
-import Gallery from '../../pages/GalleryPage/GalleryPage';
+import Gallery from '../../pages/GalleryPage/ui/GalleryPage';
 import ErrorPage from '../../pages/ErrorPage/ErrorPage';
 import CardPage from '../../pages/CardPage/CardPage';
-import { ROUTES } from './routesName';
-import AddCard from '../../pages/AddCardPage/AddCardPage';
+import { ROUTES } from './routesConfig';
+import AddCard from '../../pages/AddCardPage/ui/AddCardPage';
 import RegisterPage from '../../pages/RegisterPage/RegisterPage';
 import LogIn from '../../pages/LoginPage/LoginPage';
 

@@ -1,11 +1,11 @@
-import AddCard from '../../pages/AddCardPage/AddCardPage';
-import Gallery from '../../pages/GalleryPage/GalleryPage';
+import AddCard from '../../pages/AddCardPage/ui/AddCardPage';
+import Gallery from '../../pages/GalleryPage/ui/GalleryPage';
 import LogIn from '../../pages/LoginPage/LoginPage';
-import Profile from '../../pages/ProfilePage/ProfilePage';
+import Profile from '../../pages/ProfilePage/ui/ProfilePage';
 import RegisterPage from '../../pages/RegisterPage/RegisterPage';
 import Statistic from '../../pages/StatisticPage/StatisticPage';
 import CardPage from '../../pages/CardPage/CardPage';
-import { ROUTES } from './routesName';
+import { ROUTES } from './routesConfig';
 
 export const publicRoutes = [
     {

@@ -12,7 +12,8 @@ function MyNavigationMenu({ page, closeMenu }:MyNavigationMenuProps) {
     return (
         <MenuItem onClick={closeMenu}>
             <NavLink
-                className={({ isActive }) => (isActive ? 'link active-link' : 'link not-active')}
+                className={({ isActive }) => (
+                    isActive ? 'link active-link' : 'link not-active')}
                 to={page.url}
             >
                 {t(`${page.title}`)}

@@ -10,9 +10,11 @@ export const authenticatedSlice = createSlice({
     initialState,
     reducers: {
         authenticationTrue: (state) => {
+            // eslint-disable-next-line no-param-reassign
             state.authenticated = true;
         },
         authenticationFalse: (state) => {
+            // eslint-disable-next-line no-param-reassign
             state.authenticated = false;
         },
     },

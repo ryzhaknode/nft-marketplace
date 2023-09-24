@@ -5,22 +5,22 @@ import { useState } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { createNftCard } from '../../../shared/http/nftCardAPI';
 import {
     handleOnlyNumbers,
     handleOnlyUrl,
     handleOnlyWords,
-} from '../../shared/functions/inputChecker';
-import { emptyImages, randomEightNum, emptyArt } from './constants/constats';
+} from '../../../shared/functions/inputChecker';
+import { emptyImages, randomEightNum, emptyArt } from '../constants/constats';
 import {
     interests,
-} from '../../shared/constants/constants';
-import { createNftCard } from '../../shared/http/nftCardAPI';
-import { selectUser } from '../../app/store/slice/userIdSlice';
-import { Interest } from '../../shared/types/IRegistration';
+} from '../../../shared/constants/constants';
+import { selectUser } from '../../../app/store/slice/userIdSlice';
+import { Interest } from '../../../shared/types/IRegistration';
 import cls from './AddCardPage.module.scss';
-import { classNames } from '../../shared/classNames/classNames';
+import { classNames } from '../../../shared/classNames/classNames';
 
-function AddCard() {
+function AddCardPage() {
     const [selectedInterest, setSelectedInterest] = useState<Interest[]>([]);
     const { t } = useTranslation('addCard');
     const user = useSelector(selectUser);
@@ -33,7 +33,9 @@ function AddCard() {
     const interestsChange = (value: string) => {
         if (selectedInterest.find((int) => int.name === value)) {
             setSelectedInterest(selectedInterest.filter((int) => int.name !== value));
-        } else if (selectedInterest.length < 3) setSelectedInterest([...selectedInterest, { name: value }]);
+        } else if (
+            selectedInterest.length < 3
+        ) setSelectedInterest([...selectedInterest, { name: value }]);
     };
 
     // change values in art
@@ -128,14 +130,16 @@ function AddCard() {
                             {t('Medium')}
                         </Typography>
                         <Box
-                            className={classNames(`${cls.addCard__interestsBlock} ${cls.bottomLine}`)}
+                            className={
+                                classNames(`${cls.addCard__interestsBlock} ${cls.bottomLine}`)
+                            }
                         >
-                            {interests.map((interest, i) => (
+                            {interests.map((interest) => (
                                 <Button
                                     onClick={() => {
                                         interestsChange(interest);
                                     }}
-                                    key={i}
+                                    key={interest}
                                     color={
                                         selectedInterest.find((int) => int.name === interest)
                                             ? 'success'
@@ -311,4 +315,4 @@ function AddCard() {
     );
 }
 
-export default AddCard;
+export default AddCardPage;

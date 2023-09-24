@@ -1,3 +1,6 @@
+const chainChangedHandler = () => {
+    window.location.reload();
+};
 export const useConnectWallet = (changeState: Function) => {
     const connectWallet = () => {
         if (window.ethereum) {
@@ -13,8 +16,4 @@ export const useConnectWallet = (changeState: Function) => {
         }
     };
     return [connectWallet];
-};
-
-const chainChangedHandler = () => {
-    window.location.reload();
 };

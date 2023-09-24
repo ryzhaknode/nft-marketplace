@@ -10,9 +10,11 @@ export const userIdSlice = createSlice({
     initialState,
     reducers: {
         setLoadingFalse: (state) => {
+            // eslint-disable-next-line no-param-reassign
             state.loading = false;
         },
         setLoadingTrue: (state) => {
+            // eslint-disable-next-line no-param-reassign
             state.loading = true;
         },
     },

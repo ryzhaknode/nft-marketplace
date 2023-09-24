@@ -8,16 +8,16 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useSelector } from 'react-redux';
-import MyButton from '../../shared/ui/MyButton/MyButton';
 import { deleteNft } from '../../shared/http/nftCardAPI';
-import Loading from '../LoadingPage/LoadingPage';
-import { ROUTES } from '../../app/routes/routesName';
-import ModalWindow from '../../widgets/ModalWindow/ModalWindow';
+import { ROUTES } from '../../app/routes/routesConfig';
 import { selectUser } from '../../app/store/slice/userIdSlice';
 import { useNavigateNavMenu } from '../../shared/hooks/useNavigateMenu';
+import { classNames } from '../../shared/classNames/classNames';
+import MyButton from '../../shared/ui/MyButton/MyButton';
+import Loading from '../LoadingPage/LoadingPage';
+import ModalWindow from '../../widgets/ModalWindow/ModalWindow';
 import { useLoadCurrentNft } from './hooks/useLoadCurrentNft';
 import cls from './CardPage.module.scss';
-import { classNames } from '../../shared/classNames/classNames';
 import SwiperSlider from '../../shared/swiper/SwiperSlider';
 
 function CardPage() {
@@ -40,6 +40,7 @@ function CardPage() {
     console.log(currentCard);
 
     return (
+        // eslint-disable-next-line react/jsx-no-useless-fragment
         <>
             {loading ? (
                 <Loading />
@@ -104,10 +105,10 @@ function CardPage() {
                                                 <List
                                                     className={classNames(cls.card__interestsBlock)}
                                                 >
-                                                    {currentCard.interests.map((int, i) => (
+                                                    {currentCard.interests.map((int) => (
                                                         <ListItem
                                                             className={classNames(cls.card__interestsItem)}
-                                                            key={i}
+                                                            key={int.name}
                                                         >
                                                             <Typography variant="body1" component="div">
                                                                 {int.name}

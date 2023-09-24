@@ -1,4 +1,4 @@
-function Loading() {
+function LoadingPage() {
     return (
         <div className="loading-placeholder">
             <div className="loading-animation">Loading</div>
@@ -6,4 +6,4 @@ function Loading() {
     );
 }
 
-export default Loading;
+export default LoadingPage;

@@ -14,6 +14,7 @@ export const userIdSlice = createSlice({
     initialState,
     reducers: {
         setUserId: (state, action) => {
+            // eslint-disable-next-line no-param-reassign
             state.userId = action.payload;
         },
     },

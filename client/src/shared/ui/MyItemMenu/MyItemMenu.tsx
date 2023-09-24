@@ -14,11 +14,14 @@ interface MyItemMenuProps {
 }
 
 export const MyItemMenu = ({
-    className = '', callbacks, setFullWidth = false, children, icon = <></>,
+    className = '', callbacks, setFullWidth = false, children,
+    icon,
 }: MyItemMenuProps) => (
     <MenuItem className={classNames(cls.MyItemMenu, {}, [className])}>
         <MyButton
+            // eslint-disable-next-line i18next/no-literal-string
             size="large"
+            // eslint-disable-next-line i18next/no-literal-string
             variant="contained"
             fullWidth={setFullWidth}
             startIcon={icon}

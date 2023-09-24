@@ -23,8 +23,8 @@ function SliderNoCheck({ images }: any) {
                 modules={[FreeMode, Navigation, Thumbs]}
                 className={classNames(`${cls.navArrow} MySwiper2`)}
             >
-                {images.map((img, i) => (
-                    <SwiperSlide key={i}>
+                {images.map((img) => (
+                    <SwiperSlide key={img}>
                         <img src={img.url} alt={img.name} />
                     </SwiperSlide>
                 ))}
@@ -40,8 +40,8 @@ function SliderNoCheck({ images }: any) {
                 modules={[FreeMode, Navigation, Thumbs]}
                 className={classNames('mySwiper')}
             >
-                {images.map((img, i) => (
-                    <SwiperSlide key={i}>
+                {images.map((img) => (
+                    <SwiperSlide key={img}>
                         <img src={img.url} alt={img.name} />
                     </SwiperSlide>
                 ))}

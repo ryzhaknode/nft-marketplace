@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import cls from './StatisticPage.module.scss';
 import { classNames } from '../../shared/classNames/classNames';
 
-function Statistic() {
+function StatisticPage() {
     const { t } = useTranslation();
 
     return (
@@ -14,4 +14,4 @@ function Statistic() {
     );
 }
 
-export default Statistic;
+export default StatisticPage;

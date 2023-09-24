@@ -1,5 +1,6 @@
 import { Box, Button } from '@mui/material';
 import { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import cls from './ModalWindow.module.scss';
 import { classNames } from '../../shared/classNames/classNames';
 
@@ -9,20 +10,24 @@ export interface IModalWindowProps {
     children: ReactNode;
 }
 
-const ModalWindow = ({ onClose, show, children }: IModalWindowProps) => (
-    <Box className={`popup ${show ? 'show' : ''}`}>
-        <Box
-            className={classNames(cls.modalWindow)}
-        >
-            {children}
-            <Button
-                className={classNames(cls.modalWindow__button)}
-                onClick={onClose}
+const ModalWindow = ({ onClose, show, children }: IModalWindowProps) => {
+    const { t } = useTranslation();
+
+    return (
+        <Box className={`popup ${show ? 'show' : ''}`}>
+            <Box
+                className={classNames(cls.modalWindow)}
             >
-                Close
-            </Button>
+                {children}
+                <Button
+                    className={classNames(cls.modalWindow__button)}
+                    onClick={onClose}
+                >
+                    {t('close')}
+                </Button>
+            </Box>
         </Box>
-    </Box>
-);
+    );
+};
 
 export default ModalWindow;

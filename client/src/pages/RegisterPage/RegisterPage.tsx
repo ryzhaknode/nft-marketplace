@@ -3,13 +3,14 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import DoneIcon from '@mui/icons-material/Done';
+import { useTranslation } from 'react-i18next';
 import { Interest } from '../../shared/types/IRegistration';
 import { interests } from '../../shared/constants/constants';
 import { handleOnlyWords } from '../../shared/functions/inputChecker';
-import ModalWindow from '../../widgets/ModalWindow/ModalWindow';
 import { registration } from '../../shared/http/userAPI';
-import cls from './RegisterPage.module.scss';
 import { classNames } from '../../shared/classNames/classNames';
+import ModalWindow from '../../widgets/ModalWindow/ModalWindow';
+import cls from './RegisterPage.module.scss';
 import { emptyUser } from './constants/constants';
 
 function RegisterPage() {
@@ -18,10 +19,17 @@ function RegisterPage() {
     const [repeatPassword, setRepeatPassword] = useState('');
     const [modal, setModal] = useState(false);
     const [error, serError] = useState('');
+    const { t } = useTranslation();
     const interestsChange = (value: string) => {
         if (selectedInterest.find((int) => int.name === value)) {
-            setSelectedInterest(selectedInterest.filter((int) => int.name !== value));
-        } else if (selectedInterest.length < 3) setSelectedInterest([...selectedInterest, { name: value }]);
+            setSelectedInterest(
+                selectedInterest.filter((int) => int.name !== value),
+            );
+        } else if (selectedInterest.length < 3) {
+            setSelectedInterest(
+                [...selectedInterest, { name: value }],
+            );
+        }
     };
 
     const closeModal = () => {
@@ -43,7 +51,8 @@ function RegisterPage() {
         setNewUser(emptyUser);
     };
 
-    const submitNewRegister = async () => {
+    const submitNewRegister = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
         if (newUser.password === repeatPassword) {
             try {
                 await registration({
@@ -66,16 +75,16 @@ function RegisterPage() {
         <Box
             className={classNames(cls.register)}
         >
-            <Typography variant="h4" component="h1">
-                Registration Form
+            <Typography
+                variant="h4"
+                component="h1"
+            >
+                {t('Registration Form')}
             </Typography>
             <Box>
                 <FormControl
                     component="form"
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        submitNewRegister();
-                    }}
+                    onSubmit={submitNewRegister}
                 >
                     <Box
                         className={classNames(cls.register__form)}
@@ -97,15 +106,21 @@ function RegisterPage() {
                                 handleInputUserChange(e);
                             }}
                         />
-                        <Box sx={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                        <Box sx={
+                            { display: 'flex', gap: '10px', flexWrap: 'wrap' }
+                        }
+                        >
                             {interests.map((interest, i) => (
+
                                 <Button
                                     onClick={() => {
                                         interestsChange(interest);
                                     }}
-                                    key={i}
+                                    key={interest}
                                     color={
-                                        selectedInterest.find((int) => int.name === interest)
+                                        selectedInterest.find((
+                                            int,
+                                        ) => int.name === interest)
                                             ? 'success'
                                             : 'primary'
                                     }
@@ -113,7 +128,11 @@ function RegisterPage() {
                                     variant="outlined"
                                     sx={{ borderRadius: '20px' }}
                                 >
-                                    <Typography component="p">{interest}</Typography>
+                                    <Typography
+                                        component="p"
+                                    >
+                                        {t(`${interest}`)}
+                                    </Typography>
                                 </Button>
                             ))}
                         </Box>
@@ -150,7 +169,9 @@ function RegisterPage() {
                                 label="Repeat-password"
                                 name="repeatpassword"
                                 color={
-                                    newUser.password === repeatPassword ? 'success' : 'error'
+                                    newUser.password === repeatPassword
+                                        ? 'success'
+                                        : 'error'
                                 }
                                 variant="outlined"
                                 required
@@ -159,11 +180,12 @@ function RegisterPage() {
                                     setRepeatPassword(e.target.value);
                                 }}
                             />
-                            {newUser.password !== repeatPassword ? (
-                                <Typography color="error">not the same password!</Typography>
-                            ) : (
-                                <></>
-                            )}
+                            {newUser.password !== repeatPassword
+                                && (
+                                    <Typography color="error">
+                                        not the same password!
+                                    </Typography>
+                                )}
                         </Box>
                     </Box>
                     <Button
@@ -197,10 +219,16 @@ function RegisterPage() {
                     {error === '' ? (
                         <>
                             {' '}
-                            <DoneIcon fontSize="large" sx={{ paddingRight: '10px' }} />
+                            <DoneIcon
+                                fontSize="large"
+                                sx={
+                                    { paddingRight: '10px' }
+                                }
+                            />
                             Successfully registered
                         </>
                     ) : (
+                        // eslint-disable-next-line react/jsx-no-useless-fragment
                         <>{error}</>
                     )}
                 </Typography>

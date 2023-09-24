@@ -1,26 +1,29 @@
-import { $authHost, $host } from "./index";
-import jwt_decode from "jwt-decode";
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode';
+import { $authHost, $host } from './index';
 
-export const registration = async ({ name, email, password, interests }) => {
-  const { data } = await $host.post("api/user/registration", {
-    name,
-    email,
-    password,
-    interests,
-    role: "ADMIN",
-  });
-  localStorage.setItem("token", data.token);
-  return jwt_decode(data.token);
+export const registration = async ({
+    name, email, password, interests,
+}) => {
+    const { data } = await $host.post('api/user/registration', {
+        name,
+        email,
+        password,
+        interests,
+        role: 'ADMIN',
+    });
+    localStorage.setItem('token', data.token);
+    return jwt_decode(data.token);
 };
 
 export const login = async ({ email, password }) => {
-  const { data } = await $host.post("api/user/login", { email, password });
-  localStorage.setItem("token", data.token);
-  return jwt_decode(data.token);
+    const { data } = await $host.post('api/user/login', { email, password });
+    localStorage.setItem('token', data.token);
+    return jwt_decode(data.token);
 };
 
 export const check = async () => {
-  const { data } = await $authHost.get("api/user/auth");
-  localStorage.setItem("token", data.token);
-  return jwt_decode(data.token);
+    const { data } = await $authHost.get('api/user/auth');
+    localStorage.setItem('token', data.token);
+    return jwt_decode(data.token);
 };

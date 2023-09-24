@@ -1,13 +1,22 @@
 import { MenuItem, Select } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { filtersList } from '../../pages/GalleryPage/constants/filterList';
 import { FilterItem } from '../../shared/types/IFilterItem';
 
 interface NftFilterProps{
-    selectChange: (e: any) => void,
-    selectedFilter: string,
+    sortDatajson: (key: string, sortBy: boolean) => void,
 }
-function NftFilter({ selectedFilter, selectChange }:NftFilterProps) {
+function NftFilter({ sortDatajson }:NftFilterProps) {
+    const [selectedFilter, setSelectedFilter] = useState('');
+    function selectChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const { value } = e.target;
+        const filter = filtersList.find((lst) => lst.label === value);
+        if (filter) {
+            sortDatajson(filter.key, filter.sortBy);
+        }
+        setSelectedFilter(value);
+    }
+
     return (
         <Select
             labelId="filter-label"
